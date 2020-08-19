@@ -1,18 +1,25 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
+import { Route, BrowserRouter } from 'react-router-dom';
+import Content from './components/Content/Content';
 
 const App = () => {
   return (
-    <div className="main">
-      <Header />
-      <Main />
-      <Aside />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="wrap_main">
+        <header className="header">
+          <Header />
+        </header>
+        <div className="content">
+          <Content />
+        </div>
+        <footer className="footer">
+          <Footer />
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 

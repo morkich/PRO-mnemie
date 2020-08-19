@@ -1,14 +1,18 @@
 import React from 'react';
 import style from './Header.module.css';
+import Logo from './Logo/Logo';
+import Search from './Search/Search';
+import Autorization from './Autorization/Autorization';
+import Menu from './Menu/Menu';
 
 const Header = () => {
   return (
-    <header className={style.main}>
-      <picture>
-        <source srcset="https://marketplace.canva.com/EAD7RZBpky0/1/0/400w/canva-blue-and-white-gaming-logo-N-0-xW64Gwc.jpg" media="(min-width: 800px)" />
-        <img src="https://bower.io/img/bower-logo.png" alt="MDN" />
-      </picture>
-    </header>
+    <div className="container wrap_header">
+      <Logo />
+      <Search />
+      <Autorization />
+      <Menu />
+    </div>
   );
 }
 

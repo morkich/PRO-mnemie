@@ -1,7 +1,30 @@
-.main {
+.wrap_main {
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) 285px;  
-  grid-template-rows: 150px 1fr 100px;
+  grid-template-columns: 1fr;  
   grid-gap: 20px;
-  min-height: 100vh;
+  margin-top: 55px;
+  background-color: #fff;
+}
+
+.container {
+  width: 100%;
+  margin: auto;
+  position: relative;
+  padding: 0 10px;
+  z-index: 5;
+  max-width: 1200px;
+}
+
+footer {
+  background-color: #0E2A42; 
+}
+
+aside {
+  background-color: purple;
+}
+
+.wrap_content {
+  display: grid;
+  grid-template-columns: 1fr 285px;
+  grid-gap: 20px;
 }
