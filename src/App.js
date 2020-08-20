@@ -5,12 +5,12 @@ import Footer from './components/Footer/Footer';
 import { Route, BrowserRouter } from 'react-router-dom';
 import Content from './components/Content/Content';
 
-const App = () => {
+const App = (props) => {
   return (
     <BrowserRouter>
       <div className="wrap_main">
         <header className="header">
-          <Header />
+          <Header headerData={props.state.headerPage}/>
         </header>
         <div className="content">
           <Content />

@@ -8,32 +8,3 @@
   grid-gap: 1rem;
   justify-content: space-between;
 }
-
-.top_menu ul li a {
-  position: relative;
-  font-weight: 500;
-  text-decoration: none;
-  color: #7C9BA9;
-  transition: .2s;
-}
-
-.top_menu ul li a:hover,
-.top_menu ul li a.active {
-  color: #145E94;
-}
-
-.top_menu ul li a::after {
-  content: '';
-  display: flex;
-  height: 2px;
-  width: 0;
-  left: 0;
-  bottom: 0;
-  background-color: #145E94;
-  transition: .2s;
-}
-
-.top_menu ul li a:hover:after,
-.top_menu ul li a.active::after {
-  width: 85%;
-}

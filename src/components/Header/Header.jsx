@@ -5,13 +5,13 @@ import Search from './Search/Search';
 import Autorization from './Autorization/Autorization';
 import Menu from './Menu/Menu';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div className="container wrap_header">
       <Logo />
       <Search />
       <Autorization />
-      <Menu />
+      <Menu menuData={props.headerData.topMenu}/>
     </div>
   );
 }

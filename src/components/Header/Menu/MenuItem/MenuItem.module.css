@@ -1,0 +1,28 @@
+.item {
+  position: relative;
+  font-weight: 500;
+  text-decoration: none;
+  color: #7C9BA9;
+  transition: .2s;
+}
+
+.item:hover,
+.item.active {
+  color: #145E94;
+}
+
+.item::after {
+  content: '';
+  display: flex;
+  height: 2px;
+  width: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #145E94;
+  transition: .2s;
+}
+
+.item:hover:after,
+.item.active::after {
+  width: 85%;
+}

@@ -8,8 +8,8 @@ import Main from './Main/Main';
 const Content = () => {
   return (
     <div className="wrap_content container">
-      <Route path="/home" component={Main} />
-      <Route path="/account" component={Account} />
+      <Route path="/home" render={() => <Main />} />
+      <Route path="/account" render={() => <Account />} />
       <Aside />
     </div>
   );

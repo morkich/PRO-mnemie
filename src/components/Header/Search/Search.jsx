@@ -5,7 +5,7 @@ const Search = () => {
   return (
     <a href="/" className="wrap">
       <picture>
-        <source srcset="./logo.svg" media="(min-width: 800px)" />
+        <source srcSet="./logo.svg" media="(min-width: 800px)" />
         <img src="./logo.svg" alt="MDN" />
       </picture>
     </a>
