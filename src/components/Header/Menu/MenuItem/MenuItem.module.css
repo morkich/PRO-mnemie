@@ -6,9 +6,11 @@
   transition: .2s;
 }
 
+.item:focus,
 .item:hover,
 .item.active {
   color: #145E94;
+  outline: none;
 }
 
 .item::after {

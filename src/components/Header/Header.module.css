@@ -1,9 +1,8 @@
-.main {
-  grid-column: 1 / -1;
-  background-color: aqua;    
+.wrap {
+  display: grid;  
+  grid-template-columns: 170px 1fr 310px;
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 1.5rem;  
+  align-items: center;
 }
 
-.main img {
-  width: auto;
-  height: 100%;
-}

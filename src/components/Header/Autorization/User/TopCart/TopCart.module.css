@@ -1,0 +1,38 @@
+.wrap {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  text-decoration: none;    
+  cursor: pointer;
+  outline: none;
+}
+
+.wrap svg {
+  fill: #237FC2;
+  transition: .2s;
+}
+
+.wrap.empty svg{
+  fill: #7C9BA9; 
+}
+
+.wrap:focus svg,
+.wrap:hover svg {
+  fill: #145E94;  
+}
+
+.count {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  top: -7px;
+  right: -4.5px;
+  border-radius: 10em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #237FC2;
+  background-color: #fff;    
+}

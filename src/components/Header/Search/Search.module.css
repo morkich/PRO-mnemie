@@ -1,3 +1,43 @@
 .wrap {
-    
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search_form {
+  display: flex;
+  align-items: center;    
+  max-width: 405px;
+  width: 100%;
+  height: 41px;
+  padding: 0 2rem;
+  background-color: #E9F3FA;
+  border-radius: 2px;
+  overflow: hidden;    
+}
+
+.search_form button {
+  border: none;
+  padding: 0;
+  margin: 0 20px 0 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.search_form input {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 1.3rem;
+  color: #0E2A42;
+}
+
+.search_form input::placeholder {
+  font-size: 1.3rem;
+  color: #7C9BA9;
+  font-weight: normal;
 }

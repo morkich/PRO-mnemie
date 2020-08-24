@@ -1,14 +1,19 @@
 import React from 'react';
 import style from './Autorization.module.css';
+import Guest from './Guest/Guest';
+import User from './User/User';
 
-const Autorization = () => {
+const Autorization = (props) => {
+
+  let typeUser = <Guest logIn={props.logIn}/>;
+  if( props.userData.autorization ) {
+    typeUser = <User userData={props.userData.data} logIn={props.logIn}/>;
+  }
+   
   return (
-    <a href="/" className="wrap">
-      <picture>
-        <source srcSet="./logo.svg" media="(min-width: 800px)" />
-        <img src="./logo.svg" alt="MDN" />
-      </picture>
-    </a>
+    <div className={style.wrap}>
+      {typeUser}
+    </div>
   );
 }
 

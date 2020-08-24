@@ -2,15 +2,13 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import { Route, BrowserRouter } from 'react-router-dom';
 import Content from './components/Content/Content';
 
 const App = (props) => {
   return (
-    <BrowserRouter>
       <div className="wrap_main">
         <header className="header">
-          <Header headerData={props.state.headerPage}/>
+          <Header headerData={props.store.headerPage} userData={props.store.user} logIn={props.logIn}/>
         </header>
         <div className="content">
           <Content />
@@ -19,7 +17,6 @@ const App = (props) => {
           <Footer />
         </footer>
       </div>
-    </BrowserRouter>
   );
 }
 

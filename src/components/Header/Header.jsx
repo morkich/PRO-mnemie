@@ -4,14 +4,16 @@ import Logo from './Logo/Logo';
 import Search from './Search/Search';
 import Autorization from './Autorization/Autorization';
 import Menu from './Menu/Menu';
+import TopBanner from './TopBanner/TopBanner';
 
 const Header = (props) => {
-  return (
-    <div className="container wrap_header">
+  return (    
+    <div className={`container ${style.wrap}`}>      
       <Logo />
-      <Search />
-      <Autorization />
+      <Search searchData={props.headerData.search}/>
+      <Autorization userData={props.userData} logIn={props.logIn}/>
       <Menu menuData={props.headerData.topMenu}/>
+      <TopBanner /> 
     </div>
   );
 }

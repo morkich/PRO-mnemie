@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import './elements.css';
 import * as serviceWorker from './serviceWorker';
-import state from './redux/state';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import store from './redux/store';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App state={state}/>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export let renderAllThree = (store) => {
+  debugger;
+  ReactDOM.render(    
+    <React.StrictMode>
+      <BrowserRouter>        
+        <App store={store.getState()} logIn={store.logIn.bind(store)} />        
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root') 
+  );
+}
+
+store.subscribe(renderAllThree);
+store.renderAllThree(store);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
