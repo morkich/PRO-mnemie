@@ -5,9 +5,9 @@ import User from './User/User';
 
 const Autorization = (props) => {
 
-  let typeUser = <Guest logIn={props.logIn}/>;
+  let typeUser = <Guest dispatch={props.dispatch}/>;
   if( props.userData.autorization ) {
-    typeUser = <User userData={props.userData.data} logIn={props.logIn}/>;
+    typeUser = <User userData={props.userData.data} dispatch={props.dispatch}/>;
   }
    
   return (

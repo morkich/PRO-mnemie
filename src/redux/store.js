@@ -1,3 +1,7 @@
+import headerPageReducer from "./headerPage-reducer";
+import userReducer from "./user-reducer";
+import footerPageReducer from "./footerPage-reducer";
+
 let store = {
   _state: {
     user: {
@@ -5,10 +9,11 @@ let store = {
       data: {
         firstName: 'Вадим',
         lastName: 'Чуб',
-        avatar: 'https://sun9-19.userapi.com/c6063/v6063774/b54b/nRzTteJwDDw.jpg',      
+        shortLastName: '',
+        avatar: 'https://sun9-19.userapi.com/c6063/v6063774/b54b/nRzTteJwDDw.jpg',
         login: 'login',
         password: 'password',
-      }    
+      }
     },
     headerPage: {
       topMenu: [
@@ -23,28 +28,29 @@ let store = {
         { to: '/about', name: 'О нас' },
       ],
       search: {
-        searchRequest: 'Ищем'    
+        searchRequest: '',
+        searchText: ''
       },
     },
     footerPage: {
-      
-    }  
+
+    }
   },
   getState() {
     return this._state;
   },
-  renderAllThree() {  
+  renderAllThree() {
     console.log('Функция renderAllThree не определена. Сайт не может отрисовать измемения.');
   },
   subscribe(observer) {
     this.renderAllThree = observer;
   },
-  logIn(autorization) {
-    this._state.user.autorization = autorization;
-    this.renderAllThree(this);
-  },
-  dispatch(){
+  dispatch(action) {
+    this._state.headerPage = headerPageReducer(this._state.headerPage, action);
+    this._state.footerPage = footerPageReducer(this._state.footerPage, action);
+    this._state.user = userReducer(this._state.user, action);
     
+    this.renderAllThree(this);
   }
 }
 

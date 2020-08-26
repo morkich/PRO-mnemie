@@ -1,10 +1,11 @@
 import React from 'react';
 import style from './Guest.module.css';
+import { loginCreator } from '../../../../redux/user-reducer';
 
 const Guest = (props) => {
 
-  let registration = () => {
-    props.logIn(1);
+  let registration = () => {   
+    props.dispatch(loginCreator(1));
   }
 
   return (

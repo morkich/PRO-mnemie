@@ -8,10 +8,10 @@ const App = (props) => {
   return (
       <div className="wrap_main">
         <header className="header">
-          <Header headerData={props.store.headerPage} userData={props.store.user} logIn={props.logIn}/>
+          <Header headerData={props.state.headerPage} userData={props.state.user} dispatch={props.dispatch}/>
         </header>
         <div className="content">
-          <Content />
+          <Content contentData={props.state}/>
         </div>
         <footer className="footer">
           <Footer />

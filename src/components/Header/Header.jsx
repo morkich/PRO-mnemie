@@ -10,8 +10,8 @@ const Header = (props) => {
   return (    
     <div className={`container ${style.wrap}`}>      
       <Logo />
-      <Search searchData={props.headerData.search}/>
-      <Autorization userData={props.userData} logIn={props.logIn}/>
+      <Search searchData={props.headerData.search} dispatch={props.dispatch}/>
+      <Autorization userData={props.userData} dispatch={props.dispatch}/>
       <Menu menuData={props.headerData.topMenu}/>
       <TopBanner /> 
     </div>

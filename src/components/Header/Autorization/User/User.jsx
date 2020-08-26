@@ -7,7 +7,7 @@ const User = (props) => {
   return (
     <div className={style.wrap}>      
       <TopCart />
-      <UserData logIn={props.logIn} userData={props.userData}/>
+      <UserData dispatch={props.dispatch} userData={props.userData}/>
     </div>
   );
 }
