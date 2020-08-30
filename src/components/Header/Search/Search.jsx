@@ -1,15 +1,17 @@
 import React from 'react';
 import style from './Search.module.css';
-import { searchRequestCreator, sendSearchRequestCreator } from '../../../redux/headerPage-reducer';
 
 const Search = (props) => {  
+
   const onSearchChange = (event) => {
-    props.dispatch(searchRequestCreator(event.target.value));    
+    let searchBody = event.target.value;
+    props.changeSearchRequest(searchBody);    
   }
 
   const sendSearchRequest = (event) => {
     event.preventDefault();
-    props.dispatch(sendSearchRequestCreator(props.searchData.searchRequest)); 
+    let body = props.searchData.searchRequest;
+    props.sendSearchRequest(body);
   }
 
   return (

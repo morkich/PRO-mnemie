@@ -17,3 +17,9 @@
   background-color: #145E94;
   outline: none;
 }
+
+.content_right-aside {
+  display: grid;
+  grid-template-columns: 1fr 255px;
+  grid-gap: 2rem;
+}

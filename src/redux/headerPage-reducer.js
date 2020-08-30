@@ -22,15 +22,24 @@ let initialState = {
 const headerPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_REQUEST:
-      state.search.searchRequest = action.request;
-      return state;
+      return {
+        ...state,
+        search: {
+          searchRequest: action.request,
+          searchText: action.request
+        }
+      };
     case SEND_SEARCH_REQUEST:
-      state.search.searchRequest = '';
-      state.search.searchText = action.request;
-      return state;
+      return {
+        ...state,
+        search: {
+          searchRequest: '',
+          searchText: action.request
+        }
+      };
     default:
       return state;
-  }  
+  }
 }
 
 export const sendSearchRequestCreator = (value) => {

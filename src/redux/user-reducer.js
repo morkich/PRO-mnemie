@@ -5,7 +5,6 @@ let initialState = {
   data: {
     firstName: 'Вадим',
     lastName: 'Чуб',
-    shortLastName: '',
     avatar: 'https://sun9-19.userapi.com/c6063/v6063774/b54b/nRzTteJwDDw.jpg',
     login: 'login',
     password: 'password',
@@ -15,9 +14,11 @@ let initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN:
-      state.autorization = action.autorization;
-      state.data.shortLastName = `${state.data.lastName.substr(0, 1)}.`;
-      return state;
+      return {
+        ...state,
+        data: { ...state.data },
+        autorization: action.autorization
+      };
     default:
       return state;
   }

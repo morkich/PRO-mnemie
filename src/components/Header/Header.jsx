@@ -1,19 +1,19 @@
 import React from 'react';
 import style from './Header.module.css';
 import Logo from './Logo/Logo';
-import Search from './Search/Search';
-import Autorization from './Autorization/Autorization';
-import Menu from './Menu/Menu';
 import TopBanner from './TopBanner/TopBanner';
+import AutorizationContainer from './Autorization/AutorizationContainer';
+import SearchContainer from './Search/SearchContainer';
+import MenuContainer from './Menu/MenuContainer';
 
 const Header = (props) => {
-  return (    
-    <div className={`container ${style.wrap}`}>      
+  return (
+    <div className={`container ${style.wrap}`}>
       <Logo />
-      <Search searchData={props.headerData.search} dispatch={props.dispatch}/>
-      <Autorization userData={props.userData} dispatch={props.dispatch}/>
-      <Menu menuData={props.headerData.topMenu}/>
-      <TopBanner /> 
+      <SearchContainer />
+      <AutorizationContainer/>
+      <MenuContainer />
+      <TopBanner />
     </div>
   );
 }

@@ -1,15 +1,15 @@
 import React from 'react';
 import style from './Autorization.module.css';
-import Guest from './Guest/Guest';
 import User from './User/User';
+import GuestContainer from './Guest/GuestContainer';
 
 const Autorization = (props) => {
 
-  let typeUser = <Guest dispatch={props.dispatch}/>;
-  if( props.userData.autorization ) {
-    typeUser = <User userData={props.userData.data} dispatch={props.dispatch}/>;
+  let typeUser = <GuestContainer/>;
+  if (props.userLogin) {
+    typeUser = <User/>;
   }
-   
+
   return (
     <div className={style.wrap}>
       {typeUser}
