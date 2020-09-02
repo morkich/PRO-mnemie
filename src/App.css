@@ -1,7 +1,7 @@
 .wrap_main {
   display: grid;
   grid-template-columns: 1fr;  
-  grid-gap: 20px;
+  grid-gap: 50px;
   margin-top: 55px;
   background-color: #fff;
 }
@@ -27,4 +27,8 @@ aside {
   display: grid;
   grid-template-columns: 1fr 285px;
   grid-gap: 20px;
+}
+
+.content {
+  position: relative;
 }
