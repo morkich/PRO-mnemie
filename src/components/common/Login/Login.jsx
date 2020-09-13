@@ -1,9 +1,8 @@
 import React from 'react';
-import * as axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 const Login = (props) => {
-  if (props.loggetIn || localStorage.getItem('token')) {
+  if (props.isLoading || localStorage.getItem('token')) {
     return <Redirect to={`/profile/me`} noThrow />
   } else {
     return (

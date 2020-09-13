@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleisLoading, setUserData, updateUserData, getError } from '../../../redux/auth-reducer';
+import { toggleLoadingAcc, setUserData, updateUserData, getError } from '../../../redux/auth-reducer';
 import * as axios from 'axios';
 import Login from './Login';
+import { optionAPI } from '../../../api/api';
 
 class LoginContainer extends React.Component {
 
@@ -11,33 +12,39 @@ class LoginContainer extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    const siteURL = 'http://proview.loc/';
-    const loginData = {
-      username: this.props.username,
-      password: this.props.password
-    }
-    this.props.toggleisLoading(true);
-    axios.post(`${siteURL}/wp-json/jwt-auth/v1/token`, loginData)
-      .then(response => {
-        if (response.data.token === undefined) {
-          this.props.getError(response.data.message);
-          this.props.toggleisLoading(false);
-          return;
+    this.props.toggleLoadingAcc(true);
+    optionAPI.getToken(this.props.username, this.props.password)
+      .then(data => {
+        if (!data.token) {
+          this.props.getError(data.message);
+          this.props.toggleLoadingAcc(false);
+          return false;
         }
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userName', response.data.user_nicename);
+        localStorage.setItem('token', data.token);
         this.props.setUserData({
-          userNiceName: response.data.user_nicename,
-          userEmail: response.data.user_email,
-          loggetIn: true,
-          isLoading: false,
-          token: response.data.token
+          userNiceName: data.user_nicename,
+          userEmail: data.user_email,
+          token: data.token
         });
+        const token = localStorage.getItem('token');
+        const myHeaders = {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }
+        axios.get(`http://proview.loc/wp-json/wp/v2/users/me`, myHeaders)
+          .then(response => {
+            this.props.setUserData({
+              loggetIn: true,
+              userId: response.data.id,
+              firstname: response.data.pro_firstname,
+              lastname: response.data.pro_lastname,
+              avatar: response.data.avatar,
+              favoritesExperts: (response.data.pro_favorites_experts.length > 0)? JSON.parse(response.data.pro_favorites_experts): [],
+              favoritesVideos: (response.data.pro_favorites_video.length > 0)? JSON.parse(response.data.pro_favorites_video): [],
+              favoritesEvents: (response.data.pro_favorites_events.length > 0)? JSON.parse(response.data.pro_favorites_events): [],          
+              loadingAcc: false,
+            });
+          });      
       })
-      .catch(error => {
-        this.props.getError(error.response.data);
-        this.props.toggleisLoading(false);
-      });
   };
 
   handleOnChange = (event) => {
@@ -54,7 +61,7 @@ class LoginContainer extends React.Component {
         userNiceName={this.props.userNiceName}
         userEmail={this.props.userEmail}
         loggetIn={this.props.loggetIn}
-        isLoading={this.props.isLoading}
+        loadingAcc={this.props.loadingAcc}
         userId={this.props.userId}
       />
     )
@@ -63,17 +70,18 @@ class LoginContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
+    firstname: state.auth.firstname,
     username: state.auth.username,
     password: state.auth.password,
     userNiceName: state.auth.userNiceName,
     userEmail: state.auth.userEmail,
     loggetIn: state.auth.loggetIn,
-    isLoading: state.auth.isLoading,
+    loadingAcc: state.auth.loadingAcc,
     token: state.auth.token,
     userId: state.auth.userId,
   }
 }
 
 export default connect(mapStateToProps,
-  { toggleisLoading, setUserData, updateUserData, getError }
+  { toggleLoadingAcc, setUserData, updateUserData, getError }
 )(LoginContainer);

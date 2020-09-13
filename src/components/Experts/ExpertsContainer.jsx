@@ -1,31 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addFavorives, removeFavorites, setExperts, setCurrentPage, setTotalPageCount, toggleisLoading } from '../../redux/experts-reducer';
-import * as axios from 'axios';
+import { getExpertsThunkCreator } from '../../redux/experts-reducer';
 import Experts from './Experts';
+
 
 class ExpertsContainer extends React.Component {
 
   componentDidMount() {
-    const pageSize = this.props.pageSize;
-    this.props.toggleisLoading(true);
-    axios.get(`http://proview.loc/wp-json/wp/v2/users?page=${this.props.currentPage}&per_page=${pageSize}`)
-      .then(response => {
-        this.props.toggleisLoading(false);
-        this.props.setExperts(response.data);
-        this.props.setTotalPageCount(response.headers['x-wp-totalpages']);
-      });
+    this.props.getExpertsThunkCreator(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChange = (numberPage) => {
-    const pageSize = this.props.pageSize;
-    this.props.toggleisLoading(true);
-    this.props.setCurrentPage(numberPage);
-    axios.get(`http://proview.loc/wp-json/wp/v2/users?page=${numberPage}&per_page=${pageSize}`)
-      .then(response => {
-        this.props.toggleisLoading(false);
-        this.props.setExperts(response.data)
-      });
+    this.props.getExpertsThunkCreator(numberPage, this.props.pageSize);
   }
 
   render() {
@@ -34,8 +20,6 @@ class ExpertsContainer extends React.Component {
         totalPageCount={this.props.totalPageCount}
         currentPage={this.props.currentPage}
         onPageChange={this.onPageChange}
-        removeFavorites={this.props.removeFavorites}
-        addFavorives={this.props.addFavorives}
         experts={this.props.experts}
         isLoading={this.props.isLoading}
       />
@@ -53,6 +37,6 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, 
-  {addFavorives, removeFavorites, setExperts, setCurrentPage, setTotalPageCount, toggleisLoading}
-  )(ExpertsContainer);
+export default connect(mapStateToProps,
+  { getExpertsThunkCreator }
+)(ExpertsContainer);

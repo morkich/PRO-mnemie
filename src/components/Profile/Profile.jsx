@@ -1,25 +1,12 @@
 import React from 'react';
 import style from './Profile.module.css';
+import FavoritesContainer from '../common/Favorites/FavoritesContainer';
 
 const Profile = (props) => {
   return (
     <section className={`${style.wrap} container`}>
       <div key={props.profile.id} className={style.profile_card}>
-
-        {
-          props.profile.pro_favorites
-            ? <button onClick={() => { props.removeFavorites() }} className={`${style.favorite} ${style.unfavorite}`}>
-              <svg width="25" height="32" viewBox="0 0 25 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H25V32L12.5 24.4211L0 32V0Z" />
-              </svg>
-            </button>
-            : <button onClick={() => { props.addFavorives() }} className={`${style.favorite} ${style.addfavorite}`}>
-              <svg width="25" height="32" viewBox="0 0 25 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H25V32L12.5 24.4211L0 32V0Z" />
-              </svg>
-            </button>
-        }
-
+        <FavoritesContainer expertId={props.profile.id} />
         <div className={style.avatar}>
           <img src={props.profile.avatar} alt="" />
         </div>

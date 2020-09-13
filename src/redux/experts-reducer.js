@@ -1,5 +1,5 @@
-const FAVORITE = 'FAVORITE';
-const UNFAVORITE = 'UNFAVORITE';
+import { usersAPI } from "../api/api";
+
 const SET_EXPERTS = 'SET_EXPERTS';
 const CURRENT_PAGE = 'CURRENT_PAGE';
 const TOTAL_PAGES = 'TOTAL_PAGES';
@@ -15,32 +15,6 @@ let initialState = {
 
 const expertsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FAVORITE:
-      return {
-        ...state,
-        experts: state.experts.map(expert => {
-          if (expert.id == action.expertId) {
-            return {
-              ...expert,
-              pro_favorites: true
-            }
-          }
-          return expert;
-        })
-      };
-    case UNFAVORITE:
-      return {
-        ...state,
-        experts: state.experts.map(expert => {
-          if (expert.id === action.expertId) {
-            return {
-              ...expert,
-              pro_favorites: false
-            }
-          }
-          return expert;
-        })
-      };
     case SET_EXPERTS:
       return {
         ...state,
@@ -63,20 +37,6 @@ const expertsReducer = (state = initialState, action) => {
       };
     default:
       return state;
-  }
-}
-
-export const addFavorives = (expertId) => {
-  return {
-    type: FAVORITE,
-    expertId
-  }
-}
-
-export const removeFavorites = (expertId) => {
-  return {
-    type: UNFAVORITE,
-    expertId
   }
 }
 
@@ -105,6 +65,17 @@ export const toggleisLoading = (isLoading) => {
   return {
     type: TOGGLE_PRELOADER,
     isLoading
+  }
+}
+
+export const getExpertsThunkCreator = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleisLoading(true));
+    usersAPI.getExperts(currentPage, pageSize).then(response => {
+      dispatch(toggleisLoading(false))
+      dispatch(setExperts(response.data))
+      dispatch(setTotalPageCount(response.headers['x-wp-totalpages']))
+    });
   }
 }
 

@@ -1,10 +1,11 @@
+import { usersAPI } from "../api/api";
+
 const SET_PROFILE = 'SET_PROFILE';
-const FAVORITE = 'FAVORITE';
-const UNFAVORITE = 'UNFAVORITE';
 const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
 
 let initialState = {
   profile: {},
+  favorites: false,
   isLoading: true
 }
 
@@ -14,23 +15,6 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.profile
-      };
-
-    case FAVORITE:
-      return {
-        ...state,
-        profile: {
-          ...state.profile,
-          pro_favorites: true
-        }
-      };
-    case UNFAVORITE:
-      return {
-        ...state,
-        profile: {
-          ...state.profile,
-          pro_favorites: false
-        }
       };
     case TOGGLE_PRELOADER:
       return {
@@ -49,24 +33,28 @@ export const setUserProfile = (profile) => {
   }
 }
 
-export const addFavorives = (favorite) => {
-  return {
-    type: FAVORITE,
-    favorite
-  }
-}
-
-export const removeFavorites = (unfavorite) => {
-  return {
-    type: UNFAVORITE,
-    unfavorite
-  }
-}
-
 export const toggleisLoading = (isLoading) => {
   return {
     type: TOGGLE_PRELOADER,
     isLoading
+  }
+}
+
+export const getProfile = (userId) => {
+  return (dispatch) => {
+    if (userId == 'me') {
+      dispatch(toggleisLoading(true));
+      usersAPI.getMe().then(data => {        
+        dispatch(setUserProfile(data));
+        dispatch(toggleisLoading(false));
+      });
+    } else {    
+    dispatch(toggleisLoading(true));
+      usersAPI.getExpert(userId).then(data => {
+        dispatch(setUserProfile(data[0]));
+        dispatch(toggleisLoading(false));
+      });
+    }
   }
 }
 

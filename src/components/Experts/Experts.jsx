@@ -2,9 +2,9 @@ import React from 'react';
 import style from './Experts.module.css';
 import Preloader from '../common/Preloader/Preloader';
 import { NavLink } from 'react-router-dom';
+import FavoritesContainer from '../common/Favorites/FavoritesContainer';
 
 const Experts = (props) => {
-
   let pages = [];
   for (let i = 1; i <= props.totalPageCount; i++) {
     pages.push(i);
@@ -17,7 +17,6 @@ const Experts = (props) => {
         className={props.currentPage === numberPage ? style.active : ''}>{numberPage}
       </span>
     });
-
 
   return (
     <section className="container">
@@ -45,33 +44,19 @@ const Experts = (props) => {
               props.experts.map(expert =>
                 (
                   <li key={expert.id}>
-
                     <div key={expert.id} className={style.expert}>
-
-                      {
-                        expert.pro_favorites
-                          ? <button onClick={() => { props.removeFavorites(expert.id) }} className={`${style.favorite} ${style.unfavorite}`}>
-                            <svg width="25" height="32" viewBox="0 0 25 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M0 0H25V32L12.5 24.4211L0 32V0Z" />
-                            </svg>
-                          </button>
-                          : <button onClick={() => { props.addFavorives(expert.id) }} className={`${style.favorite} ${style.addfavorite}`}>
-                            <svg width="25" height="32" viewBox="0 0 25 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M0 0H25V32L12.5 24.4211L0 32V0Z" />
-                            </svg>
-                          </button>
-                      }
-                        <div className={style.avatar}>
-                          <img src={expert.avatar} alt="" />
+                    <FavoritesContainer expertId={expert.id} />
+                      <div className={style.avatar}>
+                        <img src={expert.avatar} alt="" />
+                      </div>
+                      <div className={style.discription}>
+                        <h2><NavLink to={`/profile/${expert.id}`}>{expert.pro_lastname} {expert.pro_firstname} {expert.pro_secondname}</NavLink></h2>
+                        <div className={style.work}>
+                          <span>{expert.pro_position ? expert.pro_position : 'Странник'}</span>
+                          <span>{expert.pro_workplace ? expert.pro_workplace : 'Всё и Вся'}</span>
+                          <span className={style.city}>{expert.pro_city ? expert.pro_city : 'Человек мира'}</span>
                         </div>
-                        <div className={style.discription}>
-                          <h2><NavLink to={`/profile/${expert.id}`}>{expert.pro_lastname} {expert.pro_firstname} {expert.pro_secondname}</NavLink></h2>
-                          <div className={style.work}>
-                            <span>{expert.pro_position ? expert.pro_position : 'Странник'}</span>
-                            <span>{expert.pro_workplace ? expert.pro_workplace : 'Всё и Вся'}</span>
-                            <span className={style.city}>{expert.pro_city ? expert.pro_city : 'Человек мира'}</span>
-                          </div>
-                        </div>
+                      </div>
 
                       <div className={style.raiting}>
                         <div>

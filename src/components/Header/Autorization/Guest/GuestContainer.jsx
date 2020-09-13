@@ -9,10 +9,7 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
   return {
-    // userLogin: (autorized) => {
-    //   let action = loginCreator(autorized);
-    //   dispatch(action);
-    // }
+
   }  
 }
 
