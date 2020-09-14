@@ -7,7 +7,6 @@ const Guest = (props) => {
   return (
     <>
       <NavLink to='/auth' >
-        {/* <button onClick={registration} className="button">Авторизоваться</button> */}
         <button className="button">Авторизоваться</button>
       </NavLink>
     </>

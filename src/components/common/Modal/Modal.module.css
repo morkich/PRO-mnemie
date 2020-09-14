@@ -1,0 +1,37 @@
+.wrap {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(14, 42, 66, 0.9);
+  z-index: 999;
+}
+
+.content {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: #fff;
+  padding: 70px;
+  max-width: 425px;
+  width: 100%;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.close:hover {
+  transform: rotate(90deg);
+}

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import style from './Login.module.css';
+import Title from '../Title/Title';
 
 const Login = (props) => {
   if (props.isLoading || localStorage.getItem('token')) {
-    return <Redirect to={`/profile/me`} noThrow />
+    return <Redirect to={`/account`} noThrow />
   } else {
     return (
-      <div className="">
+      <div className={style.wrap}>
+        <Title position="center" title="Вход"/>
         <form onSubmit={props.onFormSubmit}>
           <input
             type="text"
@@ -20,7 +23,8 @@ const Login = (props) => {
             value={props.password}
             onChange={props.handleOnChange}
           />
-          <button type="submit">Login</button>
+          <button className="button" type="submit">Войти</button>
+          <a href="">Регистрация</a>
         </form>
       </div>
     );

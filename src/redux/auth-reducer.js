@@ -1,4 +1,5 @@
-import { usersAPI } from "../api/api";
+import { authAPI, usersAPI } from "../api/api";
+import * as axios from 'axios';
 
 const LOADING_ACCAUNT = 'LOADING_ACCAUNT';
 const SET_USER_DATA = 'SET_USER_DATA';
@@ -129,6 +130,42 @@ export const authThunk = (token) => {
   }
 }
 
+export const loginThunk = (username, password) => {
+  return (dispatch) => {
+    dispatch(toggleLoadingAcc(true));
+    authAPI.getToken(username, password)
+      .then(data => {
+        if (!data.token) {
+          dispatch(getError(data.message));
+          dispatch(toggleLoadingAcc(false));
+          return false;
+        }
+        localStorage.setItem('token', data.token);
+        dispatch(setUserData({
+          userNiceName: data.user_nicename,
+          userEmail: data.user_email,
+          token: data.token
+        }));    
+        const myHeaders = {
+          headers: { 'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9wcm92aWV3LmxvYyIsImlhdCI6MTU5OTk5NjY4MSwibmJmIjoxNTk5OTk2NjgxLCJleHAiOjE2MDA2MDE0ODEsImRhdGEiOnsidXNlciI6eyJpZCI6IjEzIn19fQ.9euOJXyE3aCIEhwRccO7e61PKwo1FByjLmq023oDU2o` }
+        }
+        axios.get(`http://proview.loc/wp-json/wp/v2/users/me`, myHeaders)
+          .then(response => {
+            dispatch(setUserData({
+              loggetIn: true,
+              userId: response.data.id,
+              firstname: response.data.pro_firstname,
+              lastname: response.data.pro_lastname,
+              avatar: response.data.avatar,
+              favoritesExperts: (response.data.pro_favorites_experts.length > 0) ? JSON.parse(response.data.pro_favorites_experts) : [],
+              favoritesVideos: (response.data.pro_favorites_video.length > 0) ? JSON.parse(response.data.pro_favorites_video) : [],
+              favoritesEvents: (response.data.pro_favorites_events.length > 0) ? JSON.parse(response.data.pro_favorites_events) : [],
+              loadingAcc: false,
+            }));
+          });    
+      })    
+  }
+}
 
 
 

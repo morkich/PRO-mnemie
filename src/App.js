@@ -6,7 +6,8 @@ import Main from './components/Main/Main';
 import { Route } from 'react-router-dom';
 import ExpertsContainer from './components/Experts/ExpertsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import LoginContainer from './components/common/Login/LoginContainer';
+import ModalContainer from './components/common/Modal/ModalContainer';
+import AccountContainer from './components/Account/AccountContainer';
 
 const App = () => {
   return (
@@ -18,8 +19,9 @@ const App = () => {
         <Route path="/experts" render={() => <ExpertsContainer />} />
         <Route path="/home" render={() => <Main />} />
         <Route path="/profile/:userId?" render={() => <ProfileContainer />} />      
-        <Route path="/auth" render={() => <LoginContainer />} />      
+        <Route path="/account/" render={() => <AccountContainer />} />      
       </div>
+      <Route path="/auth" render={() => <ModalContainer />} />   
       <footer className="footer">
         <Footer />
       </footer>

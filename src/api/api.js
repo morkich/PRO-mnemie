@@ -26,7 +26,7 @@ export const usersAPI = {
   }
 }
 
-export const optionAPI = {
+export const authAPI = {
   getToken(username, password) {
     const headers = { username: username, password: password };
     return noAuth.post(`jwt-auth/v1/token`, headers)

@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleLoadingAcc, setUserData, updateUserData, getError } from '../../../redux/auth-reducer';
-import * as axios from 'axios';
+import { updateUserData, loginThunk } from '../../../redux/auth-reducer';
 import Login from './Login';
-import { optionAPI } from '../../../api/api';
 
 class LoginContainer extends React.Component {
 
@@ -12,39 +10,7 @@ class LoginContainer extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.toggleLoadingAcc(true);
-    optionAPI.getToken(this.props.username, this.props.password)
-      .then(data => {
-        if (!data.token) {
-          this.props.getError(data.message);
-          this.props.toggleLoadingAcc(false);
-          return false;
-        }
-        localStorage.setItem('token', data.token);
-        this.props.setUserData({
-          userNiceName: data.user_nicename,
-          userEmail: data.user_email,
-          token: data.token
-        });
-        const token = localStorage.getItem('token');
-        const myHeaders = {
-          headers: { 'Authorization': `Bearer ${token}` }
-        }
-        axios.get(`http://proview.loc/wp-json/wp/v2/users/me`, myHeaders)
-          .then(response => {
-            this.props.setUserData({
-              loggetIn: true,
-              userId: response.data.id,
-              firstname: response.data.pro_firstname,
-              lastname: response.data.pro_lastname,
-              avatar: response.data.avatar,
-              favoritesExperts: (response.data.pro_favorites_experts.length > 0)? JSON.parse(response.data.pro_favorites_experts): [],
-              favoritesVideos: (response.data.pro_favorites_video.length > 0)? JSON.parse(response.data.pro_favorites_video): [],
-              favoritesEvents: (response.data.pro_favorites_events.length > 0)? JSON.parse(response.data.pro_favorites_events): [],          
-              loadingAcc: false,
-            });
-          });      
-      })
+    this.props.loginThunk(this.props.username, this.props.password);
   };
 
   handleOnChange = (event) => {
@@ -83,5 +49,5 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps,
-  { toggleLoadingAcc, setUserData, updateUserData, getError }
+  { updateUserData, loginThunk }
 )(LoginContainer);

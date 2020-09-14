@@ -56,28 +56,19 @@ export const removeExpertFavorite = (id) => {
   }
 }
 
-export const favoriteThunkCreator = (itemId, arrayFav) => {
+export const favoriteThunkCreator = (itemId, arrayFav, addfavorite) => {
   return (dispatch) => {
     dispatch(toggleFavoriteProgress(true, itemId));
-    let favorites = Array.from(new Set([...arrayFav, +itemId]))
+    let favorites = addfavorite
+      ? Array.from(new Set([...arrayFav, +itemId]))
+      : arrayFav.filter(favId => favId != itemId);   
+    
     let data = { pro_favorites_experts: JSON.stringify(favorites) }
     usersAPI.setUserData(data).then(response => {
-      if (response) {
-        dispatch(addFavoriteExpert(itemId));
-      }
-      dispatch(toggleFavoriteProgress(false, itemId));
-    });
-  }  
-}
-
-export const unfavoriteThunkCreator = (itemId, arrayFav) => {
-  return (dispatch) => {
-    dispatch(toggleFavoriteProgress(true, itemId));
-    let favorites = arrayFav.filter(favId => favId != itemId);    
-    let data = { pro_favorites_experts: JSON.stringify(favorites) }
-    usersAPI.setUserData(data).then(response => {
-      if (response) {
-        dispatch(removeFavoriteExpert(itemId));
+      if (response) {        
+        addfavorite 
+          ? dispatch(addFavoriteExpert(itemId))
+          : dispatch(removeFavoriteExpert(itemId));
       }
       dispatch(toggleFavoriteProgress(false, itemId));
     });

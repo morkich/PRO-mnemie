@@ -40,9 +40,9 @@ export const toggleisLoading = (isLoading) => {
   }
 }
 
-export const getProfile = (userId) => {
+export const getProfile = (userId, pathName = '') => {
   return (dispatch) => {
-    if (userId == 'me') {
+    if (userId == 'me' || pathName == '/account/') {
       dispatch(toggleisLoading(true));
       usersAPI.getMe().then(data => {        
         dispatch(setUserProfile(data));
