@@ -5,26 +5,9 @@
 }
 
 .wrap form {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 3rem;
   justify-items: center;
 }
-
-.wrap input {
-  height: 45px;
-  padding: 0 20px;
-  line-height: 1;
-  color: #0E2A42;
-  font-size: 1.3rem;
-  font-weight: normal;
-  border: 1px solid #AECAD5;
-  border-radius: 2px;
-  width: 100%;  
-}
-
-.wrap input:focus {
-  border: 1px solid #237FC2;
-  outline: none;
-}
-

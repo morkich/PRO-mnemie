@@ -30,6 +30,7 @@
   background-color: transparent;
   cursor: pointer;
   transition: .2s;
+  outline: none;
 }
 
 .close:hover {

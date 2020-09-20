@@ -1,9 +1,19 @@
 import React from 'react';
-import style from './Input.module.css';
+import style from '../Forms.module.css';
 
 const Input = (props) => {
-  return (
-    <input type="text" placeholder={props.placeholder} value={props.value} className={style.input}/>
+  const hasError = props.meta.touched && props.meta.error;
+  return (    
+    <div className={`${style.formControl} ${hasError && style.error}`}>
+      <input
+        {...props.input}
+        name={props.input.name}
+        placeholder={props.placeholder}
+        type={props.type}
+        className={style.input}
+      />
+      {hasError && <span>{props.meta.error}</span>}
+    </div>
   )
 }
 

@@ -1,16 +1,14 @@
+import { stopSubmit } from "redux-form";
 import { authAPI, usersAPI } from "../api/api";
-import * as axios from 'axios';
 
 const LOADING_ACCAUNT = 'LOADING_ACCAUNT';
 const SET_USER_DATA = 'SET_USER_DATA';
 const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
-const GET_ERROR = 'GET_ERROR';
 const ADD_FAVORITE_EXPERT = 'ADD_FAVORITE_EXPERT';
 const REMOVE_FAVORITE_EXPERT = 'REMOVE_FAVORITE_EXPERT';
+const SET_ERROR = 'SET_ERROR';
 
 let initialState = {
-  username: '',
-  password: '',
   userNiceName: '',
   userEmail: '',
   loggetIn: false,
@@ -24,6 +22,10 @@ let initialState = {
   favoritesExperts: [],
   favoritesVideo: [],
   favoritesEvents: [],
+  pro_discription: '',
+  pro_expirience: '',
+  pro_position: '',
+  pro_workplace: '',
 }
 
 const authReducer = (state = initialState, action) => {
@@ -43,7 +45,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loadingAcc: action.loadingAcc
       };
-    case GET_ERROR:
+    case SET_ERROR:
       return {
         ...state,
         error: action.errors
@@ -70,13 +72,6 @@ export const setUserData = (data) => {
   }
 }
 
-export const updateUserData = (data) => {
-  return {
-    type: UPDATE_USER_DATA,
-    data
-  }
-}
-
 export const toggleLoadingAcc = (loadingAcc) => {
   return {
     type: LOADING_ACCAUNT,
@@ -84,9 +79,9 @@ export const toggleLoadingAcc = (loadingAcc) => {
   }
 }
 
-export const getError = (errors) => {
+export const setError = (errors) => {
   return {
-    type: GET_ERROR,
+    type: SET_ERROR,
     errors
   }
 }
@@ -116,17 +111,45 @@ export const authThunk = (token) => {
             userId: data.id,
             firstname: data.pro_firstname,
             lastname: data.pro_lastname,
+            secondname: data.pro_secondname,
             avatar: data.avatar,
+            favoritesExperts: (data.pro_favorites_experts.length > 0) ? JSON.parse(data.pro_favorites_experts) : [],
+            favoritesVideos: (data.pro_favorites_video.length > 0) ? JSON.parse(data.pro_favorites_video) : [],
+            favoritesEvents: (data.pro_favorites_events.length > 0) ? JSON.parse(data.pro_favorites_events) : [],
+            pro_discription: data.pro_discription,
+            pro_expirience: data.pro_expirience,
+            pro_position: data.pro_position,
+            pro_workplace: data.pro_workplace,
+            pro_city: data.pro_city,
             loadingAcc: false,
-            favoritesExperts: (data.pro_favorites_experts.length > 0)? JSON.parse(data.pro_favorites_experts): [],
-            favoritesVideos: (data.pro_favorites_video.length > 0)? JSON.parse(data.pro_favorites_video): [],
-            favoritesEvents: (data.pro_favorites_events.length > 0)? JSON.parse(data.pro_favorites_events): [],
-            token: token
           }));
-          dispatch(toggleLoadingAcc(false));
         }        
-      )
-    }    
+      )    
+    }
+  }
+}
+
+export const setAccauntData = (data) => {
+  return (dispatch) => {
+    dispatch(toggleLoadingAcc(true));
+    let newData = {
+      pro_discription: data.discription,
+      pro_expirience: data.expirience,
+      pro_position: data.position,
+      pro_workplace: data.workplace,
+      pro_city: data.city,
+    }
+    usersAPI.setUserData(newData)
+      .then(response => {
+        dispatch(setUserData({
+          pro_discription: response.data.pro_discription,
+          pro_expirience: response.data.pro_expirience,
+          pro_position: response.data.pro_position,
+          pro_workplace: response.data.pro_workplace,
+          pro_city: data.city,
+        }))
+        dispatch(toggleLoadingAcc(false));
+      })
   }
 }
 
@@ -135,38 +158,43 @@ export const loginThunk = (username, password) => {
     dispatch(toggleLoadingAcc(true));
     authAPI.getToken(username, password)
       .then(data => {
-        if (!data.token) {
-          dispatch(getError(data.message));
-          dispatch(toggleLoadingAcc(false));
-          return false;
+        if(data.token) {
+          localStorage.setItem('token', data.token);
+          dispatch(setUserData({
+            userNiceName: data.user_nicename,
+            userEmail: data.user_email,
+            token: data.token
+          }));
+          authAPI.getAccount(data.token)
+            .then(data => {
+              dispatch(setUserData({
+                loggetIn: true,
+                userId: data.id,
+                firstname: data.pro_firstname,
+                lastname: data.pro_lastname,
+                secondname: data.pro_secondname,
+                avatar: data.avatar,
+                favoritesExperts: (data.pro_favorites_experts.length > 0) ? JSON.parse(data.pro_favorites_experts) : [],
+                favoritesVideos: (data.pro_favorites_video.length > 0) ? JSON.parse(data.pro_favorites_video) : [],
+                favoritesEvents: (data.pro_favorites_events.length > 0) ? JSON.parse(data.pro_favorites_events) : [],
+                pro_discription: data.pro_discription,
+                pro_expirience: data.pro_expirience,
+                pro_position: data.pro_position,
+                pro_workplace: data.pro_workplace,
+                pro_city: data.pro_city,       
+              }));
+              dispatch(toggleLoadingAcc(false));     
+          });            
         }
-        localStorage.setItem('token', data.token);
-        dispatch(setUserData({
-          userNiceName: data.user_nicename,
-          userEmail: data.user_email,
-          token: data.token
-        }));    
-        const myHeaders = {
-          headers: { 'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9wcm92aWV3LmxvYyIsImlhdCI6MTU5OTk5NjY4MSwibmJmIjoxNTk5OTk2NjgxLCJleHAiOjE2MDA2MDE0ODEsImRhdGEiOnsidXNlciI6eyJpZCI6IjEzIn19fQ.9euOJXyE3aCIEhwRccO7e61PKwo1FByjLmq023oDU2o` }
-        }
-        axios.get(`http://proview.loc/wp-json/wp/v2/users/me`, myHeaders)
-          .then(response => {
-            dispatch(setUserData({
-              loggetIn: true,
-              userId: response.data.id,
-              firstname: response.data.pro_firstname,
-              lastname: response.data.pro_lastname,
-              avatar: response.data.avatar,
-              favoritesExperts: (response.data.pro_favorites_experts.length > 0) ? JSON.parse(response.data.pro_favorites_experts) : [],
-              favoritesVideos: (response.data.pro_favorites_video.length > 0) ? JSON.parse(response.data.pro_favorites_video) : [],
-              favoritesEvents: (response.data.pro_favorites_events.length > 0) ? JSON.parse(response.data.pro_favorites_events) : [],
-              loadingAcc: false,
-            }));
-          });    
-      })    
+      })
+      .catch(err => {        
+        let action = stopSubmit('login', {
+          _error: '!Неверные данные для входа',
+        });
+        dispatch(action);
+        dispatch(toggleLoadingAcc(false));
+      })
   }
 }
-
-
 
 export default authReducer;

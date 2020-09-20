@@ -1,6 +1,10 @@
 .wrap {
-    grid-column: 1 / -1;
-    height: 100px;
-    width: 100%;
-    background-color: #24A3D9;
+  grid-column: 1 / -1;
+  height: 100px;
+  width: 100%;
+  background-color: #24A3D9;
+}
+
+.wrap img {
+  height: 100%;
 }

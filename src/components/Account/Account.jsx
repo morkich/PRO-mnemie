@@ -1,7 +1,8 @@
 import React from 'react';
-import TextArea from '../common/Forms/TextArea/TextArea';
+import AsideNavContainer from '../Aside/AsideNav/AsideNavContainer';
+import Preloader from '../common/Preloader/Preloader';
 import style from './Account.module.css';
-import UserTags from './UserTags/UserTags';
+import AccountDataReduxForm from './AccountDataForm/AccountDataForm';
 
 const Account = (props) => {
   return (
@@ -11,7 +12,7 @@ const Account = (props) => {
           <img src={props.profile.avatar} alt="" />
         </div>
         <div className={style.discription}>
-          <h2>{props.profile.pro_lastname} {props.profile.pro_firstname} {props.profile.pro_secondname}</h2>
+          <h2>{props.profile.lastname} {props.profile.firstname} {props.profile.secondname}</h2>
           <div className={style.work}>
             <span>{props.profile.pro_position ? props.profile.pro_position : 'Странник'}</span>
             <span>{props.profile.pro_workplace ? props.profile.pro_workplace : 'Всё и Вся'}</span>
@@ -31,32 +32,16 @@ const Account = (props) => {
           <span>{props.profile.pro_raiting ? props.profile.pro_raiting : 0} из 5</span>
         </div>
       </div>
-
-      <div className={style.information}>
-        <span className={style.title}>Город</span>
-        <div className={style.text_box}>
-          <span>{props.profile.pro_city}</span>
-        </div>
-        <span className={style.title}>Опыт</span>
-        <div className={style.text_box}>
-          <span>{props.profile.pro_position ? props.profile.pro_position : 'Странник'}</span>
-          <span>{props.profile.pro_workplace ? props.profile.pro_workplace : 'Всё и Вся'}</span>
-          <TextArea 
-            value={props.profile.pro_expirience}
-            placeholder={'Без опыта'}
-          />    
-        </div>
-        <span className={style.title}>Хештеги</span>
-        <UserTags />
-        <span className={style.title}>О себе</span>
-        <TextArea 
-          value={props.profile.pro_discription}
-          placeholder={'Напишите о себе'}          
-        />    
+      <div className={style.form_wrap}>
+        {props.loadingAcc ? <Preloader /> : null}
+        <AccountDataReduxForm 
+          initialValues={props.initialValues}
+          onSubmit={props.onFormSubmit}          
+        />
       </div>
-
+      
       <div className={style.extra}>
-
+        <AsideNavContainer />
       </div>
     </section>
   )

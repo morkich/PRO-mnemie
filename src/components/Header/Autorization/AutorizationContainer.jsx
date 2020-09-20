@@ -1,13 +1,10 @@
 import React from 'react';
 import Autorization from './Autorization';
-import { authThunk } from '../../../redux/auth-reducer';
+import { toggleLoadingAcc } from '../../../redux/auth-reducer';
 import { connect } from 'react-redux';
+import { getLoadingAcc, getLoggetIn, getToken, getFirstname, getLastname, getAvatar, getUserId } from '../../../redux/auth-selectors';
 
 class AutorizationContainer extends React.Component {
-
-  componentDidMount() {
-    this.props.authThunk(localStorage.getItem('token'));
-  }
 
   render() {
     return (
@@ -25,14 +22,14 @@ class AutorizationContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    token: state.auth.token,
-    loggetIn: state.auth.loggetIn,
-    firstname: state.auth.firstname,
-    lastname: state.auth.lastname,
-    avatar: state.auth.avatar,
-    loadingAcc: state.auth.loadingAcc,
-    userId: state.auth.userId,
+    token: getToken(state),
+    loggetIn: getLoggetIn(state),
+    firstname: getFirstname(state),
+    lastname: getLastname(state),
+    avatar: getAvatar(state),
+    loadingAcc: getLoadingAcc(state),
+    userId: getUserId(state),
   }
 }
 
-export default connect(mapStateToProps, { authThunk })(AutorizationContainer);
+export default connect(mapStateToProps, { toggleLoadingAcc })(AutorizationContainer);

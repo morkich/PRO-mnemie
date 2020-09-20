@@ -1,23 +1,42 @@
 import React from 'react';
-import { getProfile } from '../../redux/profile-reducer';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Preloader from '../common/Preloader/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 import Account from './Account';
+import { toggleisLoading } from '../../redux/profile-reducer';
+import { setAccauntData } from '../../redux/auth-reducer';
 
 class AccountContainer extends React.Component {
 
   componentDidMount() {
-    this.props.getProfile(this.props.match.params.userId, this.props.match.path);
+    this.props.toggleisLoading(false);
+  }
+  
+  getInitialValues() {
+    return {
+      discription: this.props.profile.pro_discription,
+      expirience: this.props.profile.pro_expirience,
+      position: this.props.profile.pro_position,
+      city: this.props.profile.pro_city,      
+      workplace: this.props.profile.pro_workplace,      
+    };
+  }
+
+  onFormSubmit = (formData) => {
+    this.props.setAccauntData(formData);
   }
 
   render() {
     return (
       <>
         {this.props.isLoading ? <Preloader /> : null}
-        <Account {...this.props} />
+        <Account
+          {...this.props}
+          onFormSubmit={this.onFormSubmit}
+          initialValues={this.getInitialValues()}
+        />
       </>
     )
   }
@@ -25,13 +44,13 @@ class AccountContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    profile: state.profilePage.profile,
-    isLoading: state.profilePage.isLoading
+    profile: state.auth,
+    loadingAcc: state.auth.loadingAcc
   }
 }
 
 export default compose(
-  connect(mapStateToProps, { getProfile }),
+  connect(mapStateToProps, { toggleisLoading, setAccauntData }),
   withRouter,
   withAuthRedirect
 )(AccountContainer);

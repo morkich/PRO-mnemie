@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import style from './Favorites.module.css';
 
-const Favorites = (props) => {
+const Favorites = (props) => {  
   let inProgress = props.favoriteExpertsButtonProgress.some(id => id === +props.expertId); 
   let inActive = props.favoriteExpertsState.some(id => id === +props.expertId);
-  
+
   return (
     props.loggetIn  
     ? inActive

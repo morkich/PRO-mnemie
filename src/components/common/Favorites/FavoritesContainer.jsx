@@ -1,27 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addFavoriteExpert, removeFavoriteExpert } from '../../../redux/auth-reducer';
+import { getFavoritesExperts, getLoggetIn } from '../../../redux/auth-selectors';
 import { toggleFavoriteProgress, favoriteThunkCreator } from '../../../redux/favorive-reducer';
 import Favorites from './Favorites';
 
 class FavoritesContainer extends React.Component {
-  state = {
-    favoriteExpertsButtonProgress: [], 
-    favoriteExpertsState: []
-  }
-
   componentDidMount() {
     this.props.toggleFavoriteProgress(true, this.props.expertId);
-    let favorites = this.props.favoritesExperts.some(id => id === +this.props.expertId);
+    let favorites = this.props.favoriteExpertsState.some(id => id === +this.props.expertId);
     favorites ? this.props.addFavoriteExpert() : this.props.removeFavoriteExpert();
     this.props.toggleFavoriteProgress(false, this.props.expertId);
   }
 
   removeThisFavorite = () => {
-    this.props.favoriteThunkCreator(this.props.expertId, this.props.favoritesExperts, false);
+    this.props.favoriteThunkCreator(this.props.expertId, this.props.favoriteExpertsState, false);
   }
   addThisFavorite = () => {
-    this.props.favoriteThunkCreator(this.props.expertId, this.props.favoritesExperts, true);
+    this.props.favoriteThunkCreator(this.props.expertId, this.props.favoriteExpertsState, true);
   }
 
   render() {
@@ -30,6 +26,7 @@ class FavoritesContainer extends React.Component {
         expertId={this.props.expertId}
         loggetIn={this.props.loggetIn}
         favoriteExpertsButtonProgress={this.props.favoriteExpertsButtonProgress}
+        favoriteExpertsState={this.props.favoriteExpertsState}
         addThisFavorite={this.addThisFavorite}
         removeThisFavorite={this.removeThisFavorite}
       />
@@ -39,9 +36,9 @@ class FavoritesContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    favoritesExperts: state.auth.favoritesExperts,
+    favoriteExpertsState: getFavoritesExperts(state),
     favoriteExpertsButtonProgress: state.favorite.favoriteExpertsButtonProgress,
-    loggetIn: state.auth.loggetIn
+    loggetIn: getLoggetIn(state)
   }
 }
 

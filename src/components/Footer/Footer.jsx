@@ -1,13 +1,38 @@
 import React from 'react';
 import style from './Footer.module.css';
+import logo from '../../assets/img/logo-white.svg';
+import FooterNav from './FooterNav/FooterNav';
 
 
 const Footer = () => {
     return (
-      <div className="container wrap_footer">
-        <p className={style.pharagraph}>auto-fit будет вести себя почти как auto-fill, но если есть только одна строка и есть место для дополнительных колонок, но нет элементов, которые можно вставить эти колонки, то тогда он сделает ширину пустых колонок равную нулю. А если выставить максимальную ширину колонок на 1fr, то браузер разделит оставшееся место поровну между ними.
-          Вы можете поиграться с этим на Codepen:
-        </p>
+      <div className={`container ${style.wrap}`}>
+        <div className="logo">
+          <img src={logo} alt=""/>
+        </div>
+        <nav className={style.menu}>
+          <FooterNav />
+        </nav>
+        <div className={style.bottom}>
+          <div className={style.text_block}>
+            <p>
+              Републикация материалов - 
+              только с ссылкой на promnenie.com,
+              с разрешения редакции сайта.
+            </p>
+            <p>
+              Редакция не несет ответственности за высказывания пользователей на сайте.
+            </p>
+          </div>
+          <div className={style.contact}>
+            <a href="tel:8-800-800-00-00">8-800-800-00-00</a>
+          <p>
+            100000, г. Москва,
+            ул. Тверская д. 58, офис 12556
+          </p>  
+          </div>          
+        </div>
+        <div className={style.dev}></div>
       </div>
     );
 }

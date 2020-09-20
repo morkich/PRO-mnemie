@@ -4,13 +4,15 @@ const SET_EXPERTS = 'SET_EXPERTS';
 const CURRENT_PAGE = 'CURRENT_PAGE';
 const TOTAL_PAGES = 'TOTAL_PAGES';
 const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
+const SET_CITIES = 'SET_CITIES';
 
 let initialState = {
   experts: [],
   pageSize: 9,
   totalPageCount: 1,
   currentPage: 1,
-  isLoading: true
+  isLoading: true,
+  uniqCities : ['Москва', 'Санкт-Петербург']
 }
 
 const expertsReducer = (state = initialState, action) => {
@@ -35,6 +37,11 @@ const expertsReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.isLoading
       };
+    case SET_CITIES:
+      return {
+        ...state,
+        uniqCities: action.uniqCities
+      }
     default:
       return state;
   }
@@ -68,15 +75,33 @@ export const toggleisLoading = (isLoading) => {
   }
 }
 
+export const setCities = (uniqCities) => {
+  return {
+    type: SET_CITIES,
+    uniqCities
+  }
+}
+
 export const getExpertsThunkCreator = (currentPage, pageSize) => {
   return (dispatch) => {
     dispatch(toggleisLoading(true));
     usersAPI.getExperts(currentPage, pageSize).then(response => {
       dispatch(toggleisLoading(false))
       dispatch(setExperts(response.data))
+      dispatch(setCurrentPage(currentPage))
       dispatch(setTotalPageCount(response.headers['x-wp-totalpages']))
     });
   }
 }
 
+export const getUniqUserCities = (fieldName) => {
+  return (dispatch) => {
+    dispatch(toggleisLoading(true));    
+    usersAPI.getAllUniqCities()
+      .then(data => {
+        dispatch(setCities(Object.values(data)));
+        dispatch(toggleisLoading(false));    
+      })
+  }
+}
 export default expertsReducer;

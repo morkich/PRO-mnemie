@@ -1,0 +1,6 @@
+.filter {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 285px);
+  grid-gap: 2rem;
+  justify-items: start;
+}

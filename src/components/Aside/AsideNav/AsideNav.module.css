@@ -1,0 +1,14 @@
+.container {
+  margin-left: 2rem;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2rem;
+}
+
+.item {
+
+}
+

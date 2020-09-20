@@ -4,3 +4,7 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.wrap a {
+  text-decoration: none;
+}

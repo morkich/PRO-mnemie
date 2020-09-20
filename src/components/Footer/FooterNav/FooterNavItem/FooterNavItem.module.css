@@ -1,0 +1,13 @@
+.item {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.7rem;
+  color: #fff;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.item:hover {
+  color: #237FC2;
+  text-decoration: underline;
+}

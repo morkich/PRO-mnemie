@@ -21,12 +21,28 @@ export const usersAPI = {
   getExperts(page = 1, pageSize = 10) {
     return noAuth.get(`wp/v2/users?page=${page}&per_page=${pageSize}`)
   },
+  getAllUniqCities() {
+    return noAuth.get(`wp/v2/users/cities`)
+      .then(response => response.data);
+  },
   setUserData(data) {
     return auth.post(`wp/v2/users/me`, data)
   }
 }
 
+export const optionsAPI = {
+  getLogo() {
+    return noAuth.get(`wp/v2/theme_options/logo`)
+      .then(response => response.data);
+  }
+}
+
 export const authAPI = {
+  getAccount(token) {
+    const myHeaders = { headers: { 'Authorization': `Bearer ${token}` } };
+    return noAuth.get(`wp/v2/users/me`, myHeaders)
+      .then(response => response.data);
+  },
   getToken(username, password) {
     const headers = { username: username, password: password };
     return noAuth.post(`jwt-auth/v1/token`, headers)

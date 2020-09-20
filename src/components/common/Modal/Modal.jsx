@@ -1,8 +1,8 @@
 import React from 'react';
-import LoginContainer from '../Login/LoginContainer';
 import Watermark from '../Watermark/Watermark';
 import style from './Modal.module.css';
 import closeImg from '../../../assets/img/close.svg';
+import LoginContainer from '../Login/LoginContainer';
 
 const Modal = (props) => {
   return (

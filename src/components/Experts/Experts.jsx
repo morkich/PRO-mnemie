@@ -1,8 +1,12 @@
 import React from 'react';
 import style from './Experts.module.css';
 import Preloader from '../common/Preloader/Preloader';
+import Watermark from '../common/Watermark/Watermark';
 import { NavLink } from 'react-router-dom';
 import FavoritesContainer from '../common/Favorites/FavoritesContainer';
+import Title from '../common/Title/Title';
+import FilterContainer from '../common/Filter/FilterContainer'
+import Aside from '../Aside/Aside';
 
 const Experts = (props) => {
   let pages = [];
@@ -21,17 +25,13 @@ const Experts = (props) => {
   return (
     <section className="container">
       <header className={style.header}>
-        <h1>Эксперты</h1>
-        <form action="" className={style.filter}>
-          <input type="text" />
-          <select name="" id="">
-            <option value="moskow">Москва</option>
-            <option value="spb">Санкт-Петербург</option>
-            <option value="penza">Пенза</option>
-            <option value="kostroma">Кострома</option>
-          </select>
-          <button className="button">Найти</button>
-        </form>
+        <Watermark main={true}/>   
+        <Title 
+          title={'Эксперты'} 
+          main={true} 
+          uppercase={true}
+        />
+        <FilterContainer />
       </header>
       <div className="pagination">
         {pagesCount}
@@ -86,9 +86,7 @@ const Experts = (props) => {
             }
           </ul>
         </main>
-        <aside>
-
-        </aside>
+        <Aside />
       </div>
     </section>
   )
