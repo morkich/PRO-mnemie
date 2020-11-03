@@ -3,11 +3,9 @@ import { Redirect } from 'react-router-dom';
 import style from './Login.module.css';
 import Title from '../Title/Title';
 import { Field, reduxForm } from 'redux-form';
-import { maxLengthCreator, required } from '../../../utils/validators/validators';
+import { required } from '../../../utils/validators/validators';
 import Input from '../Forms/Input/Input';
 import FormError from '../Forms/FormError/FormError';
-
-const maxLength5 = maxLengthCreator(5);
 
 const LoginForm = (props) => {
   return (

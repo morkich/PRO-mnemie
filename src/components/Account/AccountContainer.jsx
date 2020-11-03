@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import Account from './Account';
 import { toggleisLoading } from '../../redux/profile-reducer';
 import { setAccauntData } from '../../redux/auth-reducer';
+import { getRaiting, getUserId, getLoadingAcc, getDiscription, getExpirience, getPosition, getCity, getWorkplace, getAvatar, getFirstname, getLastname, getSecondname } from '../../redux/auth-selectors';
 
 class AccountContainer extends React.Component {
 
@@ -16,11 +17,11 @@ class AccountContainer extends React.Component {
   
   getInitialValues() {
     return {
-      discription: this.props.profile.pro_discription,
-      expirience: this.props.profile.pro_expirience,
-      position: this.props.profile.pro_position,
-      city: this.props.profile.pro_city,      
-      workplace: this.props.profile.pro_workplace,      
+      discription: this.props.discription,
+      expirience: this.props.expirience,
+      position: this.props.position,
+      city: this.props.city,      
+      workplace: this.props.workplace,      
     };
   }
 
@@ -44,8 +45,18 @@ class AccountContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    profile: state.auth,
-    loadingAcc: state.auth.loadingAcc
+    loadingAcc: getLoadingAcc(state),
+    userId: getUserId(state),
+    avatar: getAvatar(state),
+    firstname: getFirstname(state),
+    secondname: getSecondname(state),
+    lastname: getLastname(state),
+    discription: getDiscription(state),
+    expirience: getExpirience(state),
+    position: getPosition(state),
+    city: getCity(state),      
+    workplace: getWorkplace(state),   
+    raiting: getRaiting(state),   
   }
 }
 

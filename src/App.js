@@ -10,6 +10,7 @@ import ModalContainer from './components/common/Modal/ModalContainer';
 import AccountContainer from './components/Account/AccountContainer';
 import { authThunk } from './redux/auth-reducer';
 import { connect } from 'react-redux';
+import CareerContainer from './components/Career/CareerContainer';
 
 class App extends React.Component {
 
@@ -28,6 +29,7 @@ class App extends React.Component {
           <Route path="/home" render={() => <Main />} />
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
           <Route path="/account/" render={() => <AccountContainer />} />
+          <Route path="/career/" render={() => <CareerContainer />} />
         </div>
         <Route path="/auth" render={() => <ModalContainer />} />
         <footer className="footer">

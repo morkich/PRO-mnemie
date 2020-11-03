@@ -5,6 +5,7 @@ import { getLogo } from '../../../redux/options-reducer';
 import { connect } from 'react-redux';
 import PreloaderMini from '../../common/PreloaderMini/PreloaderMini';
 import style from './Logo.module.css';
+import { getOptionsLogo } from '../../../redux/options-selectors';
 
 class LogoContainer extends React.Component {
 
@@ -31,7 +32,7 @@ class LogoContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    logo: state.options.logo
+    logo: getOptionsLogo(state)
   }
 }
 

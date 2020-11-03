@@ -1,38 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from '../Forms.module.css';
 
-class TextArea extends React.Component {
-  state = {
-    height: 200,
-  }
+const TextArea = (props) => {  
+  const [textAreaHeight, setTextAreaHeight] = useState(200);
+  const updateTextArea = (e) => setTextAreaHeight(e.target.scrollHeight);
+  const hasError = props.meta.touched && props.meta.error;
 
-  updateTextArea = (e) => {
-    this.setState({
-      height: e.target.scrollHeight,
-    })
-  }
+  // useEffect( () => {
+  //   setTextAreaHeight(10);
+  // }, [props])
 
-  render() {
-    const autoSize = this.state.height;
-    const hasError = this.props.meta.touched && this.props.meta.error;
-    return (
-      <div className={`${style.formControl} ${hasError && style.error}`}>
-        <textarea
-          {...this.props.input}
-          onFocus={this.updateTextArea}
-          onChange={(e) => {
-            this.props.input.onChange(e);
-            this.updateTextArea(e);
-          }}
-          name={this.props.input.name}
-          placeholder={this.props.placeholder}
-          style={{ height: autoSize }}
-          className={style.textarea}
-        />
-        {hasError && <span>{this.props.meta.error}</span>}
-      </div>
-    )
-  }
+  return (
+    <div className={`${style.formControl} ${hasError && style.error}`}>
+      <textarea
+        {...props.input}
+        onFocus={updateTextArea}
+        onChange={(e) => {
+          props.input.onChange(e);
+          updateTextArea(e);
+        }}
+        name={props.input.name}
+        placeholder={props.placeholder}
+        style={{ height: textAreaHeight }}
+        className={style.textarea}
+      />
+      {hasError && <span>{props.meta.error}</span>}
+    </div>
+  )
 }
 
-export default TextArea
+export default TextArea;

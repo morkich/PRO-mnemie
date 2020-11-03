@@ -7,15 +7,15 @@ import AccountDataReduxForm from './AccountDataForm/AccountDataForm';
 const Account = (props) => {
   return (
     <section className={`${style.wrap} container`}>
-      <div key={props.profile.id} className={style.profile_card}>
+      <div key={props.userId} className={style.profile_card}>
         <div className={style.avatar}>
-          <img src={props.profile.avatar} alt="" />
+          <img src={props.avatar} alt="" />
         </div>
         <div className={style.discription}>
-          <h2>{props.profile.lastname} {props.profile.firstname} {props.profile.secondname}</h2>
+          <h2>{props.lastname} {props.firstname} {props.secondname}</h2>
           <div className={style.work}>
-            <span>{props.profile.pro_position ? props.profile.pro_position : 'Странник'}</span>
-            <span>{props.profile.pro_workplace ? props.profile.pro_workplace : 'Всё и Вся'}</span>
+            <span>{props.position ? props.position : 'Странник'}</span>
+            <span>{props.workplace ? props.workplace : 'Всё и Вся'}</span>
           </div>
         </div>
 
@@ -29,7 +29,7 @@ const Account = (props) => {
             <path d="M11.9458 5.48313C11.8017 5.02278 11.4081 4.72533 10.9433 4.72533H7.94563L7.00165 1.73908C6.85655 1.28002 6.46384 0.984131 6.00033 0.984131C5.99885 0.984131 5.99733 0.984131 5.99585 0.984155C5.53045 0.986059 5.1379 1.28561 4.99582 1.74731L4.07935 4.72533H1.05672C0.590708 4.72533 0.196871 5.02378 0.053406 5.48565C-0.0900822 5.94751 0.0612565 6.42974 0.438971 6.71413L2.8846 8.55558L1.94324 11.5336C1.79755 11.9944 1.94636 12.4774 2.32234 12.7638C2.51117 12.9077 2.72792 12.9796 2.9448 12.9796C3.15972 12.9796 3.37475 12.9089 3.56265 12.7674L6.01251 10.9228L8.43328 12.7643C8.80884 13.05 9.29522 13.0514 9.67232 12.7679C10.0494 12.4844 10.2013 12.0032 10.0594 11.5418L9.14036 8.55558L11.5652 6.71098C11.9406 6.42542 12.09 5.94346 11.9458 5.48313Z" fill="#EFC74C" />
           </svg>
           <span>Рейтинг</span>
-          <span>{props.profile.pro_raiting ? props.profile.pro_raiting : 0} из 5</span>
+          <span>{props.pro_raiting ? props.pro_raiting : 0} из 5</span>
         </div>
       </div>
       <div className={style.form_wrap}>

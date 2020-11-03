@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api";
+import { usersAPI, filterExpertAPI } from "../api/api";
 
 const SET_EXPERTS = 'SET_EXPERTS';
 const CURRENT_PAGE = 'CURRENT_PAGE';
@@ -91,6 +91,18 @@ export const getExpertsThunkCreator = (currentPage, pageSize) => {
       dispatch(setCurrentPage(currentPage))
       dispatch(setTotalPageCount(response.headers['x-wp-totalpages']))
     });
+  }
+}
+
+export const getFilterExpertThunk = (filter, query) => {
+  return (dispatch) => {
+    dispatch(toggleisLoading(true));
+    filterExpertAPI.getfilterExpert(filter, query).then(response => {      
+      usersAPI.getExpert(response).then(response => {
+        dispatch(setExperts(response))
+        dispatch(toggleisLoading(false))
+      })            
+    })
   }
 }
 

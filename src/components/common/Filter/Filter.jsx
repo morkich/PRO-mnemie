@@ -8,11 +8,11 @@ import { cities } from '../../../utils/data/cities';
 
 const dataList = dataListHardCode(cities().names);
 
-const Filter = (props) => { 
+const Filter = (props) => {   
   return (
     <form onSubmit={props.handleSubmit} className={style.filter}>
       <Field
-        component={Input}        
+        component={Input}  
         name={"filter_name"}
         placeholder={'Ключевое слово'}
       />

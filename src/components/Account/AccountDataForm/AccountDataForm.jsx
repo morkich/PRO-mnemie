@@ -3,12 +3,11 @@ import TextArea from '../../common/Forms/TextArea/TextArea';
 import UserTags from '../UserTags/UserTags';
 import style from '../../common/Forms/Forms.module.css';
 import { Field, reduxForm } from 'redux-form';
-import { dataListHardCode, maxLengthCreator, required } from '../../../utils/validators/validators';
+import { dataListHardCode, required } from '../../../utils/validators/validators';
 import Input from '../../common/Forms/Input/Input';
 import InputList from '../../common/Forms/InputList/InputList';
 import { cities } from '../../../utils/data/cities';
 
-const maxLength5 = maxLengthCreator(5);
 const citiesName = cities();
 const dataList = dataListHardCode(citiesName.names);
 

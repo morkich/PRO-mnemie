@@ -49,3 +49,10 @@ export const authAPI = {
       .then(response => response.data);
   }
 }
+
+export const filterExpertAPI = {
+  getfilterExpert(filter, query) {
+    return noAuth.get(`wp/v2/users/filtered/${filter}/${query}`)
+      .then(response => response.data);
+  }, 
+}

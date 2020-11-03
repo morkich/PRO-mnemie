@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getExpertsThunkCreator } from '../../redux/experts-reducer';
 import Experts from './Experts';
 
-
 class ExpertsContainer extends React.Component {
 
   componentDidMount() {
@@ -12,6 +11,10 @@ class ExpertsContainer extends React.Component {
 
   onPageChange = (numberPage) => {
     this.props.getExpertsThunkCreator(numberPage, this.props.pageSize);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps != this.props || nextState != this.state;
   }
 
   render() {

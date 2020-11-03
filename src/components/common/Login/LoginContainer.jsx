@@ -6,10 +6,6 @@ import Preloader from '../Preloader/Preloader';
 import Login from './Login';
 
 class LoginContainer extends React.Component {
-
-  componentDidMount() {
-  }
-
   onFormSubmit = (formData) => {
     this.props.loginThunk(formData.username, formData.password);
   };

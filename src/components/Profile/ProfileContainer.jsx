@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 import Preloader from '../common/Preloader/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { getProfileData, getProfileLoading } from '../../redux/profile-selectors';
 
 class ProfileContainer extends React.Component {
-
   componentDidMount() {
     this.props.getProfile(this.props.match.params.userId);
   }
-
   render() {
     return (
       <>
@@ -25,8 +24,8 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    profile: state.profilePage.profile,
-    isLoading: state.profilePage.isLoading
+    profile: getProfileData(state),
+    isLoading: getProfileLoading(state)
   }
 }
 

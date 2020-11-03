@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addFavoriteExpert, removeFavoriteExpert } from '../../../redux/auth-reducer';
-import { getFavoritesExperts, getLoggetIn } from '../../../redux/auth-selectors';
+import { getFavoritesExperts, getFavoritesExpertsButtonProgress, getLoggetIn } from '../../../redux/auth-selectors';
 import { toggleFavoriteProgress, favoriteThunkCreator } from '../../../redux/favorive-reducer';
 import Favorites from './Favorites';
 
@@ -37,7 +37,7 @@ class FavoritesContainer extends React.Component {
 let mapStateToProps = (state) => {
   return {
     favoriteExpertsState: getFavoritesExperts(state),
-    favoriteExpertsButtonProgress: state.favorite.favoriteExpertsButtonProgress,
+    favoriteExpertsButtonProgress: getFavoritesExpertsButtonProgress(state),
     loggetIn: getLoggetIn(state)
   }
 }
