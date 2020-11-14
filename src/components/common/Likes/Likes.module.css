@@ -1,0 +1,57 @@
+.wrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  align-items: center;
+  align-content: center;
+  max-width: 100px;
+}
+
+.like {
+  margin-bottom: 4px;
+}
+
+.dislike {
+  margin-top: 4px;
+}
+
+.like,
+.dislike {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.like svg path,
+.dislike svg path {
+  transition: .2s;
+}
+
+.like svg:hover path,
+.dislike svg:hover path {
+  fill: rgba(35, 127, 194, 1);
+}
+
+.like:disabled path,
+.dislike:disabled path {
+  fill: rgba(35, 127, 194, 1);
+  cursor: auto;
+}
+
+.likeCount {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(35, 127, 194, 1);
+  width: 25px;
+  height: 25px;
+  border-radius: 10em;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 300;
+  overflow: hidden;
+}
+
+

@@ -10,7 +10,9 @@ class ExpertsContainer extends React.Component {
   }
 
   onPageChange = (numberPage) => {
+    
     this.props.getExpertsThunkCreator(numberPage, this.props.pageSize);
+    console.log(this.props);
   }
 
   shouldComponentUpdate(nextProps, nextState) {

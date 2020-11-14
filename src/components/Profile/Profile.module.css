@@ -54,21 +54,6 @@
   font-size: 1rem;
   line-height: 1.2rem;
 }
-  
-.raiting {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-  
-.raiting span{
-  text-align: center;
-  color: #7C9BA9;
-}
-
-.raiting svg {
-  margin-bottom: 6px;
-}
 
 .information {
   display: grid;

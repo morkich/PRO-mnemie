@@ -1,33 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getUniqUserCities, getFilterExpertThunk, getExpertsThunkCreator } from '../../../redux/experts-reducer';
 import { getExpertsState, getUniqCitiesState } from '../../../redux/experts-selectors';
 import FilterReduxForm from './Filter';
 
-class FilterContainer extends React.Component {
+const FilterContainer = (props) => {
 
-  componentDidMount() {
-    this.props.getUniqUserCities();
-  }
+  useEffect( () => {
+    props.getUniqUserCities();
+  }, [props.getUniqCitiesState]);
 
-  onFormSubmit = (formData) => {    
+  const onFormSubmit = (formData) => {    
     if(formData){
-      this.props.getFilterExpertThunk(formData.filter_city, formData.filter_name);
+      props.getFilterExpertThunk(formData.filter_city, formData.filter_name);
     } else {
-      this.props.getExpertsThunkCreator();
+      props.getExpertsThunkCreator();
     }
   };  
 
-  render() {
-    return (
-      <FilterReduxForm 
-        onSubmit={this.onFormSubmit}
-        uniqCities={this.props.uniqCities}
-        changeInput={this.changeInput}
-        datalistFunc={this.dataList}
-      />        
-    )    
-  }
+  return (
+    <FilterReduxForm 
+      onSubmit={onFormSubmit}
+      uniqCities={props.uniqCities}
+    />  
+  )
 }
 
 let mapStateToProps = (state) => {

@@ -1,0 +1,19 @@
+.raiting {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+  
+.raiting span{
+  text-align: center;
+  color: #7C9BA9;
+}
+
+.raiting svg {
+  margin-bottom: 6px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+}

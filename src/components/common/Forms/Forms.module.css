@@ -125,6 +125,18 @@
   grid-gap: 5rem;
 }
 
+.comment_form {
+  margin-left: 100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 25px;
+  justify-items: end;
+}
+
+.comment_form .textarea{
+  height: 80px!important;
+}
+
 .form_error {
   position: absolute;
   top: -1.5rem;  

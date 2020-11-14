@@ -1,0 +1,24 @@
+.info_block {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: start;
+  justify-content: start;  
+  grid-gap: 12px;
+}
+
+.info_block_box {
+  display: flex;
+  align-items: center;
+}
+
+.info_block_box svg {
+  margin-right: 5px;
+}
+
+.views {
+
+}
+
+.comment {
+
+}

@@ -1,6 +1,7 @@
 import { usersAPI, filterExpertAPI } from "../api/api";
 
 const SET_EXPERTS = 'SET_EXPERTS';
+const SET_NEW_PAGE = 'SET_NEW_PAGE';
 const CURRENT_PAGE = 'CURRENT_PAGE';
 const TOTAL_PAGES = 'TOTAL_PAGES';
 const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
@@ -21,6 +22,11 @@ const expertsReducer = (state = initialState, action) => {
       return {
         ...state,
         experts: action.experts
+      };
+    case SET_NEW_PAGE:
+      return {
+        ...state,
+        experts: [...state.experts, ...action.experts, ]
       };
     case CURRENT_PAGE:
       return {
@@ -50,6 +56,13 @@ const expertsReducer = (state = initialState, action) => {
 export const setExperts = (experts) => {
   return {
     type: SET_EXPERTS,
+    experts
+  }
+}
+
+export const setNewPage = (experts) => {
+  return {
+    type: SET_NEW_PAGE,
     experts
   }
 }

@@ -65,7 +65,7 @@ const authReducer = (state = initialState, action) => {
   }
 }
 
-export const setUserData = (data) => {
+export const setUserData = (data) => {  
   return {
     type: SET_USER_DATA,
     data
@@ -104,8 +104,8 @@ export const authThunk = (token) => {
   return (dispatch) => {
     if (token) {
       dispatch(toggleLoadingAcc(true));
-      usersAPI.getMe().then(
-        data => {
+      usersAPI.getMe().then(        
+        data => {          
           dispatch(setUserData({
             loggetIn: true,
             userId: data.id,
@@ -120,7 +120,7 @@ export const authThunk = (token) => {
             pro_expirience: data.pro_expirience,
             pro_position: data.pro_position,
             pro_workplace: data.pro_workplace,
-            pro_city: data.pro_city,
+            pro_city: data.pro_city,            
             loadingAcc: false,
           }));
         }        
@@ -164,7 +164,7 @@ export const loginThunk = (username, password) => {
             userNiceName: data.user_nicename,
             userEmail: data.user_email,
             token: data.token
-          }));
+          }));          
           authAPI.getAccount(data.token)
             .then(data => {
               dispatch(setUserData({

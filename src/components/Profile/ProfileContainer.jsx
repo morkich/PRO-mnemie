@@ -10,6 +10,7 @@ import { getProfileData, getProfileLoading } from '../../redux/profile-selectors
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
+    console.log(this.props);
     this.props.getProfile(this.props.match.params.userId);
   }
   render() {

@@ -10,13 +10,17 @@ import ModalContainer from './components/common/Modal/ModalContainer';
 import AccountContainer from './components/Account/AccountContainer';
 import { authThunk } from './redux/auth-reducer';
 import { connect } from 'react-redux';
-import CareerContainer from './components/Career/CareerContainer';
+import PostLoopContainer from './components/PostLoop/PostLoopContainer';
+import PostContainer from './components/Post/PostContainer';
 
 class App extends React.Component {
 
   componentDidMount() {
+    console.log(this);
     this.props.authThunk(localStorage.getItem('token'));    
   }
+
+  
 
   render() {
     return (
@@ -29,7 +33,8 @@ class App extends React.Component {
           <Route path="/home" render={() => <Main />} />
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
           <Route path="/account/" render={() => <AccountContainer />} />
-          <Route path="/career/" render={() => <CareerContainer />} />
+          <Route path="/posts/:catId?" render={() => <PostLoopContainer />} />
+          <Route path="/post/:postId?" render={() => <PostContainer />} />
         </div>
         <Route path="/auth" render={() => <ModalContainer />} />
         <footer className="footer">

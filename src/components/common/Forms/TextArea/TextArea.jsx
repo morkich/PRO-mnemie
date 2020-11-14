@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import style from '../Forms.module.css';
 
-const TextArea = (props) => {  
+const TextArea = (props) => { 
   const [textAreaHeight, setTextAreaHeight] = useState(200);
   const updateTextArea = (e) => setTextAreaHeight(e.target.scrollHeight);
   const hasError = props.meta.touched && props.meta.error;
-
-  // useEffect( () => {
-  //   setTextAreaHeight(10);
-  // }, [props])
 
   return (
     <div className={`${style.formControl} ${hasError && style.error}`}>

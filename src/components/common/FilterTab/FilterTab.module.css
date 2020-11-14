@@ -1,0 +1,23 @@
+.wrap {
+  position: relative;
+}
+
+.wrap ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10px, auto));  
+  grid-gap: 10px;
+  margin-bottom: 25px;
+}
+
+.wrap ul li a{
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color:  rgba(124, 155, 169, 1);
+  transition: .2s;
+}
+
+.active,
+.wrap ul li a:hover{
+  color: rgba(20, 94, 148, 1)!important; 
+}

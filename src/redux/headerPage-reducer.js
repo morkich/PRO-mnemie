@@ -4,7 +4,7 @@ const SEND_SEARCH_REQUEST = 'SEND-SEARCH-REQUEST';
 let initialState = {
   topMenu: [
     { to: '/home', name: 'Главная' },
-    { to: '/career', name: 'Карьера' },
+    { to: '/posts/16', name: 'Карьера' },
     { to: '/events', name: 'События' },
     { to: '/study', name: 'Образование' },
     { to: '/media', name: 'Медиа' },

@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Menu from './Menu';
 import { connect } from 'react-redux';
+import { getLoadingMenuState, getMenuState } from '../../../redux/menu-selectors';
+import { setMenuThunk } from '../../../redux/menu-reducer';
+
+const MenuContainer = (props) => {
+  useEffect(() => {    
+    props.setMenuThunk();
+  }, [])
+  
+  return (
+    <Menu 
+      menuData={props.menuData}
+    />
+  )
+}
 
 
 let mapStateToProps = (state) => {
   return {
-    menuData: state.headerPage.topMenu
+    menuData: getMenuState(state),
+    nemuLoading: getLoadingMenuState(state)
   }
 }
-let mapDispatchToProps = (dispatch) => {
-  return {
- 
-  }  
-}
 
-const MenuContainer = connect(mapStateToProps, mapDispatchToProps)(Menu);
 
-export default MenuContainer; 
+export default connect(mapStateToProps, 
+  {setMenuThunk}
+)(MenuContainer);
