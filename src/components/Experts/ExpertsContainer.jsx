@@ -1,47 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { getExpertsThunkCreator } from '../../redux/experts-reducer';
+import { infinityPostLoadThunk } from '../../redux/experts-reducer';
+import { getExpertsState, getExpertsLoadingState, getExpertsPageSaizeState, getExpertsCurrentPageState, getExpertsPageCountState } from '../../redux/experts-selectors';
 import Experts from './Experts';
 
-class ExpertsContainer extends React.Component {
+const ExpertsContainer = (props) => {
 
-  componentDidMount() {
-    this.props.getExpertsThunkCreator(this.props.currentPage, this.props.pageSize);
+  let [currentPage, setCurrentPage] = useState(1);
+
+  const infinityLoading = () => {
+    props.infinityPostLoadThunk(currentPage, props.pageSize);
+    setCurrentPage = currentPage++;
   }
 
-  onPageChange = (numberPage) => {
-    
-    this.props.getExpertsThunkCreator(numberPage, this.props.pageSize);
-    console.log(this.props);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps != this.props || nextState != this.state;
-  }
-
-  render() {
-    return (
-      <Experts
-        totalPageCount={this.props.totalPageCount}
-        currentPage={this.props.currentPage}
-        onPageChange={this.onPageChange}
-        experts={this.props.experts}
-        isLoading={this.props.isLoading}
-      />
-    )
-  }
+  return (
+    <Experts
+      totalPageCount={props.totalPageCount}
+      currentPage={props.currentPage}
+      infinityLoading={infinityLoading}
+      experts={props.experts}
+      expertsLoading={props.expertsLoading}
+    />
+  )
 }
 
 let mapStateToProps = (state) => {
   return {
-    experts: state.expertsPage.experts,
-    pageSize: state.expertsPage.pageSize,
-    totalPageCount: state.expertsPage.totalPageCount,
-    currentPage: state.expertsPage.currentPage,
-    isLoading: state.expertsPage.isLoading,
+    experts: getExpertsState(state),
+    pageSize: getExpertsPageSaizeState(state),
+    totalPageCount: getExpertsPageCountState(state),
+    currentPage: getExpertsCurrentPageState(state),
+    expertsLoading: getExpertsLoadingState(state),
   }
 }
 
 export default connect(mapStateToProps,
-  { getExpertsThunkCreator }
+  { infinityPostLoadThunk }
 )(ExpertsContainer);

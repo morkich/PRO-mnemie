@@ -13,8 +13,8 @@ let initialState = {
       rendered: 'Загрузка...'
     },
   },
-  loading: true,
-  views: 0
+  loadingPost: true,
+  viewsPost: 0
 }
 
 const postReducer = (state = initialState, action) => {
@@ -27,12 +27,12 @@ const postReducer = (state = initialState, action) => {
     case TOGGLE_PRELOADER:
       return {
         ...state,
-        loading: action.loading
+        loadingPost: action.loading
       };
     case SET_VIEW:
       return {
         ...state,
-        views: state.views += 1 
+        viewsPost: state.views += 1 
       };      
     default:
       return state;

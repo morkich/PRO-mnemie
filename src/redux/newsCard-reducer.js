@@ -1,18 +1,16 @@
-import { mediaAPI } from "../api/api";
-
 const SET_NEWS_CARD = 'SET_NEWS_CARD';
 const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
 const SET_NEWS_IMG = 'SET_NEWS_IMG';
 
 let initialState = {
-  title: 'Заголовок',
-  subtitle: 'Подзаголовок',
-  category: 'Категория',
-  image: 'url',
-  content: '',
-  views: '100',
-  comments: '15',
-  isLoading: true
+  titleNewsCard: 'Заголовок',
+  subtitleNewsCard: 'Подзаголовок',
+  categoryNewsCard: 'Категория',
+  imageNewsCard: 'url',
+  contentNewsCard: '',
+  viewsNewsCard: '100',
+  commentsNewsCard: '15',
+  isLoadingNewsCard: true
 }
 
 const newsCardReducer = (state = initialState, action) => {

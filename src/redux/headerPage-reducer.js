@@ -11,7 +11,7 @@ let initialState = {
     { to: '/analitycs', name: 'Аналитика' },
     { to: '/tv', name: 'TV PRO мнение' },
     { to: '/experts', name: 'Эксперты' },
-    { to: '/about', name: 'О нас' },
+    { to: '/page/about', name: 'О нас' },
   ],
   search: {
     searchRequest: '',

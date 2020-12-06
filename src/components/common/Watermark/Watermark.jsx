@@ -3,7 +3,10 @@ import style from './Watermark.module.css';
 import watermark from '../../../assets/img/watermark.svg';
 
 let Watermark = (props) => {
-  const watermark_style = props.main ? style.watermark_main : style.watermark; 
+  let watermark_style = props.main ? style.watermark_main : style.watermark; 
+  if(props.vacancy){
+    watermark_style = style.watermark_vacancy;
+  }
   return (
     <img className={watermark_style} src={watermark} alt=""/>
   )

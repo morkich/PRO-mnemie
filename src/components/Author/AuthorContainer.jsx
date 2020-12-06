@@ -5,10 +5,13 @@ import { getAuthorDataState, getAuthorLoadingState } from '../../redux/author-se
 import Author from './Author';
 
 const AuthorContainer = (props) => {
+
+  let id = props.id,
+  getAuthorDataThunk = props.getAuthorDataThunk;
+
   useEffect(() => {
-    console.log(props);
-    props.getAuthorDataThunk(props.id);    
-  }, [props.id]);
+    getAuthorDataThunk(id);    
+  }, [id, getAuthorDataThunk]);
 
   return (
     <Author 

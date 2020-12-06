@@ -1,0 +1,46 @@
+.descTitle {
+  font-size: 13px;
+  color: #7C9BA9;
+  font-weight: 500;
+}
+
+.descTitle::after {
+  content: ':';
+}
+
+.contentStrings {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 5px;
+}
+
+.descText {
+  font-size: 13px;
+  color: #0E2A42;
+  font-weight: 500;
+}
+
+.descText ul {
+  font-size: 13px;
+  color: #0E2A42;
+}
+
+.descText ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.descText ul li::before {
+  content: '';
+  display: inline-flex;
+  margin-right: 5px;
+  width: 5px;
+  height: 5px;
+  background-color: #0E2A42;
+  border-radius: 10em;
+  min-width: 5px;
+  min-height: 5px;
+  max-width: 5px;
+  max-height: 5px;
+}

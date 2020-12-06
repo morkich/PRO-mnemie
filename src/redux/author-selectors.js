@@ -3,5 +3,5 @@ export const getAuthorDataState = (state) => {
 }
 
 export const getAuthorLoadingState = (state) => {
-  return state.author.loading;
+  return state.author.loadingAuthor;
 }

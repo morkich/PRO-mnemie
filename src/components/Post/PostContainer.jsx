@@ -9,9 +9,13 @@ import { getUserId } from '../../redux/auth-selectors';
 
 const PostContainer = (props) => {
 
+  let postId = props.match.params.postId,
+      getPostDataThunk = props.getPostDataThunk;
+
+
   useEffect( () => {
-    props.getPostDataThunk(props.match.params.postId);    
-  }, [props.postData.id]);
+    postId && getPostDataThunk(postId);  
+  }, [postId, getPostDataThunk]);
 
   return (
     <Post

@@ -1,0 +1,54 @@
+.vacancysBlocks {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 47px;
+}
+
+.vacancyBlock {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  grid-column-gap: 20px;
+  grid-row-gap: 10px;
+  color: #0E2A42;
+}
+
+.vacancyTitleBlock {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 8px;
+}
+
+.vacancyTitle {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 600;
+}
+
+.vacancyDescription {
+  color: #7C9BA9;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.vacancyPrice {
+  font-size: 20px;
+  text-align: right;
+  align-self: start;
+}
+
+.vacancyContent {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.vacancysBlocks a {
+  text-decoration: none;
+  max-width: 140px;
+  align-self: end;
+  justify-self: end;
+}
+
+.header {
+  margin-bottom: 25px;
+}

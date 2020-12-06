@@ -27,6 +27,9 @@ export const usersAPI = {
   },
   setUserData(data) {
     return auth.post(`wp/v2/users/me`, data)
+  },
+  postNewUser(userData) {
+    return noAuth.post(`wp/v2/users/register`, userData)
   }
 }
 
@@ -50,6 +53,10 @@ export const authAPI = {
         console.log(err);
       });
   },
+  setAccountDataWithLiveToken(token, data) {
+    const myHeaders = { headers: { 'Authorization': `Bearer ${token}` } };
+    return noAuth.post(`wp/v2/users/me`, myHeaders, data)
+  },
   getToken(username, password) {
     const headers = { username: username, password: password };
     return noAuth.post(`jwt-auth/v1/token`, headers)
@@ -65,12 +72,20 @@ export const filterExpertAPI = {
 }
 
 export const postAPI = {
-  getPostByIdCat(idCat) {
-    return noAuth.get(`wp/v2/posts?categories=${idCat}`)
+  getPosts(postName = 'posts') {
+    return noAuth.get(`wp/v2/${postName}/`)
+    .then(response => response.data);
+  }, 
+  getPostNumberOrder(number = 9, posts = 'posts', orderby = 'date', order = 'desc') {
+    return noAuth.get(`wp/v2/${posts}?per_page=${number}&order=${order}&orderby=${orderby}`)
     .then(response => response.data);
   },
-  getPostDataById(id) {
-    return noAuth.get(`wp/v2/posts/${id}`)
+  getPostByIdCat(idCat, catName = 'categories', posts = 'posts') {
+    return noAuth.get(`wp/v2/${posts}?${catName}=${idCat}`)
+    .then(response => response.data);
+  },
+  getPostDataById(id, posts = 'posts') {
+    return noAuth.get(`wp/v2/${posts}/${id}`)
     .then(response => response.data);
   },
   setLikesToPost(id, data) {
@@ -86,12 +101,12 @@ export const mediaAPI = {
 }
 
 export const catAPI = {
-  getCat(id, parent = false) {
+  getCat(id, parent = false, catName = 'categories') {
     if(parent){
-      return noAuth.get(`wp/v2/categories?parent=${id}`)
+      return noAuth.get(`wp/v2/${catName}?parent=${id}`)
       .then(response => response.data);
     }else{
-      return noAuth.get(`wp/v2/categories/${id}`)
+      return noAuth.get(`wp/v2/${catName}/${id}`)
       .then(response => response.data);
     }
   }
@@ -111,5 +126,38 @@ export const commentAPI = {
   },
   setComment(data) {
     return auth.post(`/wp/v2/comments/`, data)
+  }
+}
+
+export const vacanciesAPI = {
+  getVacancies() {
+    return noAuth.get(`wp/v2/vacancies/`)
+    .then(response => response.data);
+  },
+  getVacancy(vacancyId = 0) {
+    return noAuth.get(`wp/v2/vacancies/?include=${vacancyId}`)
+    .then(response => response.data);
+  },
+  getfilterVacancies(filter, query) {
+    return noAuth.get(`wp/v2/vacancies/filtered/${filter}/${query}`)
+      .then(response => response.data);
+  }, 
+}
+
+export const eventsAPI = {
+  getEvents() {
+    return noAuth.get(`wp/v2/events/`)
+    .then(response => response.data);
+  },
+}
+
+export const pagesAPI ={
+  getPageBySlug(slug) {
+    return noAuth.get(`wp/v2/pages?slug=${slug}`)
+    .then(response => response.data);
+  },
+  getPageById(id) {
+    return noAuth.get(`wp/v2/pages/${id}`)
+    .then(response => response.data);
   }
 }

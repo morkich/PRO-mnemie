@@ -16,6 +16,17 @@ import likesReducer from "./likes-reducer";
 import tagsReducer from "./tags-reducer";
 import commentsReducer from "./comments-reducer";
 import menuReducer from "./menu-reducer";
+import asideReducer from "./aside-reducer";
+import vacancyLoopReducer from "./vacancyLoop-reducer";
+import vacancyReducer from "./vacancy-reducer";
+import eventLoopReducer from "./eventLoop-reducer";
+import eventReducer from "./event-reducer";
+import courseLoopReducer from "./courseLoop-reducer";
+import pageReducer from "./page-reducer";
+import modalReducer from "./modal-reducer";
+import registerReducer from "./rigister-reducer";
+import freshPostReducer from "./freshPost-reducer";
+import upComingEventsReducer from "./upComingEvents-reducer";
 
 
 const { createStore, combineReducers, applyMiddleware } = require("redux");
@@ -37,6 +48,17 @@ let reducers = combineReducers({
     tags: tagsReducer,
     comments: commentsReducer,
     menu: menuReducer,
+    aside: asideReducer,
+    vacancyLoop: vacancyLoopReducer,
+    vacancy: vacancyReducer,
+    eventLoop: eventLoopReducer,
+    event: eventReducer,
+    courseLoop: courseLoopReducer,
+    page: pageReducer,
+    modal: modalReducer,
+    register: registerReducer,
+    freshPost: freshPostReducer,
+    upComingEvents: upComingEventsReducer,
     form: formReducer
 });
  

@@ -3,5 +3,5 @@ export const getTagsData = (state) => {
 }
 
 export const getTagsLoading = (state) => {
-  return state.tags.loading;
+  return state.tags.loadingTags;
 }

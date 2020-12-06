@@ -1,16 +1,27 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getPostsState, getCurrentPage, getLoadingPostsState, getTotalPageCount} from '../../redux/postLoop-selectors';
-import { getPostsThunk } from '../../redux/postLoop-reducer';
+import { getPostsState, getCurrentPage, getLoadingPostsState, getTotalPageCount, getParentCat, getParentCatName} from '../../redux/postLoop-selectors';
+import { getPostsThunk, getParentCatThunk } from '../../redux/postLoop-reducer';
 import { withRouter } from 'react-router-dom';
 import PostLoop from './PostLoop';
 import { compose } from 'redux';
 
 const PostLoopContainer = (props) => {
+  
+  let getParentCatThunk = props.getParentCatThunk,
+  getPostsThunk = props.getPostsThunk,
+  catId = props.match.params.catId,
+  catName = props.match.params.catName,
+  parentCat = props.parentCat;
+
+  useEffect( () => {    
+    catId && getParentCatThunk(catId, catName);  
+  }, [catId, catName, getParentCatThunk]);
 
   useEffect( () => {
-    props.getPostsThunk(props.match.params.catId);  
-  }, [props.match.params.catId]);
+    getPostsThunk(parentCat);  
+  }, [parentCat, getPostsThunk]);
+
 
     return (
     <PostLoop 
@@ -18,7 +29,8 @@ const PostLoopContainer = (props) => {
       currentPage={props.currentPage}
       posts={props.posts}
       loading={props.loading}
-      parentCat={props.match.params.catId}
+      parentCat={props.parentCat}
+      catName={props.parentCatName}
     />
   )
 }
@@ -29,10 +41,12 @@ let mapStateToProps = (state) => {
     totalPageCount: getTotalPageCount(state),
     currentPage: getCurrentPage(state),
     loading: getLoadingPostsState(state),    
+    parentCat: getParentCat(state),
+    parentCatName: getParentCatName(state)
   }
 }
 
 export default compose(connect(mapStateToProps,
-  { getPostsThunk }),
+  { getPostsThunk, getParentCatThunk }),
   withRouter
 )(PostLoopContainer);

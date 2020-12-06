@@ -1,0 +1,15 @@
+.wrap {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+  animation: blink 3s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0% { opacity: .5; }   
+  25% { opacity: 1; }
+  50% { opacity: .3; }   
+  75% { opacity: .9; }
+}

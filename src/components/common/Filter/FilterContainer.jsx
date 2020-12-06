@@ -2,26 +2,34 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getUniqUserCities, getFilterExpertThunk, getExpertsThunkCreator } from '../../../redux/experts-reducer';
 import { getExpertsState, getUniqCitiesState } from '../../../redux/experts-selectors';
+import { getFilteredVacanciesDataThunk } from '../../../redux/vacancyLoop-reducer';
 import FilterReduxForm from './Filter';
 
 const FilterContainer = (props) => {
 
+  let getUniqCitiesState = props.getUniqCitiesState,
+  getUniqUserCities = props.getUniqUserCities;
+
   useEffect( () => {
-    props.getUniqUserCities();
-  }, [props.getUniqCitiesState]);
+    getUniqUserCities();
+  }, [getUniqCitiesState, getUniqUserCities]);
 
   const onFormSubmit = (formData) => {    
-    if(formData){
-      props.getFilterExpertThunk(formData.filter_city, formData.filter_name);
-    } else {
-      props.getExpertsThunkCreator();
-    }
+    let filterCity = formData.filter_city ? formData.filter_city : 'false';
+    let filterName = formData.filter_name ? formData.filter_name : 'false';
+
+    if(props.type === 'users') {
+      formData ? props.getFilterExpertThunk(filterCity, filterName) : props.getExpertsThunkCreator();
+    } 
+    if(props.type === 'vacancies') {
+      formData ? props.getFilteredVacanciesDataThunk(filterCity, filterName) : console.log('нет');
+    }   
   };  
 
   return (
     <FilterReduxForm 
       onSubmit={onFormSubmit}
-      uniqCities={props.uniqCities}
+      uniqCities={props.uniqCities}    
     />  
   )
 }
@@ -33,4 +41,4 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getUniqUserCities, getFilterExpertThunk, getExpertsThunkCreator})(FilterContainer);
+export default connect(mapStateToProps, {getUniqUserCities, getFilterExpertThunk, getExpertsThunkCreator, getFilteredVacanciesDataThunk})(FilterContainer);

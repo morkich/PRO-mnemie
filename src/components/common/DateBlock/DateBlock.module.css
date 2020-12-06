@@ -1,0 +1,39 @@
+.date {
+  display: flex;
+  align-items: center;
+}
+
+.small {
+  font-size: 10px;
+  line-height: 12px;
+  color: #7C9BA9;
+  font-weight: normal;
+}
+
+.regular {
+  font-size: 12px;
+  line-height: 14px;
+  color: #7C9BA9;
+  font-weight: normal;
+}
+
+.mediumThink {
+  font-size: 14px;
+  line-height: 17px;
+  color: #7C9BA9;
+  font-weight: normal;
+}
+
+.medium {
+  font-size: 13px;
+  line-height: 16px;
+  color:#011B2F;
+  font-weight: 600;
+}
+
+.large {
+  font-size: 24px;
+  line-height: 29px;
+  color: #145E94;
+  font-weight: 600;
+}

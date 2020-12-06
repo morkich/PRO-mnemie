@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from './Logo';
 import { compose } from 'redux';
 import { getLogo } from '../../../redux/options-reducer';
@@ -7,27 +7,25 @@ import PreloaderMini from '../../common/PreloaderMini/PreloaderMini';
 import style from './Logo.module.css';
 import { getOptionsLogo } from '../../../redux/options-selectors';
 
-class LogoContainer extends React.Component {
 
-  state = {
-    loading: true
-  }
+const LogoContainer = (props) => {
+  
+  let getLogo = props.getLogo;
+  let [loadingState, setLoadingState] = useState(true);
 
-  componentDidMount() {
-    this.props.getLogo();
-    this.state.loading = false;
-  }
+  useEffect(() => {
+    getLogo();
+    setLoadingState(false);
+  }, [getLogo])
 
-  render() {
-    return (
-      <div className={style.wrap} >
-        {this.state.loading ? <PreloaderMini /> : null}
-        <Logo
-          logo={this.props.logo}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className={style.wrap} >
+      {loadingState ? <PreloaderMini /> : null}
+      <Logo
+        logo={props.logo}
+      />
+    </div>
+  )
 }
 
 let mapStateToProps = (state) => {

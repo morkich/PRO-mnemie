@@ -12,6 +12,7 @@
 }
 
 .experts {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fill, 285px);
   grid-gap: 2rem;

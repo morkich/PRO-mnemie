@@ -5,7 +5,7 @@ const SET_LOADING = 'SET_LOADING';
 
 let initialState = {
   tags: {},
-  loading: true
+  loadingTags: true
 }
 
 const tagsReducer = (state = initialState, action) => {
@@ -18,7 +18,7 @@ const tagsReducer = (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        likeLoading: action.loading
+        loadingTags: action.loading
       };      
     default:
       return state;

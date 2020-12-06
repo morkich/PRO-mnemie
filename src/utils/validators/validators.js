@@ -14,3 +14,8 @@ export const dataListHardCode = (itemsArray) => (value) => {
   if (!goal) return `Уточните город`;
   return undefined;
 }
+
+export const checkPassTwins = (item) => (value) => {
+  if(item !== value) return `Пароли не совпадают`;
+  return undefined;
+}

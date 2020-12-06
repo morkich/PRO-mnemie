@@ -3,5 +3,5 @@ export const getMenuState = (state) => {
 }
 
 export const getLoadingMenuState = (state) => {
-  return state.menu.loading;
+  return state.menu.loadingMenu;
 }

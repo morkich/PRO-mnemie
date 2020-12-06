@@ -5,7 +5,7 @@ import preloader from '../../../assets/img/preloader.svg'
 let Preloader = (props) => {
   return (
     <div className={style.wrap}>
-      <img src={preloader} />
+      <img src={preloader} alt=""/>
     </div>
   )
 }

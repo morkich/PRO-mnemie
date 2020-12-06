@@ -42,7 +42,7 @@ export const toggleisLoading = (isLoading) => {
 
 export const getProfile = (userId, pathName = '') => {
   return (dispatch) => {
-    if (userId == 'me' || pathName == '/account/') {
+    if (userId === 'me' || pathName === '/account/') {
       dispatch(toggleisLoading(true));
       usersAPI.getMe().then(data => {        
         dispatch(setUserProfile(data));

@@ -94,9 +94,9 @@ export const getLikesDataThunk = (idPost) => {
 export const getLikesRenderingThunk = (userId, likesData) => {
   return(dispatch) => {
     dispatch(setLoading(true));
-    dispatch(setUserLike(Object.keys(likesData).some(() => likesData[userId] == true)));
-    dispatch(setUserDislike(Object.keys(likesData).some(() => likesData[userId] == false)));
-    dispatch(setLikesCoint(Object.keys(likesData).filter(key => likesData[key] == true).length - Object.keys(likesData).filter(key => likesData[key] == false).length));
+    dispatch(setUserLike(Object.keys(likesData).some(() => likesData[userId] === true)));
+    dispatch(setUserDislike(Object.keys(likesData).some(() => likesData[userId] === false)));
+    dispatch(setLikesCoint(Object.keys(likesData).filter(key => likesData[key] === true).length - Object.keys(likesData).filter(key => likesData[key] === false).length));
     dispatch(setLoading(false));
   }
 }

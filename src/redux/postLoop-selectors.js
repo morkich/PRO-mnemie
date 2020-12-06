@@ -10,8 +10,16 @@ export const getCurrentPage = (state) => {
   return state.postLoop.currentPage;
 }
 
+export const getParentCat = (state) => {
+  return state.postLoop.parentCatPostLoop;
+}
+
+export const getParentCatName = (state) => {
+  return state.postLoop.parentCatNamePostLoop;
+}
+
 export const getLoadingPostsState = (state) => {
-  return state.postLoop.loading;
+  return state.postLoop.loadingPostLoop;
 }
 
 export const getIsMeta = (state) => {

@@ -1,5 +1,5 @@
 import { usersAPI } from "../api/api";
-import { addFavoriteExpert, removeFavoriteExpert } from '../redux/auth-reducer';
+import { addFavoriteEvent, addFavoriteExpert, removeFavoriteEvent, removeFavoriteExpert } from '../redux/auth-reducer';
 
 const TOGGLE_FAVOFITE_BUTTON = 'TOGGLE_FAVOFITE_BUTTON';
 const FAVORITE = 'FAVORITE';
@@ -17,7 +17,7 @@ const commonReducer = (state = initialState, action) => {
         ...state,
         favoriteExpertsButtonProgress: action.isFetching 
           ? Array.from(new Set([...state.favoriteExpertsButtonProgress, action.id]))
-          : state.favoriteExpertsButtonProgress.filter(id => id != action.id)
+          : state.favoriteExpertsButtonProgress.filter(id => id !== action.id)
       };
     case FAVORITE:
       return {
@@ -27,7 +27,7 @@ const commonReducer = (state = initialState, action) => {
     case UNFAVORITE:
       return {
         ...state,
-        favoriteExpertsState: state.favoriteExpertsState.filter(id => id != action.id)
+        favoriteExpertsState: state.favoriteExpertsState.filter(id => id !== action.id)
       };      
     default:
       return state;
@@ -56,14 +56,29 @@ export const removeExpertFavorite = (id) => {
   }
 }
 
-export const favoriteThunkCreator = (itemId, arrayFav, addfavorite) => {
-  return (dispatch) => {
+export const favoriteThunkCreator = (itemId, arrayFav, addfavorite, type = 'experts') => {
+  return (dispatch) => {    
+
     dispatch(toggleFavoriteProgress(true, itemId));
     let favorites = addfavorite
       ? Array.from(new Set([...arrayFav, +itemId]))
-      : arrayFav.filter(favId => favId != itemId);   
+      : arrayFav.filter(favId => favId !== itemId);   
     
-    let data = { pro_favorites_experts: JSON.stringify(favorites) }
+
+    let data = { pro_favorites_experts: JSON.stringify(favorites) }      
+    if(type === 'event'){
+      data = { pro_favorites_events: JSON.stringify(favorites) }
+      usersAPI.setUserData(data).then(response => {
+        console.log(response);
+        if (response) {        
+          addfavorite 
+            ? dispatch(addFavoriteEvent(itemId))
+            : dispatch(removeFavoriteEvent(itemId));
+        }
+        dispatch(toggleFavoriteProgress(false, itemId));
+      })      
+    }
+
     usersAPI.setUserData(data).then(response => {
       if (response) {        
         addfavorite 

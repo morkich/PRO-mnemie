@@ -1,14 +1,13 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import ModalContainer from '../../../common/Modal/ModalContainer';
 
 const Guest = (props) => {
 
   return (
-    <>
-      <NavLink to='/auth' >
-        <button className="button">Авторизоваться</button>
-      </NavLink>
-    </>
+    <ModalContainer 
+      buttonText={'Авторизация'}
+      type={'auth'}
+    />
   );
 }
 

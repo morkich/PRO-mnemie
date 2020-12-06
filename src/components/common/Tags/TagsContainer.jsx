@@ -6,9 +6,12 @@ import Tags from './Tags';
 
 const TagsContainer = (props) => {
 
+  let tagsList = props.tagsList,
+  getTagsDataThunk = props.getTagsDataThunk;
+  
   useEffect(() => {
-    props.getTagsDataThunk(props.tagsList);
-  }, [props.tagsList])
+   tagsList && getTagsDataThunk(tagsList);
+  }, [tagsList, getTagsDataThunk])
 
   return (
     <Tags 

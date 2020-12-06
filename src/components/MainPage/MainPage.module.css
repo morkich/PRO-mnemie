@@ -1,0 +1,64 @@
+.main {
+  position: relative;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+}
+
+.dataBlock {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10px, auto));
+  justify-content: start;
+  justify-items: start;
+  grid-gap: 50px;
+  color: rgba(124, 155, 169, 1);
+  font-size: 14px;
+}
+
+.thumb img {
+  display: block;
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.content {
+  font-size: 13px;
+  line-height: 16px;
+  color: #0E2A42;
+  max-width: 90%;
+  position: relative;
+}
+
+.content p {
+  margin-bottom: 13px;
+  font-weight: 400;
+  color: #0E2A42;
+}
+
+.content h2 {
+  font-size: 36px;
+  font-weight: 600;
+  color: #145E94;
+  margin: 40px 0 30px 0;
+}
+
+.interactive {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 80%;
+}
+
+.upComing {
+  margin-top: 60px;
+}
+
+.gridLine ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 4rem;
+  margin-right: 3rem;
+}

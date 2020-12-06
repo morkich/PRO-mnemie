@@ -19,6 +19,7 @@ main {
   justify-content: center;
   align-items: center;    
   min-width: 140px;
+  text-decoration: none;
 }
 
 .button:focus,
@@ -32,9 +33,24 @@ main {
   background-color: #AECAD5;
   color: #0E2A42;
 }
+
+.link {
+  font-size: 16px;
+  text-decoration: underline;
+  font-weight: 500;
+  color: #237FC2;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #0E2A42;
+  text-decoration: none;
+}
+
 .content_right-aside {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 255px;
+  grid-template-columns: 1fr 265px;
   grid-gap: 2rem;
 }

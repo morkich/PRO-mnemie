@@ -4,7 +4,7 @@ import style from './Likes.module.css';
 
 const Likes = (props) => {
 
-  let ariphmetic = (Math.sign(props.count) == '1') ? `+` :null;
+  let ariphmetic = (Math.sign(props.count) === '1') ? `+` :null;
 
   return (
     <div className={style.wrap}>      

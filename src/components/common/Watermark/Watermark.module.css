@@ -1,12 +1,18 @@
 .watermark {
-    position: absolute;
-    top: 0;
-    left: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .watermark_main {
-    position: absolute;
-    top: -48px;
-    width: 100%;
-    max-width: 435px;    
+  position: absolute;
+  top: -48px;
+  width: 100%;
+  max-width: 435px;    
+}
+
+.watermark_vacancy {
+  position: absolute;
+  width: 100%;
+  top: -60px;
 }

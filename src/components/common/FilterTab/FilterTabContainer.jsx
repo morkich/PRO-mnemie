@@ -5,13 +5,17 @@ import { getfiltersItems, getfilterTabQuery, getLoading } from '../../../redux/f
 import FilterTab from './FilterTab';
 
 const FilterTabContainer = (props) => {
+  
+  let parentCat = props.parentCat;
+  let setFilterItemsThunk =  props.setFilterItemsThunk;
+  let cats = props.catName ? props.catName : 'categories';
 
   useEffect(() => {
-    props.setFilterItemsThunk(props.parentCat);
-  }, [props.parentCat])
+    parentCat && setFilterItemsThunk(parentCat, cats);
+  }, [parentCat, cats, setFilterItemsThunk])
 
   const changeFilter = (event) => {
-    props.setFilterQueryThunk(event.target.dataset.catid);          
+    props.setFilterQueryThunk(event.target.dataset.catid, cats);    
   }
 
   return (
@@ -21,6 +25,7 @@ const FilterTabContainer = (props) => {
       onClick={changeFilter}
       parentCat={props.parentCat}
       loading={props.loading}
+      catName={props.catName}
     />  
   )
 }

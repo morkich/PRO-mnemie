@@ -62,6 +62,10 @@ export const getFavoritesExperts = (state) => {
   return state.auth.favoritesExperts;
 }
 
+export const getFavoritesEvents = (state) => {
+  return state.auth.favoritesEvents;
+}
+
 export const getFavoritesExpertsButtonProgress = (state) => {
   return state.favorite.favoriteExpertsButtonProgress;
 }

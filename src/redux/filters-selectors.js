@@ -7,5 +7,5 @@ export const getfilterTabQuery = (state) => {
 }
 
 export const getLoading = (state) => {
-  return state.filters.loading;
+  return state.filters.loadingFilter;
 }

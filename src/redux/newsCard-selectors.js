@@ -1,7 +1,7 @@
 export const getCard = (state) => {
-  return state.newsCard;
+  return state.NewsCard;
 }
 
 export const getCardImage = (state) => {
-  return state.newsCard.image;
+  return state.newsCard.imageNewsCard;
 }

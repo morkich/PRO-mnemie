@@ -73,3 +73,34 @@
 .read {
   margin-bottom: 75px;
 }
+
+.textArea {
+  display: flex;
+  flex-direction: column;  
+  align-items: flex-end;
+}
+
+.textArea textarea {
+  border-radius: 2px;
+  border: 1px solid #AECAD5;
+  margin-bottom: 17px;
+  min-height: 100px;
+  resize: vertical;
+  width: 100%;
+  padding: 12px 20px;  
+}
+
+.textArea textarea::placeholder {
+  color: #7C9BA9;
+  font-size: 13px;
+}
+
+.textArea span {
+  color: #7C9BA9;
+  font-size: 13px;
+}
+
+.textArea span a {
+  color: #237FC2;  
+  margin-right: 14px;
+}

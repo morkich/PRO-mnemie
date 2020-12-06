@@ -1,0 +1,31 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 4rem;
+}
+
+.wrap form {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 3rem;
+  justify-items: center;
+}
+
+
+.link {
+  font-size: 14px;
+  text-decoration: underline!important;
+  color: #145E94;
+  font-weight: normal;
+  transition: .2s;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.link:hover {
+  text-decoration: none!important;
+  color: #145E94  
+}

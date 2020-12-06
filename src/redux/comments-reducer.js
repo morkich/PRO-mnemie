@@ -6,7 +6,7 @@ const SET_NEW_COMMENT = 'SET_NEW_COMMENT';
 
 let initialState = {
   comments: {},
-  loading: true,  
+  loadingComments: true,  
 }
 
 const commentsReducer = (state = initialState, action) => {
@@ -19,7 +19,7 @@ const commentsReducer = (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: action.loading
+        loadingComments: action.loading
       }      
     case SET_NEW_COMMENT:
       return {

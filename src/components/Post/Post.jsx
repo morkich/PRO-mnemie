@@ -1,7 +1,8 @@
 import React from 'react';
-import Aside from '../Aside/Aside';
+import AsideLoopContainer from '../Aside/AsideLoop/AsideLoopContainer';
 import AuthorContainer from '../Author/AuthorContainer';
 import CommentsContainer from '../common/Comments/CommentsContainer';
+import DateBlock from '../common/DateBlock/DateBlock';
 import InfoBlock from '../common/InfoBlock/InfoBlock';
 import LikesContainer from '../common/Likes/LikesContainer';
 import Preloader from '../common/Preloader/Preloader';
@@ -12,8 +13,7 @@ import style from './Post.module.css';
 
 const Post = (props) => {
 
-  const postDate = new Date(props.postData.date).toLocaleString('ru-rU', {day: 'numeric', month: 'long' , year: 'numeric'} );  
-  function contentToDOM() {
+  const contentToDOM = () => {
     return {__html: `${props.postData.content.rendered}`};
   }
 
@@ -32,7 +32,11 @@ const Post = (props) => {
         {props.loading ? <Preloader /> : null}
         <div className={style.wrap}>
           <div className={style.dataBlock}>
-            <span className={style.datatime}>{postDate}</span>
+            <DateBlock 
+              date={Date.parse(props.postData.date)} 
+              type={{display: 'fulldate'}}
+              style={{front:'mediumThink'}}
+            />
             <span className={style.category}>{props.postData.category_name}</span>
             <InfoBlock 
               views={props.postData.view_count}
@@ -63,7 +67,7 @@ const Post = (props) => {
 
         </div>
       </main>
-      <Aside />
+      <AsideLoopContainer type={'post'}/>
     </div>
   </section>
   );

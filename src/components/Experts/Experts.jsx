@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef} from 'react';
 import style from './Experts.module.css';
-import Preloader from '../common/Preloader/Preloader';
 import Watermark from '../common/Watermark/Watermark';
 import { NavLink } from 'react-router-dom';
 import FavoritesContainer from '../common/Favorites/FavoritesContainer';
 import Title from '../common/Title/Title';
 import FilterContainer from '../common/Filter/FilterContainer'
-import Aside from '../Aside/Aside';
 import Raiting from '../Profile/Raiting/Raiting';
+import LoadingString from '../common/LoadingString/LoadingString';
+import AsideLoopContainer from '../Aside/AsideLoop/AsideLoopContainer';
 
 const Experts = (props) => {
-  let pages = [];
-  for (let i = 1; i <= props.totalPageCount; i++) {
-    pages.push(i);
-  }
+  const infLoad = useRef();
 
-  let pagesCount = pages
-    .map(numberPage => {
-      return <span key={numberPage}
-        onClick={() => { props.onPageChange(numberPage) }}
-        className={props.currentPage === numberPage ? style.active : ''}>{numberPage}
-      </span>
-    });
+  useEffect(() => {
+    let options = {}
+    const observer = new IntersectionObserver(function
+    (entries, observer){
+      if(entries[0].isIntersecting) {
+        props.infinityLoading()
+      }    
+    }, options);
+    if(infLoad.current != null) {
+      observer.observe(infLoad.current)
+    }    
+  }, [props])    
 
   return (
     <section className="container">
@@ -32,14 +34,10 @@ const Experts = (props) => {
           main={true} 
           uppercase={true}
         />
-        <FilterContainer />
+        <FilterContainer type={'users'} />
       </header>
-      <div className="pagination">
-        {pagesCount}
-      </div>
       <div className="content_right-aside">
-        <main className={style.main}>
-          {props.isLoading ? <Preloader /> : null}
+        <main className={style.main}>          
           <ul className={style.experts}>
             {
               props.experts.map(expert =>
@@ -51,7 +49,7 @@ const Experts = (props) => {
                         <img src={expert.avatar} alt="" />
                       </div>
                       <div className={style.discription}>
-                        <h2><NavLink to={`/profile/${expert.id}`}>{expert.pro_lastname} {expert.pro_firstname} {expert.pro_secondname}</NavLink></h2>
+                        <h2><NavLink to={`/profile/${expert.id}`}>{expert.pro_lastname} {expert.pro_firstname ? expert.pro_firstname : expert.name} {expert.pro_secondname}</NavLink></h2>
                         <div className={style.work}>
                           <span>{expert.pro_position ? expert.pro_position : 'Странник'}</span>
                           <span>{expert.pro_workplace ? expert.pro_workplace : 'Всё и Вся'}</span>
@@ -74,9 +72,11 @@ const Experts = (props) => {
                 )
               )
             }
+          {props.expertsLoading ? <LoadingString /> : null}
           </ul>
+          <div ref={infLoad} className={style.infLoad}></div>         
         </main>
-        <Aside />
+        <AsideLoopContainer type={'tv'} title={'TV PRO Мнение'}/>
       </div>
     </section>
   )

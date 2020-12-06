@@ -2,19 +2,18 @@ import React from 'react';
 import style from './PostLoop.module.css';
 import Watermark from '../common/Watermark/Watermark';
 import Title from '../common/Title/Title';
-import Aside from '../Aside/Aside';
 import NewsCard from '../common/NewsCard/NewsCard';
 import Preloader from '../common/Preloader/Preloader';
 import FilterTabContainer from '../common/FilterTab/FilterTabContainer';
+import AsideLoopContainer from '../Aside/AsideLoop/AsideLoopContainer';
 
 const PostLoop = (props) => {  
-  console.log(props);
   return (
     <section className="container">
       <header className={style.header}>
         <Watermark main={true} />
         <Title
-          title={'Карьера'}
+          title={props.catName}
           main={true}
           uppercase={true}          
         />
@@ -30,6 +29,7 @@ const PostLoop = (props) => {
             {props.posts.map(post => 
               (
                 <NewsCard
+                  key={post.id}
                   title={post.title}      
                   category={post.category_name}            
                   id={post.id}
@@ -43,7 +43,8 @@ const PostLoop = (props) => {
             
           </ul>
         </main>
-        <Aside />
+        {props.parentCat === '16' && <AsideLoopContainer asideType={'vacancies'} title={'Вакансии'} />}
+        {props.parentCat === '25' && <AsideLoopContainer asideType={'courses'} title={'Курсы'} />}
       </div>
     </section>
   )

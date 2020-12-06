@@ -5,7 +5,7 @@ const SET_LOADING = 'SET_LOADING';
 
 let initialState = {
   authorData: [],
-  loading: true
+  loadingAuthor: true
 }
 
 const authorReducer = (state = initialState, action) => {

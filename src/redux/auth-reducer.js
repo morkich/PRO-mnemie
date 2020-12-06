@@ -1,11 +1,14 @@
 import { stopSubmit } from "redux-form";
 import { authAPI, usersAPI } from "../api/api";
+import avatar from '../assets/img/noavatar-comment.svg'
 
 const LOADING_ACCAUNT = 'LOADING_ACCAUNT';
 const SET_USER_DATA = 'SET_USER_DATA';
 const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
 const ADD_FAVORITE_EXPERT = 'ADD_FAVORITE_EXPERT';
 const REMOVE_FAVORITE_EXPERT = 'REMOVE_FAVORITE_EXPERT';
+const ADD_FAVORITE_EVENT = 'ADD_FAVORITE_EVENT';
+const REMOVE_FAVORITE_EVENT = 'REMOVE_FAVORITE_EVENT';
 const SET_ERROR = 'SET_ERROR';
 
 let initialState = {
@@ -17,7 +20,7 @@ let initialState = {
   error: '',
   firstname: '',
   lastname: '',
-  avatar: '',
+  avatar: avatar,
   userId: '',
   favoritesExperts: [],
   favoritesVideo: [],
@@ -58,8 +61,18 @@ const authReducer = (state = initialState, action) => {
     case REMOVE_FAVORITE_EXPERT:
       return {
         ...state,
-        favoritesExperts: state.favoritesExperts.filter(id => id != action.expertId)
+        favoritesExperts: state.favoritesExperts.filter(id => id !== action.expertId)
       };
+    case ADD_FAVORITE_EVENT:
+      return {
+        ...state,
+        favoritesEvents: Array.from(new Set([...state.favoritesEvents, action.eventId]))
+      };
+    case REMOVE_FAVORITE_EVENT:
+      return {
+        ...state,
+        favoritesEvents: state.favoritesEvents.filter(id => id !== action.eventId)
+      };      
     default:
       return state;
   }
@@ -100,6 +113,20 @@ export const removeFavoriteExpert = (expertId) => {
   }
 }
 
+export const addFavoriteEvent = (eventId) => {
+  return {
+    type: ADD_FAVORITE_EVENT,
+    eventId
+  }
+}
+
+export const removeFavoriteEvent = (eventId) => {
+  return {
+    type: REMOVE_FAVORITE_EVENT,
+    eventId
+  }
+}
+
 export const authThunk = (token) => {
   return (dispatch) => {
     if (token) {
@@ -109,7 +136,7 @@ export const authThunk = (token) => {
           dispatch(setUserData({
             loggetIn: true,
             userId: data.id,
-            firstname: data.pro_firstname,
+            firstname: data.pro_firstname ? data.pro_firstname : data.name,
             lastname: data.pro_lastname,
             secondname: data.pro_secondname,
             avatar: data.avatar,

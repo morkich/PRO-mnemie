@@ -3,18 +3,18 @@ import style from './Menu.module.css';
 import MenuItem from './MenuItem/MenuItem';
 
 const Menu = (props) => {
-  console.log(props);
+
   let menuReady = props.menuData.map( (item, i) => {
 
     let link = '/';
-    if(item.type == 'taxonomy') {
-      link = `/posts/${item.object_id}`;
+    if(item.type === 'taxonomy') {
+      link = `/posts/${item.object_id}/${item.title}`;
     }
-    if (item.type == 'custom'){
+    if (item.type === 'custom'){
       link = `${item.url}`;  
     }    
-    
-    return <MenuItem to={link} name={item.title} key={i}/>
+   
+    return <MenuItem to={link} exact={(item.post_name === 'glavnaya') ? true : false} name={item.title} key={i}/>    
   });
 
   return (

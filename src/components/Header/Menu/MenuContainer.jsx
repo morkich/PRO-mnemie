@@ -5,9 +5,12 @@ import { getLoadingMenuState, getMenuState } from '../../../redux/menu-selectors
 import { setMenuThunk } from '../../../redux/menu-reducer';
 
 const MenuContainer = (props) => {
+
+  let setMenuThunk = props.setMenuThunk;
+
   useEffect(() => {    
-    props.setMenuThunk();
-  }, [])
+    setMenuThunk();
+  }, [setMenuThunk])
   
   return (
     <Menu 

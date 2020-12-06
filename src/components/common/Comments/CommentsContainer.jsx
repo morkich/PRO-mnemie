@@ -1,34 +1,38 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addCommentThunk, setCommentsDataThunk } from '../../../redux/comments-reducer';
-import { getAvatar, getFirstname, getLastname, getPosition, getUserId } from '../../../redux/auth-selectors';
+import { getAvatar, getFirstname, getLastname, getLoggetIn, getPosition, getUserId } from '../../../redux/auth-selectors';
 import Comments from './Comments';
 import { getCommentLoadingState, getCommentsState } from '../../../redux/comments-selectors';
 
 
 const CommentsContainer = (props) => { 
 
-  useEffect(() => {    
-      props.setCommentsDataThunk(props.postId);  
-  }, [props.userId, props.postId])
+  let userId = props.userId,
+  postId = props.postId,
+  setCommentsDataThunk = props.setCommentsDataThunk;
 
+  useEffect(() => {    
+    postId && setCommentsDataThunk(postId);  
+  }, [userId, postId, setCommentsDataThunk])
 
   const onSubmit = (formData) => {    
-    props.addCommentThunk(props.postId, props.userId, formData.commentBody);
+    props.addCommentThunk(postId, userId, formData.commentBody);
     formData.commentBody = '';
   }
 
   return (
     <Comments
       onSubmit={onSubmit}
-      userId={props.userId}
+      userId={userId}
       userAvatar={props.userAvatar}
       firstName={props.firstName}
       lastName={props.lastName}
-      postId={props.postId}
+      postId={postId}
       userPosition={props.userPosition}
       comments={props.comments}
       loading={props.loading}
+      logIn={props.logIn}
     />
   )
 }
@@ -41,7 +45,8 @@ let mapStateToProps = (state) => {
     comments: getCommentsState(state),
     firstName: getFirstname(state),
     lastName: getLastname(state),  
-    loading: getCommentLoadingState(state)
+    loading: getCommentLoadingState(state),
+    logIn: getLoggetIn(state)
   }
 }
 

@@ -7,8 +7,6 @@ const Tags = (props) => {
   let tagsArr = Object.keys(props.tags).map( (tag, i) => {
     return <NavLink to={`/tags/${props.tags[tag].id}/`} key={i}>{props.tags[tag].name}</NavLink>
   })
-
-  console.log(props);
   return (
     <div className={style.wrap}>
       <div className={style.label}>Теги:</div>

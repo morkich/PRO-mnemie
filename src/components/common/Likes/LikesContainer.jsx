@@ -6,13 +6,19 @@ import Likes from './Likes';
 
 const LikesContainer = (props) => {
 
-  useEffect(() => {
-    props.getLikesDataThunk(props.postId);
-  }, [props.postId]);
+  let postId = props.postId,
+  userId = props.userId,
+  getLikesDataThunk = props.getLikesDataThunk,
+  getLikesRenderingThunk = props.getLikesRenderingThunk,
+  likesData = props.likesData;
 
   useEffect(() => {
-    props.getLikesRenderingThunk(props.userId, props.likesData);
-  }, [props.likesData]);
+    postId && getLikesDataThunk(postId);
+  }, [postId, getLikesDataThunk]);
+
+  useEffect(() => {
+    userId && getLikesRenderingThunk(userId, likesData);
+  }, [likesData, userId, getLikesRenderingThunk]);
  
   const onDislikeFunc = () => {
     props.likesData[props.userId] = false;

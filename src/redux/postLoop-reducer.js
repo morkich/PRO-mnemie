@@ -2,13 +2,17 @@ import { postAPI } from "../api/api";
 
 const SET_POSTS = 'SET_POSTS';
 const SET_LOADING = 'SET_LOADING';
+const SET_PARENT_CAT = 'SET_PARENT_CAT';
+const SET_PARENT_CAT_NAME = 'SET_PARENT_CAT_NAME';
 
 let initialState = {
   posts: [],
-  pageSize: 9,
+  parentCatPostLoop: 0,
+  parentCatNamePostLoop: '',
+  pageSizePostLoop: 9,
   totalPageCount: 1,
   currentPage: 1,
-  loading: true,
+  loadingPostLoop: true,
 }
 
 const postLoopReducer = (state = initialState, action) => {
@@ -18,10 +22,20 @@ const postLoopReducer = (state = initialState, action) => {
         ...state,
         posts: action.posts
       };
+    case SET_PARENT_CAT:
+      return {
+        ...state,
+        parentCatPostLoop: action.catId !== undefined ? action.catId : state.parentCat
+      };      
+    case SET_PARENT_CAT_NAME:
+      return {
+        ...state,
+        parentCatNamePostLoop: action.catName !== undefined ? action.catName : state.parentCatName
+      };      
     case SET_LOADING:
       return {
         ...state,
-        loading: action.loading
+        loadingPostLoop: action.loading
       };
     default:
       return state;
@@ -42,6 +56,20 @@ export const setLoading = (loading) => {
   }
 }
 
+export const setParentCat = (catId) => {
+  return {
+    type: SET_PARENT_CAT,
+    catId
+  }
+}
+
+export const setParentCatName = (catName) => {
+  return {
+    type: SET_PARENT_CAT_NAME,
+    catName
+  }
+}
+
 export const getPostsThunk = (idCat) => {
   return (dispatch) => {
     dispatch(setLoading(true));    
@@ -51,5 +79,14 @@ export const getPostsThunk = (idCat) => {
     })        
   }
 } 
+
+export const getParentCatThunk = (catId, catName) => {
+  return (dispatch) => {
+    dispatch(setLoading(true));
+    dispatch(setParentCat(catId));     
+    dispatch(setParentCatName(catName));     
+    dispatch(setLoading(false));     
+  }
+}
 
 export default postLoopReducer;

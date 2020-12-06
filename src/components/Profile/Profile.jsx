@@ -13,7 +13,7 @@ const Profile = (props) => {
           <img src={props.profile.avatar} alt="" />
         </div>
         <div className={style.discription}>
-          <h2>{props.profile.pro_lastname} {props.profile.pro_firstname} {props.profile.pro_secondname}</h2>
+          <h2>{props.profile.pro_lastname} {props.profile.pro_firstname ? props.profile.pro_firstname : props.profile.name} {props.profile.pro_secondname}</h2>
           <div className={style.work}>
             <span>{props.profile.pro_position ? props.profile.pro_position : 'Странник'}</span>
             <span>{props.profile.pro_workplace ? props.profile.pro_workplace : 'Всё и Вся'}</span>
@@ -34,7 +34,7 @@ const Profile = (props) => {
           <p className={style.exp}>{props.profile.pro_expirience ? props.profile.pro_expirience : 'Без опыта'}</p>
         </div>
         <span className={style.title}>Хештеги</span>
-        <div className={style.tags_box}><a href="">Планирование и управление</a><a href="">Плановые показатели</a></div>
+        <div className={style.tags_box}><a href="/tags/">Планирование и управление</a><a href="/tags/">Плановые показатели</a></div>
         <span className={style.title}>О себе</span>
         <div className={style.text_box}>
           <p>{props.profile.pro_discription ? props.profile.pro_discription : 'Человек загадка'}</p>

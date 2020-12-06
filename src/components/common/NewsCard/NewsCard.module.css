@@ -5,6 +5,14 @@
   overflow: hidden;
 }
 
+.wrap a:hover .description {
+  background-color: rgba(14, 42, 66, 0.65);
+}
+
+.wrap a:hover .dark_line {
+  display: none;
+}
+
 .img {
   position: absolute;
   top: 0;
@@ -22,6 +30,7 @@
   backdrop-filter: blur(3.08049px);
   padding: 10px 16px;
   width: 100%;
+  transition: .5s;
 }
 
 .dark_line {

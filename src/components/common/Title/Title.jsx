@@ -6,7 +6,8 @@ const Title = (props) => {
     textAlign: props.position,
     textTransform: props.uppercase? 'uppercase': 'none',    
     marginBottom: props.main? '25px': 'none',
-    fontSize: props.small? '28px': '36px' 
+    fontSize: props.small? '28px': '36px',
+    maxWidth: props.maxW? props.maxW : 'auto'
   }
 
   return (

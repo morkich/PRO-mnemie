@@ -1,0 +1,7 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  color: #7C9BA9;
+  font-size: 12px;
+}

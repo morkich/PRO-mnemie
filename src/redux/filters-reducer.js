@@ -1,16 +1,16 @@
 import { catAPI } from "../api/api";
+import { getEventsDataFilterThunk} from "./eventLoop-reducer";
 import { getPostsThunk } from "./postLoop-reducer";
 
 const FILTER_TAB_QUERY = 'FILTER_TAB_QUERY';
 const SET_FILTER_ITEMS = 'SET_FILTER_ITEMS';
 const SET_LOADING = 'SET_LOADING';
 
-
-
 let initialState = {
+  filterType: 'default',
   filterTabQuery: 'all',
   filterItems: [], 
-  loading: true
+  loadingFilter: true
 }
 
 const filtersReducer = (state = initialState, action) => {
@@ -28,7 +28,7 @@ const filtersReducer = (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: action.loading
+        loadingFilter: action.loading
       };
     default:
       return state;
@@ -56,19 +56,25 @@ export const setLoading = (loading) => {
   }
 }
 
-export const setFilterItemsThunk = (catId) => {
+export const setFilterItemsThunk = (catId, catName = 'categories') => {
   return (dispatch) => {
-    catAPI.getCat(catId, true).then(response => {
+    catAPI.getCat(catId, true, catName).then(response => {
       dispatch(setFilterItems(response));      
       dispatch(setLoading(false));            
     })
   }  
 }
 
-export const setFilterQueryThunk = (query) => {
-  return (dispatch) => {
+export const setFilterQueryThunk = (query, cats) => {
+  return (dispatch) => {    
     dispatch(setFilterQuery(query));    
-    dispatch(getPostsThunk(query));
+    if(cats === 'categories'){
+      dispatch(getPostsThunk(query));  
+    }
+    if(cats === 'events_cat'){
+      console.log(cats);
+      dispatch(getEventsDataFilterThunk(query, cats, 'events'));
+    }
   }
 }
 

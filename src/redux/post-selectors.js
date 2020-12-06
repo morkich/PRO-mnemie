@@ -1,5 +1,5 @@
 export const getLoading = (state) => {
-  return state.post.loading;
+  return state.post.loadingPost;
 }
 
 export const getPostData = (state) => {
@@ -7,5 +7,5 @@ export const getPostData = (state) => {
 }
 
 export const getViewsPost = (state) => {
-  return state.post.views;
+  return state.post.viewsPost;
 }

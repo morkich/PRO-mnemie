@@ -56,7 +56,7 @@ const AccountDataForm = (props) => {
       />
       <div className={style.buttons_account_form}>
         <button className={`button`}>Сохранить</button>
-        <a className={`button button--grey`}>Отмена</a>
+        <a href="/" className={`button button--grey`}>Отмена</a>
       </div>  
         
     </form>
