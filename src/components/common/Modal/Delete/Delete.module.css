@@ -1,0 +1,10 @@
+.formGroupButton {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 50px;
+  grid-gap: 25px;
+}
+
+.button {
+  min-width: auto;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Raiting from '../../Profile/Raiting/Raiting';
 import CommentDataReduxForm from './CommentDataForm/CommentDataForm';
 import style from './Comments.module.css';
+import ModalContainer from '../Modal/ModalContainer';
 
 const Comments = (props) => {
 
@@ -55,7 +56,13 @@ const Comments = (props) => {
         </div>
         <div className={style.textArea}>
           <textarea placeholder='Оставьте комментарий...' />        
-          <span><a href="/auth">Авторизуйтесь</a>чтобы комментировать статью</span>
+          <span className={style.string}>    
+            <ModalContainer 
+              buttonText={'Авторизуйтесь'}
+              type={'auth'}
+              link={true}
+            />чтобы комментировать статью
+          </span>
         </div>          
       </div>
     </div>

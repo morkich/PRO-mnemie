@@ -1,11 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import DateBlock from '../../../common/DateBlock/DateBlock';
+import Preloader from '../../../common/Preloader/Preloader';
 import style from '../../Aside.module.css';
 
 const AsideVacancyItem = (props) => {
   return (
     <NavLink key={props.id} to={`/vacancy/${props.id}`} className={`${style.asideVacasyBlock} ${style.asideBlock} ${style.asideLine}`}>
+      {props.asideLoading ? <Preloader /> : null} 
+
       <h3 className={style.title}>{props.title}</h3>
       <span className={style.price}>{props.price} ₽</span>
       <div className={style.description}><div dangerouslySetInnerHTML={{ __html: props.description }}></div></div>

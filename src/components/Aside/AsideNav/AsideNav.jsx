@@ -6,7 +6,7 @@ const AsideNav = (props) => {
   return (
     <ul className={style.wrap}>
       <AsideNavItem to={'/favorites/'} name={'Избранное'} />
-      <AsideNavItem to={'/#/'} name={'Ваши статьи'} />
+      <AsideNavItem to={`/mydata/posts/${props.userId}`} name={'Ваши статьи'} />
       <AsideNavItem to={'/#/'} name={'Ваши видео'} />
       <AsideNavItem to={'/#/'} name={'Ваше резюме'} />
       <AsideNavItem to={'/#/'} name={'Ваши вакансии'} />

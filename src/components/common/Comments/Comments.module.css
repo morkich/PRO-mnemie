@@ -104,3 +104,8 @@
   color: #237FC2;  
   margin-right: 14px;
 }
+
+.string {
+  display: flex;
+  align-items: center;
+} 

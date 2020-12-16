@@ -21,6 +21,7 @@ class AsideNavContainer extends React.Component {
       <nav className={style.container}>
         <AsideNav
           logOut={this.logOut}
+          userId={this.props.userId}
         />
       </nav>
     )

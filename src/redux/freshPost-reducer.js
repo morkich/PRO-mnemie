@@ -46,7 +46,7 @@ export const setFreshPosts = (freshPosts) => {
   }
 }
 
-export const setLoading = (loading) => {
+export const setLoadingFreshPost = (loading) => {
   return {
     type: SET_LOADING,
     loading
@@ -55,10 +55,10 @@ export const setLoading = (loading) => {
 
 export const getFreshPostThunk = (number) => {
   return (dispatch) => {
-    dispatch(setLoading(true));
+    dispatch(setLoadingFreshPost(true));
     postAPI.getPostNumberOrder(number).then(response => {
       dispatch(setFreshPosts(response));
-      dispatch(setLoading(false));      
+      dispatch(setLoadingFreshPost(false));      
     }) 
   }
 }

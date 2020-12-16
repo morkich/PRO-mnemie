@@ -10,24 +10,26 @@ const LikesContainer = (props) => {
   userId = props.userId,
   getLikesDataThunk = props.getLikesDataThunk,
   getLikesRenderingThunk = props.getLikesRenderingThunk,
-  likesData = props.likesData;
+  likesData = props.likesData,
+  typePost = props.typePost && props.typePost;
 
   useEffect(() => {
-    postId && getLikesDataThunk(postId);
+    postId && getLikesDataThunk(postId, typePost);
   }, [postId, getLikesDataThunk]);
 
   useEffect(() => {
+    console.log(likesData);
     userId && getLikesRenderingThunk(userId, likesData);
   }, [likesData, userId, getLikesRenderingThunk]);
  
   const onDislikeFunc = () => {
     props.likesData[props.userId] = false;
-    props.setLikesThunk(props.postId, props.likesData);
+    props.setLikesThunk(props.postId, props.likesData, typePost);
     props.getLikesRenderingThunk(props.userId, props.likesData);
   }  
   const onLikeFunc = () => {
     props.likesData[props.userId] = true;
-    props.setLikesThunk(props.postId, props.likesData);  
+    props.setLikesThunk(props.postId, props.likesData, typePost);  
     props.getLikesRenderingThunk(props.userId, props.likesData);
   }  
 

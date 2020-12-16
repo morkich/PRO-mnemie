@@ -9,6 +9,40 @@ const noAuth = axios.create({
   baseURL: 'http://proview.loc/wp-json/',
 });
 
+export const itemAPI = {
+  getItem(item) {
+    return noAuth.get(`wp/v2/${item}/`)
+    .then(response => response.data);
+  },
+  getItemById(item, itemId) {
+    return noAuth.get(`wp/v2/${item}/?include=${itemId}`)
+    .then(response => response.data);
+  },
+  getItemCount(item, count) {
+    return noAuth.get(`wp/v2/${item}?per_page=${count}`)
+    .then(response => response.data);
+  },
+  getItemByAuthor(item, authorId) {
+    return noAuth.get(`wp/v2/${item}?author=${authorId}&per_page=11`)
+    .then(response => response.data);
+  },
+  postNewImage(token, image, filename, filetype = 'jpg') {
+    const authPostFile = axios.create({
+      baseURL: 'http://proview.loc/wp-json/',
+      headers: { 
+        'Authorization': `Bearer ${token}`,
+        'data-binary': `@/home/web/${filename}.jpg`, 
+        'content-disposition': `attachment; filename=${filename}`,
+        'Content-Type': `image/${filetype}`
+      },
+    });
+    return authPostFile.post(`wp/v2/media`, image)    
+  },
+  deleteItem(itemId, itemType = 'posts'){
+    return auth.delete(`wp/v2/${itemType}/${itemId}`)
+  }
+}
+
 export const usersAPI = {
   getMe() {
     return auth.get(`wp/v2/users/me`)
@@ -30,6 +64,9 @@ export const usersAPI = {
   },
   postNewUser(userData) {
     return noAuth.post(`wp/v2/users/register`, userData)
+  },
+  changeAvatar(userId, imageId) {
+    return auth.post(`wp/v2/changeavatar/${imageId}/${userId}`)
   }
 }
 
@@ -38,6 +75,10 @@ export const optionsAPI = {
     return noAuth.get(`wp/v2/theme_options/logo`)
       .then(response => response.data);
   }, 
+  getAsideBanners() {
+    return noAuth.get(`wp/v2/theme_options/asidebanners`)
+      .then(response => response.data);
+  },
   getMenu(menuId) {
     return noAuth.get(`wp/v2/navigation/${menuId}`)
       .then(response => response.data);
@@ -56,6 +97,10 @@ export const authAPI = {
   setAccountDataWithLiveToken(token, data) {
     const myHeaders = { headers: { 'Authorization': `Bearer ${token}` } };
     return noAuth.post(`wp/v2/users/me`, myHeaders, data)
+  },
+  getAuthToken() {
+    return noAuth.get(`wp/v2/loading`)
+    .then(response => response.data);
   },
   getToken(username, password) {
     const headers = { username: username, password: password };
@@ -88,8 +133,14 @@ export const postAPI = {
     return noAuth.get(`wp/v2/${posts}/${id}`)
     .then(response => response.data);
   },
-  setLikesToPost(id, data) {
-    return auth.post(`wp/v2/posts/${id}`, data)
+  setLikesToPost(id, data, postType = 'posts') {
+    return auth.post(`wp/v2/${postType}/${id}`, data)
+  },
+  postUpdatePost(data, postId, postType = 'posts') {
+    return auth.post(`wp/v2/${postType}/${postId}`, data)
+  },
+  postNewPost(data, postType = 'posts'){
+    return auth.post(`wp/v2/${postType}/`, data)
   }
 }
 
@@ -101,6 +152,10 @@ export const mediaAPI = {
 }
 
 export const catAPI = {
+  getAllCat(catName = 'categories') {
+    return noAuth.get(`wp/v2/${catName}`)
+    .then(response => response.data);
+  },
   getCat(id, parent = false, catName = 'categories') {
     if(parent){
       return noAuth.get(`wp/v2/${catName}?parent=${id}`)
@@ -113,8 +168,16 @@ export const catAPI = {
 }
 
 export const tagAPI = {
-  getTags(ids) {
-    return noAuth.get(`wp/v2/tags?include=${ids}`)
+  getTags(ids, tagType = 'tags') {
+    return noAuth.get(`wp/v2/${tagType}?include=${ids}`)
+    .then(response => response.data);  
+  },
+  getAllTags() {
+    return noAuth.get(`wp/v2/tags`)
+    .then(response => response.data);  
+  },
+  postNewTag(data) {
+    return auth.post(`wp/v2/tags`, data)
     .then(response => response.data);  
   }
 }

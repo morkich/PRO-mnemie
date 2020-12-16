@@ -27,6 +27,16 @@ import modalReducer from "./modal-reducer";
 import registerReducer from "./rigister-reducer";
 import freshPostReducer from "./freshPost-reducer";
 import upComingEventsReducer from "./upComingEvents-reducer";
+import asideBannersReducer from "./asideBanner-reducer";
+import expertsDonateReducer from "./expertsDonate-reducer";
+import avatarChangeReducer from "./avatarChange-reducer";
+import yourDataReducer from "./yourData-reducer";
+import postImageReducer from "./addPostImage-reducer";
+import addPostReducer from "./addNewPost-reducer";
+import addTagsReducer from "./addTags-reducer";
+import categorySelectReducer from "./categorySelect-reducer";
+import tvLoopReducer from "./tvLoop-reducer";
+import TVItemReducer from "./tvItem-reducer";
 
 
 const { createStore, combineReducers, applyMiddleware } = require("redux");
@@ -59,6 +69,16 @@ let reducers = combineReducers({
     register: registerReducer,
     freshPost: freshPostReducer,
     upComingEvents: upComingEventsReducer,
+    asideBanners: asideBannersReducer,
+    expertsDonate: expertsDonateReducer,
+    avatarChange: avatarChangeReducer,
+    yourData: yourDataReducer,
+    addPostImage: postImageReducer,
+    addPost: addPostReducer,
+    addTags: addTagsReducer,
+    categorySelect: categorySelectReducer,
+    tvLoop: tvLoopReducer,
+    tvItem: TVItemReducer,
     form: formReducer
 });
  

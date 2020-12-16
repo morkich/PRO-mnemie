@@ -39,10 +39,10 @@ export const setLoading = (loading) => {
   }
 }
 
-export const getTagsDataThunk = (ids) => { 
+export const getTagsDataThunk = (ids, tagType) => { 
   return (dispatch) => {    
     dispatch(setLoading(true));
-    tagAPI.getTags(ids).then(response => {
+    tagAPI.getTags(ids, tagType).then(response => {
       dispatch(setTags(response))
       dispatch(setLoading(false));
     })

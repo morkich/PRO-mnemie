@@ -1,7 +1,7 @@
 import { usersAPI } from "../api/api";
 
 const SET_AUTHOR = 'SET_AUTHOR';
-const SET_LOADING = 'SET_LOADING';
+const SET_LOADING_AUTHOR = 'SET_LOADING_AUTHOR';
 
 let initialState = {
   authorData: [],
@@ -15,10 +15,10 @@ const authorReducer = (state = initialState, action) => {
         ...state,
         authorData: action.authorData
       };
-    case SET_LOADING:
+    case SET_LOADING_AUTHOR:
       return {
         ...state,
-        loading: action.loading
+        loadingAuthor: action.loading
       };
     default:
       return state;
@@ -32,19 +32,19 @@ export const setAuthorData = (authorData) => {
   }
 }
 
-export const setLoading = (loading) => {
+export const setLoadingAuthor = (loading) => {
   return {
-    type: SET_LOADING,
+    type: SET_LOADING_AUTHOR,
     loading
   }
 }
 
 export const getAuthorDataThunk = (id) => {
   return (dispatch) => {
-    dispatch(setLoading(true));
+    dispatch(setLoadingAuthor(true));
     usersAPI.getExpert(id).then(response => {
       dispatch(setAuthorData(response[0]));
-      dispatch(setLoading(false));      
+      dispatch(setLoadingAuthor(false));      
     })
   }
 }

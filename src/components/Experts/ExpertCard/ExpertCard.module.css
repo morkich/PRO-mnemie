@@ -1,0 +1,93 @@
+.expert {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1.5rem;
+  padding: 2.5rem;
+  border-radius: 2px;
+  background-color: #E9F3FA;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+
+.avatar {
+  display: flex;
+  height: 155px;
+  width: 155px;
+  border-radius: 10em;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.avatar img{
+  object-fit: cover;
+  width: 100%;
+}
+
+.discription h2 a{
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.1rem;  
+  color: #0E2A42;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  min-height: 42px;
+  transition: .2s;
+}
+
+.discription h2 a:hover {
+  color: #237fc2;
+}
+
+.work {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: center;
+  color: #7C9BA9;
+  font-size: 1rem;
+  line-height: 1.2rem;
+}
+
+.raiting {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: end;
+  grid-gap: 40px;
+}
+
+.raiting div {
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr;
+  color: #7C9BA9;
+  text-align: center;
+  justify-items: center;  
+}
+
+.raiting div svg {
+  margin-bottom: 6px;
+}
+
+
+.raiting div:first-child:after {
+  content: '';
+  position: absolute;  
+  display: flex;
+  top: 0;
+  right: -20.5px;
+  width: 1px;
+  height: 100%;
+  background-color: #AECAD5
+}
+
+.city {
+  margin: 10px 0;
+}
+
+.active {
+  font-weight: bold;  
+}

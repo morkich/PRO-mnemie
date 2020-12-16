@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getFreshPostThunk } from '../../../redux/freshPost-reducer';
 import { getFreshPostItemsState, getFreshPostLoadingState, getFreshPostNumberState } from '../../../redux/freshPost-selectors';
+import Preloader from '../../common/Preloader/Preloader';
 import FreshPost from './FreshPost';
 
 const FreshPostContainer = (props) => {
@@ -15,11 +16,14 @@ const FreshPostContainer = (props) => {
   
   
 
-  return (
-    <FreshPost 
-      itemsFresh={props.itemsFresh}
-      loading={props.freshLoading}
-    />
+  return (    
+    <>
+      {props.freshLoading ? <Preloader /> : null}
+      <FreshPost 
+        itemsFresh={props.itemsFresh}
+        loading={props.freshLoading}
+      />
+    </>
   )
 }
 

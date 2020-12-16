@@ -8,6 +8,7 @@ const AsideEventItem = (props) => {
   const link = props.link ? props.link : `/event/${props.id}`;
   return (
     <Link key={props.id} to={link} className={`${style.asideVacasyBlock} ${style.asideBlock} ${style.asideLine}`}>
+      {props.asideLoading ? <Preloader /> : null} 
       <h3 className={`${style.title} ${style.mb10}`}>
         <DateBlock 
           date={Date.parse(props.date)} 

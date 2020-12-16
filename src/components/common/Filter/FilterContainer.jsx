@@ -11,7 +11,7 @@ const FilterContainer = (props) => {
   getUniqUserCities = props.getUniqUserCities;
 
   useEffect( () => {
-    getUniqUserCities();
+    getUniqUserCities && getUniqUserCities();
   }, [getUniqCitiesState, getUniqUserCities]);
 
   const onFormSubmit = (formData) => {    

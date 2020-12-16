@@ -3,7 +3,6 @@ import style from './Menu.module.css';
 import MenuItem from './MenuItem/MenuItem';
 
 const Menu = (props) => {
-
   let menuReady = props.menuData.map( (item, i) => {
 
     let link = '/';
@@ -12,9 +11,8 @@ const Menu = (props) => {
     }
     if (item.type === 'custom'){
       link = `${item.url}`;  
-    }    
-   
-    return <MenuItem to={link} exact={(item.post_name === 'glavnaya') ? true : false} name={item.title} key={i}/>    
+    }      
+    return <MenuItem to={link} exact={(item.post_name === 'glavnaya')} name={item.title} key={i}/>    
   });
 
   return (

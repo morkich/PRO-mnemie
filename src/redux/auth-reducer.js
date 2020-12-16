@@ -10,6 +10,10 @@ const REMOVE_FAVORITE_EXPERT = 'REMOVE_FAVORITE_EXPERT';
 const ADD_FAVORITE_EVENT = 'ADD_FAVORITE_EVENT';
 const REMOVE_FAVORITE_EVENT = 'REMOVE_FAVORITE_EVENT';
 const SET_ERROR = 'SET_ERROR';
+const SET_AUTH_AVATAR = 'SET_AUTH_AVATAR';
+const ADD_FAVORITE_VIDEO = 'ADD_FAVORITE_VIDEO';
+const REMOVE_FAVORITE_VIDEO = 'REMOVE_FAVORITE_VIDEO';
+
 
 let initialState = {
   userNiceName: '',
@@ -23,7 +27,7 @@ let initialState = {
   avatar: avatar,
   userId: '',
   favoritesExperts: [],
-  favoritesVideo: [],
+  favoritesVideos: [],
   favoritesEvents: [],
   pro_discription: '',
   pro_expirience: '',
@@ -43,6 +47,11 @@ const authReducer = (state = initialState, action) => {
         ...state,
         ...action.data,
       };
+    case SET_AUTH_AVATAR:
+      return {
+        ...state,
+        avatar: action.avatarAuth,
+      };      
     case LOADING_ACCAUNT:
       return {
         ...state,
@@ -73,6 +82,17 @@ const authReducer = (state = initialState, action) => {
         ...state,
         favoritesEvents: state.favoritesEvents.filter(id => id !== action.eventId)
       };      
+    case ADD_FAVORITE_VIDEO:
+      console.log(action);
+      return {
+        ...state,
+        favoritesVideos: Array.from(new Set([...state.favoritesVideos, action.videoId]))
+      };
+    case REMOVE_FAVORITE_VIDEO:
+      return {
+        ...state,
+        favoritesVideos: state.favoritesVideos.filter(id => id !== action.videoId)
+      };         
     default:
       return state;
   }
@@ -84,6 +104,14 @@ export const setUserData = (data) => {
     data
   }
 }
+
+export const setAuthAvatar = (avatarAuth) => {  
+  return {
+    type: SET_AUTH_AVATAR,
+    avatarAuth
+  }
+}
+
 
 export const toggleLoadingAcc = (loadingAcc) => {
   return {
@@ -124,6 +152,20 @@ export const removeFavoriteEvent = (eventId) => {
   return {
     type: REMOVE_FAVORITE_EVENT,
     eventId
+  }
+}
+
+export const addFavoriteVideo = (videoId) => {
+  return {
+    type: ADD_FAVORITE_VIDEO,
+    videoId
+  }
+}
+
+export const removeFavoriteVideo = (videoId) => {
+  return {
+    type: REMOVE_FAVORITE_VIDEO,
+    videoId
   }
 }
 

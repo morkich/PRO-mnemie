@@ -11,12 +11,16 @@ import { connect } from 'react-redux';
 import PostLoopContainer from './components/PostLoop/PostLoopContainer';
 import PostContainer from './components/Post/PostContainer';
 import VacancyLoopContainer from './components/VacancyLoop/VacancyLoopContainer';
+import TVLoopContainer from './components/TVLoop/TVLoopContainer';
+import TVItemContainer from './components/TVLoop/TVItem/TVItemContainer';
 import VacancyContainer from './components/Vacancy/VacancyContainer';
 import EventLoopContainer from './components/EventLoop/EventLoopContainer';
 import EventContainer from './components/Event/EventContainer';
 import CourseLoopContainer from './components/CourseLoop/CourseLoopContainer';
 import PageContainer from './components/Page/PageContainer';
 import MainPageContainer from './components/MainPage/MainPageContainer';
+import YourDataContainer from './components/Account/YourData/YourDataContainer';
+import AddNewPostContainer from './components/Account/AddNewPost/AddNewPostContainer';
 
 class App extends React.Component {
 
@@ -43,6 +47,11 @@ class App extends React.Component {
           <Route path="/event/:eventId?" render={() => <EventContainer />} />
           <Route path="/course_cat/" render={() => <CourseLoopContainer />} />
           <Route path="/page/slug/:pageSlug?" render={() => <PageContainer />} />
+          <Route path="/mydata/:dataType?/:userId?" render={() => <YourDataContainer />} />
+          <Route path="/add/:addType?/:userId?" render={() => <AddNewPostContainer />} />
+          <Route path="/edit/:addType?/:itemsId?" render={() => <AddNewPostContainer />} />
+          <Route path="/tv_video_cat/" render={() => <TVLoopContainer />} />
+          <Route path="/tv_video/:videoId?" render={() => <TVItemContainer />} />
         </div>
         <footer className="footer">
           <Footer />

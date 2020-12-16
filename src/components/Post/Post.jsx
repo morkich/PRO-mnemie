@@ -67,7 +67,7 @@ const Post = (props) => {
 
         </div>
       </main>
-      <AsideLoopContainer type={'post'}/>
+      <AsideLoopContainer asideType={'post'}/>
     </div>
   </section>
   );

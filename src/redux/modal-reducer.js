@@ -1,3 +1,6 @@
+import { itemAPI } from "../api/api";
+import { getYourDataThunk } from "./yourData-reducer";
+
 const SET_LOADING = 'SET_LOADING';
 const SET_VISION = 'SET_VISION';
 const SET_TYPE = 'SET_TYPE';
@@ -44,10 +47,22 @@ export const setVision = (vision) => {
   }
 }
 
-export const setLoading = (loading) => {
+export const setLoadingModal = (loading) => {
   return {
     type: SET_LOADING,
     loading
+  }
+}
+
+export const deleteItemThunk = (itemId, userId, itemType = 'posts') => {
+  return (dispatch) => {
+    dispatch(setLoadingModal(true));
+    itemAPI.deleteItem(itemId, itemType).then(response => {
+      console.log(response);
+      dispatch(getYourDataThunk(itemType, userId))
+      dispatch(setVision(false));
+      dispatch(setLoadingModal(false));
+    })
   }
 }
 

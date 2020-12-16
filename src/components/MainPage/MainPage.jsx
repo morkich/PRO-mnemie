@@ -1,7 +1,9 @@
 import React from 'react';
+import AsideBannersContainer from '../Aside/AsideLoop/AsideBanners/AsideBannersContainer';
 import AsideLoopContainer from '../Aside/AsideLoop/AsideLoopContainer';
 import Title from '../common/Title/Title';
 import Watermark from '../common/Watermark/Watermark';
+import ExpertsDonateContainer from './ExpertsDonate/ExpertsDonateContainer';
 import FreshPostContainer from './FreshPost/FreshPostContainer';
 import style from './MainPage.module.css';
 import UpComingEventsContainer from './UpComingEvents/UpComingEventsContainer';
@@ -43,9 +45,11 @@ const MainPage = (props) => {
               numberUpcomingEvent={5}          
             />
           </main>
-          <AsideLoopContainer asideType={'banner'}/>
+          <AsideBannersContainer asideType={'banner'}/>
         </div>
       </section>  
+      <ExpertsDonateContainer title={'Эксперты'}/>
+
     </>
   );
 }

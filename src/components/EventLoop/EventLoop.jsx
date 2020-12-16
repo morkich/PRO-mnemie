@@ -36,7 +36,8 @@ const EventLoop = (props) => {
                 city={props.items[item].pro_event_city}
                 title={props.items[item].title ? props.items[item].title.rendered : 'Загрузка...' }
                 content={props.items[item].content ? props.items[item].content.rendered : 'Загрузка...' }
-                id={props.items[item].id}                
+                id={props.items[item].id}     
+                button={true}           
               />
             )}            
             

@@ -35,3 +35,10 @@
   font-size: 12px;
   color: #7C9BA9;
 }
+
+.minimalName {
+  text-decoration: none;
+  color: #7C9BA9;
+  font-size: 12px;
+  font-weight: 500;
+}

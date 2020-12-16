@@ -3,9 +3,7 @@ import EventCard from '../../EventLoop/EventCard/EventCard';
 import style from './UpComingEvents.module.css';
 
 const UpComingEvents = (props) => {
-  console.log(props);
   let freshPosts = props.itemsEvents.map(post => {
-    console.log(post);
     return <EventCard 
       key={post.id}
       img={post.img_url}

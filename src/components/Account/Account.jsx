@@ -1,18 +1,19 @@
 import React from 'react';
 import AsideNavContainer from '../Aside/AsideNav/AsideNavContainer';
+import AvatarChangeContainer from './AvatarChange/AvatarChangeContainer';
 import Preloader from '../common/Preloader/Preloader';
 import Raiting from '../Profile/Raiting/Raiting';
 import style from './Account.module.css';
 import AccountDataReduxForm from './AccountDataForm/AccountDataForm';
 
 const Account = (props) => {
-  console.log(props);
   return (
     <section className={`${style.wrap} container`}>
       <div key={props.userId} className={style.profile_card}>
-        <div className={style.avatar}>
-          <img src={props.avatar} alt="" />
-        </div>
+        <AvatarChangeContainer 
+          avatar={props.avatar}
+          userId={props.userId}
+        />
         <div className={style.discription}>
           <h2>{props.lastname} {props.firstname} {props.secondname}</h2>
           <div className={style.work}>
@@ -31,7 +32,7 @@ const Account = (props) => {
       </div>
       
       <div className={style.extra}>
-        <AsideNavContainer />
+        <AsideNavContainer userId={props.userId}/>
       </div>
     </section>
   )

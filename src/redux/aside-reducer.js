@@ -1,7 +1,7 @@
 import { postAPI } from "../api/api";
 
-const SET_LOADING = 'SET_LOADING';
-const SET_ITEMS = 'SET_ITEMS';
+const SET_ASIDE_LOADING = 'SET_ASIDE_LOADING';
+const SET_ASIDE_ITEMS = 'SET_ASIDE_ITEMS';
 const SET_ASIDE_TYPE = 'SET_ASIDE_TYPE';
 
 let initialState = {
@@ -11,12 +11,12 @@ let initialState = {
 
 const asideReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ITEMS:
+    case SET_ASIDE_ITEMS:
       return {
         ...state,
         asideItems: action.asideItems
       }      
-    case SET_LOADING:
+    case SET_ASIDE_LOADING:
       return {
         ...state,
         asideLoading: action.loading
@@ -35,14 +35,14 @@ export const setAsideType = (typeAside) => {
 
 export const setAsideItems = (asideItems) => {
   return {
-    type: SET_ITEMS,
+    type: SET_ASIDE_ITEMS,
     asideItems
   }
 }
 
 export const setAsideLoading = (loading) => {
   return {
-    type: SET_LOADING,
+    type: SET_ASIDE_LOADING,
     loading
   }
 }
@@ -51,7 +51,11 @@ export const getAsideItemsThunk = (type) => {
   return (dispatch) => {
     dispatch(setAsideLoading(true));
     postAPI.getPosts(type).then( response => {
-      dispatch(setAsideItems(response));
+      if(type === 'asidebanners'){
+        console.log('привет');
+      }else{
+        dispatch(setAsideItems(response));
+      }      
       dispatch(setAsideLoading(false));      
     })
   }

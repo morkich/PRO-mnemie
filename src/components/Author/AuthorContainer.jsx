@@ -17,6 +17,7 @@ const AuthorContainer = (props) => {
     <Author 
       author={props.author}
       loading={props.loading}
+      minimal={props.minimal}
     />
   )
 }

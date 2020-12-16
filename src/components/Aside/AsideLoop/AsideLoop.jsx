@@ -4,6 +4,7 @@ import style from '../Aside.module.css';
 import AsideBanners from './AsideBanners/AsideBanners';
 import AsideEventItem from './AsideEventItem/AsideEventItem';
 import AsideVacancyItem from './AsideVacancyItem/AsideVacancyItem';
+import Preloader from '../../common/Preloader/Preloader';
 
 const AsideLoop = (props) => {
   console.log(props);
@@ -16,7 +17,7 @@ const AsideLoop = (props) => {
           title={props.items[item].title.rendered}
           companyName={props.items[item].pro_event_company_name}
           date={props.items[item].date}
-          loading={props.asideLoading}
+          asideLoading={props.asideLoading}
         />     
       )
     }
@@ -30,6 +31,7 @@ const AsideLoop = (props) => {
           description={props.items[item].content.rendered}
           companyName={props.items[item].pro_vacancy_company_name}
           date={props.items[item].date}
+          asideLoading={props.asideLoading}
         />        
       )
     }
@@ -38,15 +40,18 @@ const AsideLoop = (props) => {
         <AsideEventItem 
           key={props.items[item].id}
           link={props.items[item].pro_course_link}
-          title={props.items[item].title.rendered}
+          title={props.items[item].title && props.items[item].title.rendered}
           companyName={props.items[item].pro_course_organization}
           date={props.items[item].pro_course_date}
+          asideLoading={props.asideLoading}
         />        
       )
     }
-    if(props.type === 'banner'){
+    if(props.type === 'banners'){
       return (
-        <AsideBanners />     
+        <AsideBanners 
+          asideLoading={props.asideLoading}
+        />     
       )
     }
     return 'Укажите тип сайдбара'
@@ -55,7 +60,7 @@ const AsideLoop = (props) => {
   return (
       <aside>
         <Title title={props.title} uppercase={true} small={true} />
-        <div className={style.wrap}>          
+        <div className={style.wrap}> 
           {itemsPack}
         </div>
       </aside>

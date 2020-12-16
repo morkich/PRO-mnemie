@@ -12,7 +12,7 @@ const FilterTab = (props) => {
   return (
     <div className="content_right-aside">
       <nav className={style.wrap}>
-        {props.loading ? <PreloaderMini /> : null} 
+        {props.filterLoading ? <PreloaderMini /> : null} 
         <ul>          
           <FilterTabItem to={`/${catName}?filter=all`} catId={props.parentCat} onClick={props.onClick} name='Все' key='999'/>
           {filterReady}        

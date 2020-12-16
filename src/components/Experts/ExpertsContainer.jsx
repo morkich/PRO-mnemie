@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { infinityPostLoadThunk } from '../../redux/experts-reducer';
-import { getExpertsState, getExpertsLoadingState, getExpertsPageSaizeState, getExpertsCurrentPageState, getExpertsPageCountState } from '../../redux/experts-selectors';
+import { getExpertsState, getExpertsLoadingState, getExpertsPageSaizeState, getExpertsPageCountState } from '../../redux/experts-selectors';
 import Experts from './Experts';
 
 const ExpertsContainer = (props) => {
@@ -16,7 +16,6 @@ const ExpertsContainer = (props) => {
   return (
     <Experts
       totalPageCount={props.totalPageCount}
-      currentPage={props.currentPage}
       infinityLoading={infinityLoading}
       experts={props.experts}
       expertsLoading={props.expertsLoading}
@@ -29,7 +28,7 @@ let mapStateToProps = (state) => {
     experts: getExpertsState(state),
     pageSize: getExpertsPageSaizeState(state),
     totalPageCount: getExpertsPageCountState(state),
-    currentPage: getExpertsCurrentPageState(state),
+    // currentPage: getExpertsCurrentPageState(state),
     expertsLoading: getExpertsLoadingState(state),
   }
 }

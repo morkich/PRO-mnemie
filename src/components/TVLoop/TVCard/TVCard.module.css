@@ -1,0 +1,46 @@
+.wrap a {
+ text-decoration: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 7px;
+}
+
+.img {
+  position: relative;
+  height: 205px;
+  border-radius: 2px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img img {
+  width: 100%;  
+  height: 100%;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.play {
+  position: absolute;  
+}
+
+.information {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 5px;  
+}
+
+.datetime {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 13px;
+  color: #0E2A42;
+  font-weight: normal;
+}

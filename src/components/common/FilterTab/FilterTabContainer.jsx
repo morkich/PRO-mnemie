@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setFilterItemsThunk, setFilterQueryThunk } from '../../../redux/filters-reducer';
-import { getfiltersItems, getfilterTabQuery, getLoading } from '../../../redux/filters-selectors';
+import { getfiltersItems, getfilterTabQuery, getFilterLoading } from '../../../redux/filters-selectors';
 import FilterTab from './FilterTab';
 
 const FilterTabContainer = (props) => {
@@ -15,6 +15,8 @@ const FilterTabContainer = (props) => {
   }, [parentCat, cats, setFilterItemsThunk])
 
   const changeFilter = (event) => {
+    console.log(event.target.dataset.catid);
+    console.log(cats);
     props.setFilterQueryThunk(event.target.dataset.catid, cats);    
   }
 
@@ -24,7 +26,7 @@ const FilterTabContainer = (props) => {
       filterQuery={props.filterQuery}
       onClick={changeFilter}
       parentCat={props.parentCat}
-      loading={props.loading}
+      filterLoading={props.filterLoading}
       catName={props.catName}
     />  
   )
@@ -34,7 +36,7 @@ let mapStateToProps = (state) => {
   return {    
     filterItems: getfiltersItems(state),
     filterQuery: getfilterTabQuery(state),
-    loading:     getLoading(state)
+    filterLoading: getFilterLoading(state)
   }
 }
 

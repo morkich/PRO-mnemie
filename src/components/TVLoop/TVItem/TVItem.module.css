@@ -1,0 +1,91 @@
+.main {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+  align-content: start;
+}
+
+.infoLine {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10px, auto));
+  grid-gap: 80px;
+  justify-content: start;
+}
+
+.infoBlock {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10px, auto));
+  justify-content: start;
+  grid-gap: 40px;
+  color: #7C9BA9;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.dataBlocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10px, auto));
+  align-items: center;
+  grid-gap: 30px;
+  color: #0E2A42;
+  font-weight: 500;
+} 
+
+.dataBlocks button {
+  justify-self: end;
+}
+
+.dataBlock {
+  justify-self: start;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 13px;
+  width: 100%;
+  max-width: 780px;
+}
+
+.dataTitle {
+  font-size: 14px;  
+  line-height: 17px;
+}
+
+.dataString {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.contactBlocks {
+  width: 100%;
+  max-width: 550px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
+  color: #0E2A42;
+}
+
+.contactString {
+  grid-column: 1/-1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.contactBlock {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;  
+}
+
+.title:after {
+  content: ':';
+}
+
+.string {
+  font-size: 13px;
+  font-weight: normal;
+}

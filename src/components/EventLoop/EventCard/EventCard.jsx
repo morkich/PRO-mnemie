@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DateBlock from '../../common/DateBlock/DateBlock';
 import FavoritesContainer from '../../common/Favorites/FavoritesContainer';
 import style from './EventCard.module.css';
 
 const EventCard = (props) => {  
+
+  let [imageLoad, setImageLoad] = useState(false);
+
   return (
     <li className={style.wrap} key={props.id}>
       <FavoritesContainer expertId={props.id} darkTheme={true} type={'event'}/>
-      <div className={style.img}>
-        <img src={props.img} alt={props.title}/>
+      <div className={`${style.img} ${!imageLoad && style.preloader}`}>
+        <img src={props.img} alt={props.title} onLoad={() => setImageLoad(true)}/>
       </div>
-      <div className={style.information}>
+      <div className={style.information} style={props.button ? null : {padding: `20px 20px 30px 0`}}>
         <div className={style.date}>
           <DateBlock 
             type={{display: 'shortdate'}} 
@@ -25,7 +28,7 @@ const EventCard = (props) => {
           <span className="infoString">{props.city}</span>
         </div>
         <h2 className={style.title}>{props.title}</h2>
-        <Link className="button" to={`/event/${props.id}`}>Я пойду</Link>
+        {props.button && <Link className="button" to={`/event/${props.id}`}>Я пойду</Link>}        
       </div>
     </li>
   )

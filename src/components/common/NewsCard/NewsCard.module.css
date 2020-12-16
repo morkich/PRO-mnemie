@@ -2,7 +2,6 @@
   position: relative;
   height: 205px;
   border-radius: 2px;
-  overflow: hidden;
 }
 
 .wrap a:hover .description {
@@ -13,6 +12,14 @@
   display: none;
 }
 
+.wrap:hover .description {
+  background-color: rgba(14, 42, 66, 0.65);
+}
+
+.wrap:hover .dark_line {
+  display: none;
+}
+
 .img {
   position: absolute;
   top: 0;
@@ -20,7 +27,19 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 2px;
 }
+
+.navLink {
+  color: #fff;
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
 
 .description {
   position: absolute;
@@ -53,4 +72,35 @@
   line-height: 16px;
   font-weight: 600;
   margin-bottom: 15px;
+}
+
+.editWrap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px 0;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.editMenu {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  background-color: #fff;
+  padding: 17px 30px;
+  right: -20px;
+  box-shadow: 4px 4px 20px rgba(14, 76, 103, 0.25);
+  bottom: -40px;
+  z-index: 99;
+}
+
+.editMenu a {
+  font-size: 13px;
+  color: #7C9BA9;  
+  text-decoration: none;
 }

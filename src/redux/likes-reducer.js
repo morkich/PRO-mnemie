@@ -81,11 +81,16 @@ export const setLoading = (loading) => {
   }
 }
 
-export const getLikesDataThunk = (idPost) => { 
+export const getLikesDataThunk = (idPost, postType = 'posts') => { 
   return (dispatch) => {    
     dispatch(setLoading(true));
-    postAPI.getPostDataById(idPost).then(response => {
-        dispatch(setLikesData(JSON.parse(response.pro_likes)));
+    postAPI.getPostDataById(idPost, postType).then(response => {
+        console.log(response);
+        if(postType === 'tv_video'){
+          dispatch(setLikesData(response.pro_tv_video_like ? JSON.parse(response.pro_tv_video_like) : {}));
+        }else{
+          dispatch(setLikesData(response.pro_tv_video_like ? JSON.parse(response.pro_tv_video_like) : {}));
+        }        
         dispatch(setLoading(false));      
     })
   }
@@ -101,13 +106,22 @@ export const getLikesRenderingThunk = (userId, likesData) => {
   }
 }
 
-export const setLikesThunk = (postId, arrayLikes) => {
+export const setLikesThunk = (postId, arrayLikes, likesFieldName = 'posts') => {
   return(dispatch) => {
     dispatch(setLoading(true));
-    let data = { pro_likes: JSON.stringify(arrayLikes)}
-    postAPI.setLikesToPost(postId, data).then(response => {
+    
+    console.log(likesFieldName);
+    let data;
+    if(likesFieldName === 'tv_video') data = { pro_tv_video_like: JSON.stringify(arrayLikes)};
+    if(likesFieldName === 'posts') data = { pro_likes: JSON.stringify(arrayLikes)};
+    
+    console.log(data);
+    postAPI.setLikesToPost(postId, data, likesFieldName).then(response => {
       if(response.status === 200){
-        getLikesDataThunk(postId);
+        console.log(response);
+        getLikesDataThunk(postId, likesFieldName);
+        dispatch(setLoading(false));
+      }else{
         dispatch(setLoading(false));
       }
     })

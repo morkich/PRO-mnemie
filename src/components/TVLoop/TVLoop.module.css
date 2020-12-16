@@ -1,0 +1,6 @@
+.gridfour {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+  grid-gap: 20px;  
+  min-height: 500px;
+}

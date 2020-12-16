@@ -6,7 +6,7 @@ import { setType, setVision } from '../../../redux/modal-reducer';
 
 const ModalContainer = (props) => {
 
-  let type =props.type,
+  let type = props.type,
   setType = props.setType;
 
   useEffect(() => {
@@ -23,10 +23,17 @@ const ModalContainer = (props) => {
   return (
     <Modal 
       type={props.modalType}
+      clean={props.clean}
       vision={props.modalVision}
       modalLoading={props.modalLoading}
       modalOpen={modalVision}
       modalClose={modalClose}
+      buttonText={props.buttonText}
+      link={props.link}
+      string={props.string}
+      deleteId={props.deleteId}
+      deleteName={props.deleteName}
+      userId={props.userId}
     />
   )
 }

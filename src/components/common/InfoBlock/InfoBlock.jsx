@@ -13,9 +13,6 @@ const InfoBlock = (props) => {
     iconComments = <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M0.864746 0.565307C0.864746 0.289165 1.0886 0.0653076 1.36475 0.0653076H12.4154C12.6915 0.0653076 12.9154 0.289165 12.9154 0.565308V7.06515C12.9154 7.34129 12.6915 7.56515 12.4154 7.56515H5.3813L2.36906 9.06536L2.36906 7.56515H1.36475C1.0886 7.56515 0.864746 7.34129 0.864746 7.06515V0.565307ZM2.37021 1.56604H11.4082V2.31602H2.37021V1.56604ZM11.4081 3.06458H2.37012V3.81456H11.4081V3.06458ZM2.37012 5.31469H8.39543V4.56471H2.37012V5.31469Z" fill={colorTheme}/></svg>;    
   }
 
-
-
-
   return (
     <div className={style.info_block}>
       <div className={style.info_block_box}>

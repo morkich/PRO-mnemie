@@ -11,7 +11,7 @@ let initialState = {
   experts: [],
   pageSize: 9,
   loadingExperts: true,
-  uniqCities : ['Москва', 'Санкт-Петербург']
+  uniqCities : ['Москва', 'Санкт-Петербург'],
 }
 
 const expertsReducer = (state = initialState, action) => {
@@ -25,11 +25,6 @@ const expertsReducer = (state = initialState, action) => {
       return {
         ...state,
         experts: [...state.experts, ...action.experts]
-      };
-    case CURRENT_PAGE:
-      return {
-        ...state,
-        currentPage: action.currentPage
       };
     case TOTAL_PAGES:
       return {
@@ -65,13 +60,6 @@ export const setNewPage = (experts) => {
   }
 }
 
-export const setCurrentPage = (currentPage) => {
-  return {
-    type: CURRENT_PAGE,
-    currentPage
-  }
-}
-
 export const setTotalPageCount = (totalPages) => {
   return {
     type: TOTAL_PAGES,
@@ -99,7 +87,6 @@ export const getExpertsThunkCreator = (currentPage, pageSize) => {
     usersAPI.getExperts(currentPage, pageSize).then(response => {
       dispatch(toggleisLoading(false))
       dispatch(setExperts(response.data))
-      dispatch(setCurrentPage(currentPage))
       dispatch(setTotalPageCount(response.headers['x-wp-totalpages'])) 
     });
   }
@@ -109,6 +96,7 @@ export const infinityPostLoadThunk = (currentPage, pageSize) => {
   return (dispatch) => {   
     dispatch(toggleisLoading(true));
     usersAPI.getExperts(currentPage, pageSize).then(response => {
+      console.log(response);
       if(+response.headers['x-wp-totalpages'] >= currentPage) {      
         dispatch(setNewPage(response.data))
       }     

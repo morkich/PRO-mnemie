@@ -1,0 +1,21 @@
+.donateExperts {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 55px;
+}
+
+.span {
+ color: #011B2F;
+ font-size: 16px;
+ max-width: 680px;
+}
+
+.expertList {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(333px, 333px));
+  grid-gap: 50px;
+  justify-content: space-between;
+  min-height: 300px;
+}

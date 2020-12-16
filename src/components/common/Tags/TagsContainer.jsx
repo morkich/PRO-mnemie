@@ -5,12 +5,13 @@ import { getTagsData, getTagsLoading } from '../../../redux/tags-selectors';
 import Tags from './Tags';
 
 const TagsContainer = (props) => {
-
+  console.log(props);
   let tagsList = props.tagsList,
-  getTagsDataThunk = props.getTagsDataThunk;
+  getTagsDataThunk = props.getTagsDataThunk,
+  tagType = props.tagType;
   
   useEffect(() => {
-   tagsList && getTagsDataThunk(tagsList);
+   tagsList && getTagsDataThunk(tagsList, tagType);
   }, [tagsList, getTagsDataThunk])
 
   return (

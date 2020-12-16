@@ -1,16 +1,17 @@
 import { catAPI } from "../api/api";
 import { getEventsDataFilterThunk} from "./eventLoop-reducer";
 import { getPostsThunk } from "./postLoop-reducer";
+import { getTVLoopItemsByCatIdThunk } from "./tvLoop-reducer";
 
 const FILTER_TAB_QUERY = 'FILTER_TAB_QUERY';
 const SET_FILTER_ITEMS = 'SET_FILTER_ITEMS';
-const SET_LOADING = 'SET_LOADING';
+const SET_FILTER_LOADING = 'SET_FILTER_LOADING';
 
 let initialState = {
   filterType: 'default',
   filterTabQuery: 'all',
   filterItems: [], 
-  loadingFilter: true
+  filterLoading: true
 }
 
 const filtersReducer = (state = initialState, action) => {
@@ -25,10 +26,10 @@ const filtersReducer = (state = initialState, action) => {
         ...state,
         filterTabQuery: action.filterQuery
       }
-    case SET_LOADING:
+    case SET_FILTER_LOADING:
       return {
         ...state,
-        loadingFilter: action.loading
+        filterLoading: action.filterLoading
       };
     default:
       return state;
@@ -49,18 +50,19 @@ export const setFilterQuery = (filterQuery) => {
   }
 }
 
-export const setLoading = (loading) => {
+export const setFilterLoading = (filterLoading) => {
   return {
-    type: SET_LOADING,
-    loading    
+    type: SET_FILTER_LOADING,
+    filterLoading    
   }
 }
 
 export const setFilterItemsThunk = (catId, catName = 'categories') => {
   return (dispatch) => {
+    dispatch(setFilterLoading(true));  
     catAPI.getCat(catId, true, catName).then(response => {
       dispatch(setFilterItems(response));      
-      dispatch(setLoading(false));            
+      dispatch(setFilterLoading(false));            
     })
   }  
 }
@@ -72,8 +74,10 @@ export const setFilterQueryThunk = (query, cats) => {
       dispatch(getPostsThunk(query));  
     }
     if(cats === 'events_cat'){
-      console.log(cats);
       dispatch(getEventsDataFilterThunk(query, cats, 'events'));
+    }
+    if(cats === 'tv_video_cat'){
+      dispatch(getTVLoopItemsByCatIdThunk(query, cats, 'tv_video'));
     }
   }
 }

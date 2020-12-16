@@ -1,8 +1,7 @@
 import { postAPI } from "../api/api";
 
-const SET_LOADING = 'SET_LOADING';
-const SET_ITEMS = 'SET_ITEMS';
-const SET_NUMBER = 'SET_NUMBER';
+const SET_LOADING_UP_EVENT = 'SET_LOADING_UP_EVENT';
+const SET_ITEMS_UP_EVENT = 'SET_ITEMS_UP_EVENT';
 
 let initialState = {  
   itemsUpEvents: [],
@@ -11,17 +10,12 @@ let initialState = {
 
 const upComingEventsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_NUMBER:
-      return {
-        ...state,
-        numberUpEvents: action.number
-      }
-    case SET_ITEMS:
+    case SET_ITEMS_UP_EVENT:
       return {
         ...state,
         itemsUpEvents: action.asideItems
       }      
-    case SET_LOADING:
+    case SET_LOADING_UP_EVENT:
       return {
         ...state,
         loadingUpEvents: action.loading
@@ -31,35 +25,28 @@ const upComingEventsReducer = (state = initialState, action) => {
   }
 }
 
-export const setNumber = (number) => {
-  return {
-    type: SET_NUMBER,
-    number
-  }
-}
-
 export const setItemsUpEvents = (asideItems) => {
   return {
-    type: SET_ITEMS,
+    type: SET_ITEMS_UP_EVENT,
     asideItems
   }
 }
 
-export const setLoading = (loading) => {
+export const setLoadingUpEvent = (loading) => {
   return {
-    type: SET_LOADING,
+    type: SET_LOADING_UP_EVENT,
     loading
   }
 }
 
 export const getUpComingEventsThunk = (number, postType) => {
   return (dispatch) => {
-    dispatch(setLoading(true));
+    dispatch(setLoadingUpEvent(true));
     console.log(number);
     postAPI.getPostNumberOrder(number, postType).then(response => {
-      
+      console.log(response);
       dispatch(setItemsUpEvents(response));
-      dispatch(setLoading(false));      
+      dispatch(setLoadingUpEvent(false));      
     }
     ) 
   }

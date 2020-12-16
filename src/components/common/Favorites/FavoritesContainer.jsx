@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addFavoriteExpert, removeFavoriteExpert } from '../../../redux/auth-reducer';
-import { getFavoritesEvents, getFavoritesExperts, getFavoritesExpertsButtonProgress, getLoggetIn } from '../../../redux/auth-selectors';
+import { getFavoritesEvents, getFavoritesExperts, getFavoritesExpertsButtonProgress, getFavoritesVideos, getLoggetIn } from '../../../redux/auth-selectors';
 import { toggleFavoriteProgress, favoriteThunkCreator } from '../../../redux/favorive-reducer';
 import Favorites from './Favorites';
 
@@ -10,6 +10,7 @@ const FavoritesContainer = (props) => {
 
   let favoritesIds = props.favoriteExpertsState,
       favoriteEventsState = props.favoriteEventsState,
+      favoriteVideosState = props.favoriteVideosState,
       expertId = props.expertId,
       toggleFavoriteProgress = props.toggleFavoriteProgress,
       addFavoriteExpert = props.addFavoriteExpert,
@@ -17,12 +18,16 @@ const FavoritesContainer = (props) => {
       type = props.type;
 
   if(props.type === 'event') favoritesIds = favoriteEventsState;
+  if(props.type === 'tv_video') favoritesIds = favoriteVideosState;
 
   useEffect(() => {
     expertId && toggleFavoriteProgress(true, expertId);
     let favorites = favoritesIds.some(id => id === +expertId);    
     if(type === 'event') {
       favorites = favoriteEventsState.some(id => id === +expertId);
+    }
+    if(type === 'tv_video') {
+      favorites = favoriteVideosState.some(id => id === +expertId);
     }
     favorites ? addFavoriteExpert() : removeFavoriteExpert();
     toggleFavoriteProgress(false, expertId);
@@ -52,6 +57,7 @@ let mapStateToProps = (state) => {
   return {
     favoriteExpertsState: getFavoritesExperts(state),
     favoriteEventsState: getFavoritesEvents(state),
+    favoriteVideosState: getFavoritesVideos(state),
     favoriteExpertsButtonProgress: getFavoritesExpertsButtonProgress(state),
     loggetIn: getLoggetIn(state)
   }

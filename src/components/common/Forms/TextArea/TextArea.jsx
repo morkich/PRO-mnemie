@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '../Forms.module.css';
 
 const TextArea = (props) => { 
+
   const [textAreaHeight, setTextAreaHeight] = useState(200);
-  const updateTextArea = (e) => setTextAreaHeight(e.target.scrollHeight);
+  const updateTextArea = (event) => setTextAreaHeight(event.target.scrollHeight);
   const hasError = props.meta.touched && props.meta.error;
 
   return (
@@ -11,15 +12,16 @@ const TextArea = (props) => {
       <textarea
         {...props.input}
         onFocus={updateTextArea}
-        onChange={(e) => {
-          props.input.onChange(e);
-          updateTextArea(e);
+        onChange={(event) => {
+          console.log(props.input.value);
+          props.input.onChange(event);          
+          updateTextArea(event);
         }}
         name={props.input.name}
         placeholder={props.placeholder}
         style={{ height: textAreaHeight }}
         className={style.textarea}
-      />
+      ></textarea>
       {hasError && <span>{props.meta.error}</span>}
     </div>
   )

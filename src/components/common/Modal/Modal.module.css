@@ -36,3 +36,43 @@
 .close:hover {
   transform: rotate(90deg);
 }
+
+.link {
+  color: #237FC2;
+  font-size: 13px;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  font-weight: normal;
+  padding: 0 10px;
+  min-width: auto;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: #237FC2;
+  font-size: 13px;
+  background-color: transparent;
+  border: none;  
+  font-weight: normal;
+}
+
+.string {
+  text-decoration: none;
+  color: #7C9BA9;
+  font-size: 12px;
+  background-color: transparent;
+  border: none;
+  font-weight: normal;
+  padding: 0;
+  min-width: auto;
+}
+
+.string:hover {
+  text-decoration: none;
+  color: #7C9BA9;
+  font-size: 12px;
+  background-color: transparent;
+  border: none;  
+  font-weight: normal;
+}

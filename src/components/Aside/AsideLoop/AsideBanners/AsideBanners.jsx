@@ -1,15 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Preloader from '../../../common/Preloader/Preloader';
 import style from '../../Aside.module.css';
-import banner from '../../../../assets/img/banners/asideBanner.jpg';
 
-
-const AsideBanners = (props) => {
-  const link = props.link ? props.link : `/event/${props.id}`;
+const AsideBanners = (props) => {    
+  let itemsPack = props.asideBannerItems.map((item, i) => {
+    return (
+      <Link key={i} to={item.pro_banner_link}>
+        {props.asideLoading ? <Preloader /> : null} 
+        <img src={item.pro_banner_img} alt=""/>
+      </Link>
+    )
+  })
   return (
-    <Link key={props.id} to={link}>
-      <img src={banner} alt=""/>
-    </Link>
+    <aside>    
+      <div className={style.wrap}>          
+        {itemsPack}
+      </div>
+    </aside>
   )
 }
 
