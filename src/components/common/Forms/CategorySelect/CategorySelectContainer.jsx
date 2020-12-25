@@ -7,6 +7,8 @@ import CategorySelect from './CategorySelect';
 
 const CategorySelectContainer = (props) => {
 
+  console.log(props);
+
   let getAllCategorySelectThunk = props.getAllCategorySelectThunk,
   allCategorySelect = props.allCategorySelect;
 

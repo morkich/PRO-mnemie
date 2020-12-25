@@ -6,6 +6,7 @@ import FavoritesContainer from '../../common/Favorites/FavoritesContainer';
 
 
 const ExpertCard = (props) => {
+
   return (
     <li key={props.key}>
       <div key={props.expertId} className={style.expert}>

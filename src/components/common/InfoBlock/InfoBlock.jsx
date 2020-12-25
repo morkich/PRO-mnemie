@@ -2,6 +2,7 @@ import React from 'react';
 import style from './InfoBlock.module.css';
 
 const InfoBlock = (props) => {
+
   const colorTheme = props.darkTheme ? 'rgba(124, 155, 169, 1)' : 'white';  
   let iconViews;
   let iconComments;
@@ -17,7 +18,7 @@ const InfoBlock = (props) => {
     <div className={style.info_block}>
       <div className={style.info_block_box}>
         {iconViews}
-        <div style={{ color: colorTheme }} className={style.views}>{props.views}</div>
+        <div style={{ color: colorTheme }} className={style.views}>{props.views ? props.views : 0}</div>
       </div>
       
       <div className={style.info_block_box}>

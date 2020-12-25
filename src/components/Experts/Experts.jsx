@@ -8,6 +8,7 @@ import AsideLoopContainer from '../Aside/AsideLoop/AsideLoopContainer';
 import ExpertCard from './ExpertCard/ExpertCard';
 
 const Experts = (props) => {
+  console.log(props);
   const infLoad = useRef();
   let infinityLoading = props.infinityLoading;
 
@@ -51,7 +52,7 @@ const Experts = (props) => {
                     pro_position={expert.pro_position}
                     pro_workplace={expert.pro_workplace}
                     pro_city={expert.pro_city}
-                    pro_articles={expert.pro_articles}
+                    pro_articles={expert.articles_count}
                     pro_raiting={expert.pro_raiting}
                     name={expert.name}
                   />
@@ -62,7 +63,9 @@ const Experts = (props) => {
           </ul>
           <div ref={infLoad} className={style.infLoad}></div>         
         </main>
-        <AsideLoopContainer type={'tv'} title={'TV PRO Мнение'}/>
+        <div className={style.aside}>
+          <AsideLoopContainer asideType={'tv_video'} title={'TV PRO Мнение'}/>
+        </div>        
       </div>
     </section>
   )

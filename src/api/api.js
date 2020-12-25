@@ -1,12 +1,13 @@
 import * as axios from 'axios';
 
+let domen = window.location.origin;
 const auth = axios.create({
-  baseURL: 'http://proview.loc/wp-json/',
+  baseURL: `${domen}/wp-json/`,
   headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
 });
 
 const noAuth = axios.create({
-  baseURL: 'http://proview.loc/wp-json/',
+  baseURL: `${domen}/wp-json/`,
 });
 
 export const itemAPI = {
@@ -26,14 +27,18 @@ export const itemAPI = {
     return noAuth.get(`wp/v2/${item}?author=${authorId}&per_page=11`)
     .then(response => response.data);
   },
+  getItemByAuthorUnlimited(item, authorId) {
+    return noAuth.get(`wp/v2/${item}?author=${authorId}&per_page=100`)
+    .then(response => response.data);
+  },
   postNewImage(token, image, filename, filetype = 'jpg') {
     const authPostFile = axios.create({
-      baseURL: 'http://proview.loc/wp-json/',
+      baseURL: `${domen}/wp-json/`,
       headers: { 
         'Authorization': `Bearer ${token}`,
-        'data-binary': `@/home/web/${filename}.jpg`, 
+        'data-binary': `@/home/web/${filename}`, 
         'content-disposition': `attachment; filename=${filename}`,
-        'Content-Type': `image/${filetype}`
+        'Content-Type': filetype
       },
     });
     return authPostFile.post(`wp/v2/media`, image)    
@@ -133,6 +138,10 @@ export const postAPI = {
     return noAuth.get(`wp/v2/${posts}/${id}`)
     .then(response => response.data);
   },
+  getPopularPostForTimes(times = 'mounth'){
+    return noAuth.get(`wp/v2/post_likes/${times}`)
+    .then(response => response.data);
+  },  
   setLikesToPost(id, data, postType = 'posts') {
     return auth.post(`wp/v2/${postType}/${id}`, data)
   },
@@ -153,7 +162,7 @@ export const mediaAPI = {
 
 export const catAPI = {
   getAllCat(catName = 'categories') {
-    return noAuth.get(`wp/v2/${catName}`)
+    return noAuth.get(`wp/v2/${catName}?per_page=100&exclude=35,16,30,25`)
     .then(response => response.data);
   },
   getCat(id, parent = false, catName = 'categories') {
@@ -169,15 +178,15 @@ export const catAPI = {
 
 export const tagAPI = {
   getTags(ids, tagType = 'tags') {
-    return noAuth.get(`wp/v2/${tagType}?include=${ids}`)
+    return noAuth.get(`wp/v2/${tagType}?include=${ids}&per_page=100`)
     .then(response => response.data);  
   },
-  getAllTags() {
-    return noAuth.get(`wp/v2/tags`)
+  getAllTags(tagsType = 'tags') {
+    return noAuth.get(`wp/v2/${tagsType}?per_page=100`)
     .then(response => response.data);  
   },
-  postNewTag(data) {
-    return auth.post(`wp/v2/tags`, data)
+  postNewTag(data, tagsType = 'tags') {
+    return auth.post(`wp/v2/${tagsType}`, data)
     .then(response => response.data);  
   }
 }
@@ -221,6 +230,20 @@ export const pagesAPI ={
   },
   getPageById(id) {
     return noAuth.get(`wp/v2/pages/${id}`)
+    .then(response => response.data);
+  }
+}
+
+export const searchAPI = {
+  getSearchRequest(query) {
+    return noAuth.get(`wp/v2/global_search/${query}`)
+    .then(response => response.data);
+  }
+}
+
+export const viewAPI = {
+  setPostLike(postId, fieldName = 'pro_views') {
+    return noAuth.get(`wp/v2/view/${postId}/${fieldName}`)
     .then(response => response.data);
   }
 }

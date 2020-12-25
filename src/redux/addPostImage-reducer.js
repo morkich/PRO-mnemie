@@ -1,5 +1,6 @@
 import { authAPI, itemAPI } from "../api/api";
 import { setAddPostImage, setAddPostImageId } from "./addNewPost-reducer";
+import { setAddVideoImage, setAddVideoImageId } from "./addNewVideo-reducer";
 
 const SET_POST_IMAGE_URL = 'SET_POST_IMAGE_URL';
 const SET_POST_IMAGE_TYPE = 'SET_POST_IMAGE_TYPE';
@@ -54,15 +55,22 @@ export const setPostImageLoading = (postImageLoading) => {
   }
 }
 
-export const postImagePostThunk = (token, image, filename, filetype) => {
+export const postImagePostThunk = (image, filename, postType = 'posts') => {
   return (dispatch) => {
     dispatch(setPostImageLoading(true));
     authAPI.getAuthToken().then(response => {
       return response;
     }).then(authToken => {
-      itemAPI.postNewImage(authToken, image, filename, filetype).then(response => {
-        dispatch(setAddPostImage(response.data.source_url));
-        dispatch(setAddPostImageId(response.data.id));        
+      itemAPI.postNewImage(authToken, image, filename).then(response => {
+        if(postType === 'posts') {
+          dispatch(setAddPostImage(response.data.source_url));
+          dispatch(setAddPostImageId(response.data.id));                          
+        }
+        if(postType === 'tv_video') {
+          dispatch(setAddVideoImage(response.data.source_url));
+          dispatch(setAddVideoImageId(response.data.id));  
+          dispatch(setPostImageUrl(response.data.source_url));  
+        }        
         dispatch(setPostImageLoading(false));
       })
     })    

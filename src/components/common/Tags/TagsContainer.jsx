@@ -5,7 +5,7 @@ import { getTagsData, getTagsLoading } from '../../../redux/tags-selectors';
 import Tags from './Tags';
 
 const TagsContainer = (props) => {
-  console.log(props);
+
   let tagsList = props.tagsList,
   getTagsDataThunk = props.getTagsDataThunk,
   tagType = props.tagType;

@@ -7,7 +7,9 @@ import style from './NewsCard.module.css';
 
 const NewsCard = (props) => {  
 
-  let categorys = props.category.map( cat => `${cat} `);
+  let [imageLoad, setImageLoad] = useState(false);
+
+  let categorys = props.category ? props.category.map( cat => `${cat} `): null;
   let [editMode, setEditModeState] = useState(false);
 
   let showEditMenu = () => {
@@ -32,13 +34,15 @@ const NewsCard = (props) => {
   let notEditCard = (
     <li className={style.wrap} key={props.id}>
       <NavLink to={`/post/${props.id}`}>
-        <img src={props.image} alt="" className={style.img}/>
+        <div className={`${style.img} ${!imageLoad && style.preloader}`}>
+          <img src={props.image} alt="" className={style.img} onLoad={() => setImageLoad(true)}/>
+        </div>
         <div className={style.description}>
           <div className={style.dark_line}></div>
           <span className={style.light_text}>{categorys}</span>
-          <h2 className={style.title}>{props.title.rendered}</h2>
+          <h2 className={style.title}>{props.cleanTitle ? props.cleanTitle: props.title.rendered}</h2>
           <InfoBlock 
-            views={props.views}
+            views={props.views ? props.views : 0}
             comment={props.comment} 
           />
         </div>
@@ -62,7 +66,7 @@ const NewsCard = (props) => {
           </div>
         <span className={style.light_text}>{categorys}</span>
         <NavLink className={style.link} to={`/post/${props.id}`}>
-          <h2 className={style.title}>{props.title.rendered}</h2>
+          <h2 className={style.title}>{props.cleanTitle ? props.cleanTitle: props.title.rendered}</h2>
         </NavLink>   
         <InfoBlock 
           views={props.views}

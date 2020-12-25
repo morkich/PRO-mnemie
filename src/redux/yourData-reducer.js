@@ -40,9 +40,10 @@ export const setYourDataLoading = (dataLoading) => {
   }
 }
 
-export const getYourDataThunk = (type, userId) => {
+export const getYourDataThunk = (type, userId, itemType) => {
   return (dispatch) => {
     dispatch(setYourDataLoading(true));
+    console.log(userId);
     itemAPI.getItemByAuthor(type, userId).then(response => {
       dispatch(setYourDataItems(response));
       dispatch(setYourDataLoading(false));      

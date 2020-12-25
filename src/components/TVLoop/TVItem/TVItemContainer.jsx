@@ -8,7 +8,6 @@ import TVItem from './TVItem';
 import { getUserId } from '../../../redux/auth-selectors';
 
 const TVItemContainer = (props) => {
-  console.log(props);
 
   let itemId = props.match.params.videoId,
   getTVItemDataThunk = props.getTVItemDataThunk;
@@ -29,8 +28,8 @@ const TVItemContainer = (props) => {
 let mapStateToProps = (state) => {
   return {
     tvItem: getTVItemState(state),
-    loadingTVItem: getTVItemLoadingState(state),
     userId: getUserId(state),
+    loadingTVItem: getTVItemLoadingState(state),
   }
 }
 

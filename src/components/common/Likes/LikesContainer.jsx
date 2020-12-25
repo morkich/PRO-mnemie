@@ -18,7 +18,6 @@ const LikesContainer = (props) => {
   }, [postId, getLikesDataThunk]);
 
   useEffect(() => {
-    console.log(likesData);
     userId && getLikesRenderingThunk(userId, likesData);
   }, [likesData, userId, getLikesRenderingThunk]);
  

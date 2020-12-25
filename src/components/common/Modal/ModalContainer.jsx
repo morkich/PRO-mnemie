@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Modal from './Modal';
 import {getModalLoadingState, getModalVisionState, getModalTypeState} from '../../../redux/modal-selectors';
 import { setType, setVision } from '../../../redux/modal-reducer';
 
 const ModalContainer = (props) => {
+
+  props.open && props.setVision(true);
 
   let type = props.type,
   setType = props.setType;
@@ -33,6 +35,7 @@ const ModalContainer = (props) => {
       string={props.string}
       deleteId={props.deleteId}
       deleteName={props.deleteName}
+      itemType={props.itemType}
       userId={props.userId}
     />
   )

@@ -1,5 +1,4 @@
-import { itemAPI } from "../api/api";
-
+import { itemAPI, viewAPI } from "../api/api";
 
 const SET_TV_ITEM = 'SET_TV_ITEM';
 const SET_TV_ITEM_LOADING = 'SET_TV_ITEM_LOADING';
@@ -45,7 +44,13 @@ export const getTVItemDataThunk = (tvItemId) => {
     dispatch(setTVItemLoading(true));
     itemAPI.getItemById('tv_video', tvItemId).then(response => {
       dispatch(setTVItem(response[0]));
-      dispatch(setTVItemLoading(false));
+      
+      return tvItemId;
+    }).then(tvItemId => {
+      viewAPI.setPostLike(tvItemId, 'pro_tv_view').then(response => {
+        console.log(response);
+        dispatch(setTVItemLoading(false));
+      })
     })
   }
 }

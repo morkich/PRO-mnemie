@@ -8,6 +8,7 @@ const SET_ADD_POST_IMAGE_ID = 'SET_ADD_POST_IMAGE_ID';
 const SET_ADD_POST_CONTENT = 'SET_ADD_POST_CONTENT';
 const SET_ADD_POST_TAGS = 'SET_ADD_POST_TAGS';
 const SET_ADD_TAG_TO_POST_TAGS = 'SET_ADD_TAG_TO_POST_TAGS';
+const SET_ADDED_POST = 'SET_ADDED_POST';
 const SET_ADD_POST_LOADING = 'SET_ADD_POST_LOADING';
 
 let initialState = {
@@ -18,6 +19,7 @@ let initialState = {
   addPostImageId: '',
   addPostContent: '',
   addPostTags: '',
+  postAdded: false,
   addPostLoading: false
 }
 
@@ -41,7 +43,7 @@ const addPostReducer = (state = initialState, action) => {
     case SET_ADD_POST_IMAGE_URL:
       return {
         ...state,
-        addPostImage: action.addPostImage
+        addPostImage: action.addPostImageUrl
       }  
     case SET_ADD_POST_IMAGE_ID:
       return {
@@ -62,6 +64,11 @@ const addPostReducer = (state = initialState, action) => {
       return {
         ...state,
         addPostTags: Array.from(new Set([...state.addPostTags, action.tagToPostTag]))  
+      }       
+    case SET_ADDED_POST:
+      return {
+        ...state,
+        postAdded: action.postAdded  
       }       
     case SET_ADD_POST_LOADING:
       return {
@@ -94,10 +101,11 @@ export const setAddPostCategoryName = (addPostCategoryName) => {
   }
 }
 
-export const setAddPostImage = (addPostImage) => {
+export const setAddPostImage = (addPostImageUrl) => {
+  console.log(addPostImageUrl);
   return {
     type: SET_ADD_POST_IMAGE_URL,
-    addPostImage
+    addPostImageUrl
   }
 }
 
@@ -126,6 +134,13 @@ export const setAddTagToPostTags = (tagToPostTag) => {
   return {
     type: SET_ADD_TAG_TO_POST_TAGS,
     tagToPostTag
+  }
+}
+
+export const setAddedPost = (postAdded) => {
+  return {
+    type: SET_ADDED_POST,
+    postAdded
   }
 }
 
@@ -168,13 +183,24 @@ export const postNewPostThunk = (data, imageId, tagsIds = 0, postCat, postId) =>
 
     if(postId){
       postAPI.postUpdatePost(postData, postId).then(response => {
+        if(response.status === 201) {
+          dispatch(setAddedPost(true))
+        }else{
+          dispatch(setAddedPost(false))
+        }
         dispatch(setAddPostLoading(false));
       })
     }else{
       postAPI.postNewPost(postData).then(response => {
+        if(response.status === 201) {
+          dispatch(setAddedPost(true))
+        }else{
+          dispatch(setAddedPost(false))
+        }
         dispatch(setAddPostLoading(false));
       })
-    }    
+    }   
+
   }
 }
 

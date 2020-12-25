@@ -4,12 +4,12 @@ import style from '../Aside.module.css';
 import AsideBanners from './AsideBanners/AsideBanners';
 import AsideEventItem from './AsideEventItem/AsideEventItem';
 import AsideVacancyItem from './AsideVacancyItem/AsideVacancyItem';
-import Preloader from '../../common/Preloader/Preloader';
+import AsideTVItem from './AsideTVItem/AsideTVItem';
 
 const AsideLoop = (props) => {
-  console.log(props);
+
   let itemsPack = Object.keys(props.items).map(item => {
-    if(props.type === 'events'){
+    if(props.asideType === 'events'){
       return (
         <AsideEventItem 
           key={props.items[item].id}
@@ -21,7 +21,7 @@ const AsideLoop = (props) => {
         />     
       )
     }
-    if(props.type === 'vacancies'){
+    if(props.asideType === 'vacancies'){
       return (
         <AsideVacancyItem 
           key={props.items[item].id}
@@ -35,7 +35,7 @@ const AsideLoop = (props) => {
         />        
       )
     }
-    if(props.type === 'courses'){
+    if(props.asideType === 'courses'){
       return (
         <AsideEventItem 
           key={props.items[item].id}
@@ -47,7 +47,22 @@ const AsideLoop = (props) => {
         />        
       )
     }
-    if(props.type === 'banners'){
+    if(props.asideType === 'tv_video'){
+      return (
+        <AsideTVItem
+          key={props.items[item].id}
+          id={props.items[item].id}
+          image={props.items[item].img_url}
+          date={props.items[item].date}          
+          title={props.items[item].title && props.items[item].title.rendered}
+          comment={props.items[item].comments_count ? props.items[item].comments_count: 0}
+          name={props.items[item].author_name}        
+          views={props.items[item].views_count ? props.items[item].views_count: 0}  
+          asideLoading={props.asideLoading}
+        />        
+      )
+    }
+    if(props.asideType === 'banners'){
       return (
         <AsideBanners 
           asideLoading={props.asideLoading}
@@ -58,7 +73,7 @@ const AsideLoop = (props) => {
   });
 
   return (
-      <aside>
+      <aside className={style.aside}>
         <Title title={props.title} uppercase={true} small={true} />
         <div className={style.wrap}> 
           {itemsPack}

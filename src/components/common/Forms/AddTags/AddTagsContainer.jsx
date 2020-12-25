@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setAddPostTags } from '../../../../redux/addNewPost-reducer';
+import { setAddVideoTags } from '../../../../redux/addNewVideo-reducer';
 import { getAllTagsThunk, postNewTagThunk, postOldTagThunk, removePostTagThunk, setAddTagsItems } from '../../../../redux/addTags-reducer';
 import { getAddTagsItemsState, getAddTagsLoadingState, getAllTagsItemsState, getInputsTagsReadyState } from '../../../../redux/addTags-selectors';
 import AddTags from './AddTags';
@@ -9,11 +10,13 @@ const AddTagsContainer = (props) => {
   let getAllTagsThunk = props.getAllTagsThunk,
   inputTagsIdReady = props.inputTagsIdReady,
   setAddPostTags = props.setAddPostTags,
-  startTags = props.startTags,
-  allTagsItems = props.allTagsItems;
+  setAddVideoTags = props.setAddVideoTags,
+  startTags = props.startTags ? props.startTags : [],
+  allTagsItems = props.allTagsItems,
+  tagsType = props.tagsType;
   
   useEffect(() => {
-    getAllTagsThunk();
+    getAllTagsThunk(tagsType);
   }, [getAllTagsThunk])
 
   useEffect(() => {
@@ -24,14 +27,21 @@ const AddTagsContainer = (props) => {
   }, [startTags, allTagsItems])
 
   useEffect(() => {
-    inputTagsIdReady && setAddPostTags(inputTagsIdReady);
-  }, [inputTagsIdReady, setAddPostTags])
+    if(tagsType === 'tv_video_tags') {
+      inputTagsIdReady && setAddVideoTags(inputTagsIdReady);
+    }else{
+      inputTagsIdReady && setAddPostTags(inputTagsIdReady);
+    }   
+    console.log(props.tagsType);
+    console.log(inputTagsIdReady);
+    
+  }, [inputTagsIdReady, setAddPostTags, setAddVideoTags, tagsType])
 
   const writeTag = (event) => {
     if(event.target.value.includes(',')){
       let tagName = event.target.value.replace(/[,]/g, '').toLowerCase();      
       let oldTag = props.allTagsItems.filter(tag => tag.name === tagName);
-      oldTag.length >= 1 ? props.postOldTagThunk(oldTag[0]): props.postNewTagThunk(tagName);
+      oldTag.length >= 1 ? props.postOldTagThunk(oldTag[0]): props.postNewTagThunk(tagName, tagsType);
       event.target.value = '';
     }
   }
@@ -62,5 +72,5 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default  connect(mapStateToProps, {getAllTagsThunk, postOldTagThunk, postNewTagThunk, setAddPostTags, removePostTagThunk, setAddTagsItems})
+export default  connect(mapStateToProps, {getAllTagsThunk, postOldTagThunk, postNewTagThunk, setAddPostTags, setAddVideoTags, removePostTagThunk, setAddTagsItems})
 (AddTagsContainer);

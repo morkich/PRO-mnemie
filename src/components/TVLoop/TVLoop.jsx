@@ -36,10 +36,10 @@ const TVLoop = (props) => {
                   title={post.title}  
                   category={post.category_name}        
                   image={post.img_url}
-                  views={post.view_count ? post.view_count: 0}
+                  views={post.pro_tv_view ? post.pro_tv_view: 0}
                   comment={post.comments_count ? post.comments_count: 0}
                   idCat={post.tv_video_cat}  
-                  author={post.author}                
+                  author={post.author_name}                
                 />   
               )
             )}

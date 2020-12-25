@@ -5,6 +5,7 @@
   grid-gap: 2rem;
   color: #0E2A42;
   transition: .2s;
+  max-width: 860px;
 }
 
 .wrap:hover {

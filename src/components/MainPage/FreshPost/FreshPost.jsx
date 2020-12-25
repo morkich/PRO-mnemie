@@ -3,7 +3,7 @@ import NewsCard from '../../common/NewsCard/NewsCard';
 import style from './FreshPost.module.css';
 
 const FreshPost = (props) => {
-
+  console.log(props);
   let freshPosts = props.itemsFresh.map(post => {
     return <NewsCard
         key={post.id}
@@ -11,7 +11,7 @@ const FreshPost = (props) => {
         category={post.category_name}            
         id={post.id}
         image={post.img_url}
-        views={post.view_count}
+        views={post.pro_views}
         comment={post.comments_count}
         idCat={props.parentCat}
       />   

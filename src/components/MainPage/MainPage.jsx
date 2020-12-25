@@ -1,6 +1,6 @@
 import React from 'react';
 import AsideBannersContainer from '../Aside/AsideLoop/AsideBanners/AsideBannersContainer';
-import AsideLoopContainer from '../Aside/AsideLoop/AsideLoopContainer';
+import AsideMainNewsContainer from '../Aside/AsideMainNews/AsideMainNewsContainer';
 import Title from '../common/Title/Title';
 import Watermark from '../common/Watermark/Watermark';
 import ExpertsDonateContainer from './ExpertsDonate/ExpertsDonateContainer';
@@ -27,7 +27,7 @@ const MainPage = (props) => {
               numberPost={9}          
             />
           </main>
-          <AsideLoopContainer asideType={'courses'}/>
+          <AsideMainNewsContainer/>
         </div>
       </section>
       <section className={`container ${style.upComing}`}>

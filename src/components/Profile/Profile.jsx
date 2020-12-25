@@ -2,6 +2,7 @@ import React from 'react';
 import style from './Profile.module.css';
 import FavoritesContainer from '../common/Favorites/FavoritesContainer';
 import Raiting from './Raiting/Raiting';
+import { Link } from 'react-router-dom';
 
 const Profile = (props) => {
   console.log(props);
@@ -42,8 +43,8 @@ const Profile = (props) => {
       </div>
 
       <div className={style.extra}>
-        {props.profile.pro_articles ? <button className={`${style.button} button`}>Статьи</button> : null}
-        {props.profile.pro_videos ? <button className={`${style.button} button`}>Видео</button> : null}
+        {props.profile.articles_count ? <Link to={`/profile_data/${props.profile.id}/posts`} className={`${style.button} button`}>Статьи</Link> : null}
+        {props.profile.tv_video_count ? <Link to={`/profile_data/${props.profile.id}/tv_video`} className={`${style.button} button`}>Видео</Link> : null}
         {props.profile.pro_resumes ? <button className={`${style.button} button`}>Резюме</button> : null}
       </div>
     </section>

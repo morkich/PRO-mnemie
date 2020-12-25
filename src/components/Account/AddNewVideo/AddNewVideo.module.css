@@ -1,0 +1,35 @@
+.wrap form {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 4rem;
+  justify-items: start;
+}
+
+.formGroup {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-gap: 25px;
+  width: 100%;
+}
+
+.label {
+  font-size: 1.3rem;
+  color: #7C9BA9;
+}
+/* .link {
+  font-size: 14px;
+  text-decoration: underline!important;
+  color: #145E94;
+  font-weight: normal;
+  transition: .2s;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.link:hover {
+  text-decoration: none!important;
+  color: #145E94  
+} */

@@ -4,6 +4,8 @@ import Select from 'react-select';
 
 const CategorySelect = (props) => {
 
+  console.log(props);
+
   const styles = {
     option: (provided, state) => ({
       ...provided,
@@ -33,7 +35,7 @@ const CategorySelect = (props) => {
       name={props.name}
       onChange={props.onChange}
       onKeyDown={props.keyDown}
-      defaultValue={props.defaultValue}
+      defaultValue={props.options[1]}
     />
   )
 }

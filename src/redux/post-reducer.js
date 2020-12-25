@@ -1,4 +1,4 @@
-import { postAPI } from "../api/api";
+import { postAPI, viewAPI } from "../api/api";
 
 const SET_POST_DATA = 'SET_POST_DATA';
 const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
@@ -32,7 +32,7 @@ const postReducer = (state = initialState, action) => {
     case SET_VIEW:
       return {
         ...state,
-        viewsPost: state.views += 1 
+        viewsPost: action.viewsPost
       };      
     default:
       return state;
@@ -53,20 +53,26 @@ export const setLoading = (loading) => {
   }
 }
 
-export const setView = (view) => {
+export const setView = (viewsPost) => {
   return {
     type: SET_VIEW,
-    view
+    viewsPost
   }
 }
 
 export const getPostDataThunk = (postId) => {
   return (dispatch) => { 
     dispatch(setLoading(true)); 
-    postAPI.getPostDataById(postId).then(response => {      
-      dispatch(setPostData(response));
-      dispatch(setLoading(false));
-    })    
+    postAPI.getPostDataById(postId).then(response => {          
+      dispatch(setView(response.pro_views))
+      dispatch(setPostData(response));      
+      return postId;
+    })
+    .then( postId => {
+      viewAPI.setPostLike(postId).then(response => {
+        dispatch(setLoading(false)); 
+      })
+    })   
   }
 }
 

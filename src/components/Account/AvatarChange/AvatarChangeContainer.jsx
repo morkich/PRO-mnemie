@@ -13,10 +13,11 @@ const AvatarChangeContainer = (props) => {
   postNewAvatarThunk = props.postNewAvatarThunk,
   userId = props.userId;
 
-  let avatarId = Math.round(1 + Math.random() * (9999 - 1));
+  let avatarId = Math.round(1 + Math.random() * (99999999 - 1));
 
   const changeAvatar = (event) => {
-    postNewAvatarThunk(localStorage.getItem('token'), event.target.files[0], `avatar_user_${avatarId}`, 'jpg', userId);
+    console.log(event.target.files);
+    postNewAvatarThunk(localStorage.getItem('token'), event.target.files[0], `avatar_user_${avatarId}_${event.target.files[0].name}`, event.target.files[0].type, userId);
   }
 
   useEffect(() => {

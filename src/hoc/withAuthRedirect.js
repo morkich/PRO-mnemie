@@ -11,7 +11,7 @@ let mapStateToPropsForRedirect = (state) => ({
 export const withAuthRedirect = (Component) => {
   class AuthRedirectComponents extends React.Component {    
     render() {
-      if (!this.props.loggetIn) return <ModalContainer clean={true} type={'auth'} noThrow to='/auth' />;
+      if (!this.props.loggetIn) return <ModalContainer clean={true} type={'auth'} open={true} noThrow to='/auth' />;
       return <Component {...this.props} />
     }
   } 

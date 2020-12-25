@@ -5,6 +5,7 @@ import closeImg from '../../../assets/img/close.svg';
 import LoginContainer from './Login/LoginContainer';
 import RegisterContainer from './Register/RegisterContainer';
 import DeleteContainer from './Delete/DeleteContainer';
+import VideoContainer from './Video.jsx/VideoContainer';
 
 const Modal = (props) => {
 
@@ -12,10 +13,11 @@ const Modal = (props) => {
     <div className={style.wrap}>
       <div className={style.content}>
         <Watermark />        
-          <button onClick={props.modalClose} className={style.close}><img src={closeImg} alt=""/></button>          
+          <a onClick={props.modalClose} className={style.close}><img src={closeImg} alt=""/></a>          
           {props.type === 'auth' && <LoginContainer />}              
           {props.type === 'register' && <RegisterContainer />}              
-          {props.type === 'delete' && <DeleteContainer deleteId={props.deleteId} deleteName={props.deleteName} userId={props.userId}/>}              
+          {props.type === 'delete' && <DeleteContainer deleteId={props.deleteId} deleteName={props.deleteName} userId={props.userId} itemType={props.itemType}/>}              
+          {props.type === 'addVideo' && <VideoContainer/>}              
       </div>
     </div>;
 

@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import AddNewPost from './AddNewPost';
-import {getAddPostCategoryNameState, getAddPostCategorysState, getAddPostContentState, getAddPostImageIdState, getAddPostImageState, getAddPostLoadingState, getAddPostTagsState, getAddPostTitleState} from '../../../redux/addNewPost-selectors'
+import {getAddPostCategoryNameState, getAddPostCategorysState, getAddPostContentState, getAddPostImageIdState, getAddPostImageState, getAddPostLoadingState, getAddPostTagsState, getAddPostTitleState, getPostAddedState} from '../../../redux/addNewPost-selectors'
 import { postNewPostThunk, setAddPostCategorys, getPostEditDataThunk, setAddPostTitle, setAddPostContent, setAddPostImage} from '../../../redux/addNewPost-reducer';
 
 const AddNewPostContainer = (props) => {
-
+  console.log(props);
   let itemId = props.match.params.itemsId,
   getPostEditDataThunk = props.getPostEditDataThunk,
   setAddPostTitle = props.setAddPostTitle,
-  setAddPostImage = props.setAddPostImage,
-  addPostImage = props.addPostImage;
+  postAdded = props.postAdded;
 
   let initialValues = {
     postTitle: '',
@@ -26,10 +25,6 @@ const AddNewPostContainer = (props) => {
       postContent: props.addPostContent.replace(/<\/?[^>]+(>|$)/g, ""),
     }
   } 
-
-  useEffect(() => {
-    !itemId && setAddPostImage(null);
-  }, [addPostImage, setAddPostImage])
 
   useEffect(() => {
     itemId && getPostEditDataThunk(itemId);
@@ -48,21 +43,24 @@ const AddNewPostContainer = (props) => {
   }
 
   return (
-    <AddNewPost
-      onSubmit={onFormSubmit} 
-      onChange={onChange} 
-      userId={props.match.params.userId}
-      itemId={itemId}
-      postTitle={props.addPostTitle}
-      postCategorys={props.addPostCategorys}
-      postCategoryName={props.addPostCategoryName}
-      postImage={props.addPostImage}
-      postContent={props.addPostContent}
-      postTags={props.addPostTags}
-      postLoading={props.addPostLoading}
-      setTitle={setTitle}
-      initialValues={initialValues}
-    />
+    <>
+      {postAdded && <Redirect to={`/mydata/posts/${props.match.params.userId}`} />}
+      <AddNewPost
+        onSubmit={onFormSubmit} 
+        onChange={onChange} 
+        userId={props.match.params.userId}
+        itemId={itemId}
+        postTitle={props.addPostTitle}
+        postCategorys={props.addPostCategorys}
+        postCategoryName={props.addPostCategoryName}
+        postImage={props.addPostImage}
+        postContent={props.addPostContent}
+        postTags={props.addPostTags}
+        postLoading={props.addPostLoading}
+        setTitle={setTitle}
+        initialValues={initialValues}
+      />
+    </>
   )
 }
 
@@ -74,6 +72,7 @@ let mapStateToProps = (state) => {
     addPostImageId: getAddPostImageIdState(state),
     addPostContent: getAddPostContentState(state),
     addPostTags: getAddPostTagsState(state),
+    postAdded: getPostAddedState(state),
     addPostLoading: getAddPostLoadingState(state),
     addPostCategoryName: getAddPostCategoryNameState(state),
   }

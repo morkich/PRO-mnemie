@@ -84,7 +84,7 @@ const Vacancy = (props) => {
                 <span className={style.vacancyDate}>Вакансия опубликована {date.getDate()}.{date.getMonth()}.{date.getFullYear()}</span>
                 <div className={style.buttonsBlock}>
                   <a href="/" className="button">Откликнутся</a>
-                  <button onClick={() => window.history.back()} className="link">Назад</button>
+                    <button onClick={() => window.history.back()} className="link">Назад</button>
                 </div>
 
               </div>

@@ -15,7 +15,7 @@ const AsideLoopContainer = (props) => {
 
   return (
     <AsideLoop
-      type={type}
+      asideType={type}
       items={props.asideItems}
       asideLoading={props.asideLoading}
       title={props.title}

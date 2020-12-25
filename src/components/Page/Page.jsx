@@ -22,7 +22,7 @@ const Page = (props) => {
         {props.pageLoading ? <Preloader /> : null}
         <div className={style.content} dangerouslySetInnerHTML={{ __html: props.content }}></div>
       </main>
-      <AsideLoopContainer type={'courses'}/>
+      {/* <AsideLoopContainer type={'courses'}/> */}
     </div>
   </section>
   );

@@ -4,13 +4,13 @@ import { deleteItemThunk, setVision } from '../../../../redux/modal-reducer';
 import Delete from './Delete';
 
 const DeleteContainer = (props) => {
-  
+  console.log(props);
   const modalClose = () => {
     props.setVision(false);
   }
 
   const deleteItem = () => {
-    props.deleteId && props.deleteItemThunk(props.deleteId, props.userId);
+    props.deleteId && props.deleteItemThunk(props.deleteId, props.userId, props.itemType );
   }
 
   return (

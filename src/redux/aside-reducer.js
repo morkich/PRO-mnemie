@@ -52,7 +52,6 @@ export const getAsideItemsThunk = (type) => {
     dispatch(setAsideLoading(true));
     postAPI.getPosts(type).then( response => {
       if(type === 'asidebanners'){
-        console.log('привет');
       }else{
         dispatch(setAsideItems(response));
       }      

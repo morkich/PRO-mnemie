@@ -41,3 +41,27 @@
   color: #7C9BA9;
   font-weight: normal;
 }
+
+.gridfour {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+  grid-gap: 20px;  
+  min-height: 100px;
+}
+
+.gridLine {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 4rem;
+  margin-right: 3rem;
+  min-height: 100px;
+}
+
+.secondSearchContainer {
+  margin-top: 70px;
+}
+
+.string {
+  font-size: 13px;
+  color: #0E2A42;
+}

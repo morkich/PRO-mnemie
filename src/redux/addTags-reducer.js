@@ -119,38 +119,48 @@ export const setAddTagsLoading = (addTagsLoading) => {
   }
 }
 
-export const getAllTagsThunk = () => {
+export const getAllTagsThunk = (tagsType) => {
   return (dispatch) => {
-    tagAPI.getAllTags().then(response => {
+    tagAPI.getAllTags(tagsType).then(response => {
       dispatch(setAllTagsItems(response));
     })
   }  
 }
 
-export const postNewTagThunk = (tagName) => {
+export const postNewTagThunk = (tagName, tagsType = 'tags') => {
   return (dispatch) => {
-    dispatch(setAddTagsLoading(true));
+    dispatch(setAddTagsLoading(true));    
     let data = {
       name: tagName
     }
-    tagAPI.postNewTag(data).then(response => {
+    tagAPI.postNewTag(data, tagsType).then(response => {
       dispatch(setAddToAllTagsItems(response));
       dispatch(setAddTagItem(response));
       dispatch(setInputTagsReady(response.id));            
       dispatch(setAddTagsLoading(false));
+    })
+    .catch((error) => {
+      if(error.response.data.code === 'term_exists'){
+        tagAPI.getTags(error.response.data.data.term_id, tagsType).then(response => {
+          dispatch(setAddToAllTagsItems(response[0]));
+          dispatch(setAddTagItem(response[0]));
+          dispatch(setInputTagsReady(response[0].id));
+          dispatch(setAddTagsLoading(false));
+        })        
+      }      
     })
   }  
 }
 
 export const postOldTagThunk = (tag) => {
   return (dispatch) => {
+    console.log(tag);
     dispatch(setAddTagsLoading(true));
     dispatch(setAddTagItem(tag));
     dispatch(setInputTagsReady(tag.id));
     dispatch(setAddTagsLoading(false));
   }  
 }
-
 
 export const removePostTagThunk = (tagId) => {
   return (dispatch) => {

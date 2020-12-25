@@ -23,7 +23,7 @@ const PostContainer = (props) => {
       postData={props.postData}      
       likesData={props.likesData}
       userId={props.userId}
-      views={props.views}
+      viewsPost={props.viewsPost}
     />
   )
 }
@@ -33,7 +33,7 @@ let mapStateToProps = (state) => {
     postData: getPostData(state),
     loading: getLoading(state),    
     userId: getUserId(state),
-    views: getViewsPost(state),
+    viewsPost: getViewsPost(state),
   }
 }
 export default 

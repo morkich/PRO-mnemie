@@ -22,6 +22,10 @@ export const getAddPostTagsState = (state) => {
   return state.addPost.addPostTags;
 }
 
+export const getPostAddedState = (state) => {
+  return state.addPost.postAdded;
+}
+
 export const getAddPostLoadingState = (state) => {
   return state.addPost.addPostLoading;
 }

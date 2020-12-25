@@ -1,5 +1,6 @@
 import React from 'react';
-import AsideLoopContainer from '../Aside/AsideLoop/AsideLoopContainer';
+import AsideMainNewsContainer from '../Aside/AsideMainNews/AsideMainNewsContainer';
+import AsideBannersContainer from '../Aside/AsideLoop/AsideBanners/AsideBannersContainer';
 import AuthorContainer from '../Author/AuthorContainer';
 import CommentsContainer from '../common/Comments/CommentsContainer';
 import DateBlock from '../common/DateBlock/DateBlock';
@@ -39,7 +40,7 @@ const Post = (props) => {
             />
             <span className={style.category}>{props.postData.category_name}</span>
             <InfoBlock 
-              views={props.postData.view_count}
+              views={props.viewsPost}
               comment={props.postData.comments_count} 
               darkTheme={true}
               size={'medium'}
@@ -67,7 +68,10 @@ const Post = (props) => {
 
         </div>
       </main>
-      <AsideLoopContainer asideType={'post'}/>
+      <div className="asides">
+        <AsideMainNewsContainer asideType={'post'}/>
+        <AsideBannersContainer asideType={'banner'}/>
+      </div>      
     </div>
   </section>
   );

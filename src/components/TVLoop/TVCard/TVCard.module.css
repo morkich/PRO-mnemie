@@ -1,3 +1,7 @@
+.wrap {
+  position: relative;
+}
+
 .wrap a {
  text-decoration: none;
 }
@@ -43,4 +47,40 @@
   font-size: 13px;
   color: #0E2A42;
   font-weight: normal;
+}
+
+.author {
+  font-size: 12px;
+  color: #7C9BA9;
+}
+
+.editWrap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px 0;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.editMenu {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  background-color: #fff;
+  padding: 17px 30px;
+  right: -20px;
+  box-shadow: 4px 4px 20px rgba(14, 76, 103, 0.25);
+  top: 40px;
+  z-index: 99;
+}
+
+.editMenu a {
+  font-size: 13px;
+  color: #7C9BA9;  
+  text-decoration: none;
 }

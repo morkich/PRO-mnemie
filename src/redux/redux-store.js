@@ -37,6 +37,10 @@ import addTagsReducer from "./addTags-reducer";
 import categorySelectReducer from "./categorySelect-reducer";
 import tvLoopReducer from "./tvLoop-reducer";
 import TVItemReducer from "./tvItem-reducer";
+import asideMainNewsReducer from "./asideMainNews-reducer";
+import searchReducer from "./search-reducer";
+import profileDataReducer from "./profileData-reducer";
+import addVideoReducer from "./addNewVideo-reducer";
 
 
 const { createStore, combineReducers, applyMiddleware } = require("redux");
@@ -76,9 +80,13 @@ let reducers = combineReducers({
     addPostImage: postImageReducer,
     addPost: addPostReducer,
     addTags: addTagsReducer,
+    addVideo: addVideoReducer,
     categorySelect: categorySelectReducer,
     tvLoop: tvLoopReducer,
     tvItem: TVItemReducer,
+    asideMainNews: asideMainNewsReducer,
+    search: searchReducer,
+    profileData: profileDataReducer,
     form: formReducer
 });
  

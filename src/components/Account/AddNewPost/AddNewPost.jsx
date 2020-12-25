@@ -10,7 +10,7 @@ import Preloader from '../../common/Preloader/Preloader';
 import InputTitle from '../../common/Forms/InputTitle/InputTitle';
 import CategorySelectContainer from '../../common/Forms/CategorySelect/CategorySelectContainer';
 
-const AddNewPostForm = (props) => {
+const AddNewPostForm = (props) => {  
   return (
     <form onSubmit={props.handleSubmit}>
       {props.postLoading ? <Preloader /> : null}
