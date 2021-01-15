@@ -19,7 +19,7 @@ const AddPostImageContainer = (props) => {
 
   useEffect(() => {
     postImageUrl && setPostImageUrl(postImageUrl);
-  }, [postImageUrl])
+  }, [postImageUrl, setPostImageUrl])
 
   return (
     <AddPostImage 

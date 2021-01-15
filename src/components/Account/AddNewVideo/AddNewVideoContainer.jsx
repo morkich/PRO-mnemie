@@ -1,37 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { setAddVideoTitle, setAddVideoContent, postNewVideoThunk } from '../../../redux/addNewVideo-reducer';
+import { setAddVideoTitle, setAddVideoContent, postNewVideoThunk, getVideoEditDataThunk } from '../../../redux/addNewVideo-reducer';
 import { getAddVideoContentState, getAddVideoImageIdState, getAddVideoImageState, getAddVideoLoadingState, getAddVideoTagsState, getAddVideoTitleState, getAddVideoUrlState, getVideoAddedState } from '../../../redux/addNewVideo-selectors';
 import AddNewVideo from './AddNewVideo';
 
 const AddNewVideoContainer = (props) => {
 
-  console.log(props);
+  let [postVideoId, setPostVideoId] = useState(null)
 
   let itemId = props.match.params.itemsId,
+  getVideoEditDataThunk = props.getVideoEditDataThunk,
+  addVideoUrl = props.addVideoUrl,
   videoAdded = props.videoAdded;
-  // getPostEditDataThunk = props.getPostEditDataThunk,
-  // setAddPostTitle = props.setAddPostTitle,
-  // postAdded = props.postAdded;
 
-  // let initialValues = {
-  //   postTitle: '',
-  //   postCategory: '',
-  //   postContent: '',
-  // }
-  // if(itemId) {
-  //   initialValues = {
-  //     postTitle: props.addPostTitle,
-  //     postCategory: props.addPostCategorys,
-  //     postContent: props.addPostContent.replace(/<\/?[^>]+(>|$)/g, ""),
-  //   }
-  // } 
+  useEffect(() => {
+    if(addVideoUrl) {
+      setPostVideoId(addVideoUrl.match(/^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/));
+    } 
+  }, [addVideoUrl])
 
-  // useEffect(() => {
-  //   itemId && getPostEditDataThunk(itemId);
-  // }, [itemId, getPostEditDataThunk])
+  useEffect(() => {
+    itemId && getVideoEditDataThunk(itemId);
+  }, [itemId, getVideoEditDataThunk])
 
   const onFormSubmit = (formData) => {     
     props.postNewVideoThunk(formData.postTitle, formData.videoDescription, props.addVideoUrl, props.addVideoImageId, props.addVideoTags, itemId)
@@ -43,15 +35,14 @@ const AddNewVideoContainer = (props) => {
       <AddNewVideo
         onSubmit={onFormSubmit} 
         userId={props.match.params.userId}
-        addVideoId={props.addVideoUrl}
+        postVideo={props.addVideoUrl}
         postTitle={props.addVideoTitle}
-        postCategorys={props.addPostCategorys}
-        postCategoryName={props.addPostCategoryName}
-        postImage={props.addPostImage}
+        postImage={props.addVideoImage}
         postContent={props.addVideoContent}
         postTags={props.addVideoTags}
+        postVideoId={postVideoId}
         videoLoading={props.addVideoLoading}
-        // initialValues={initialValues}
+        
       />
     </>
   )
@@ -69,6 +60,6 @@ let mapStateToProps = (state) => {
     addVideoLoading: getAddVideoLoadingState(state)
   }
 }
-export default compose(connect(mapStateToProps, {postNewVideoThunk, setAddVideoTitle, setAddVideoContent}),
+export default compose(connect(mapStateToProps, {postNewVideoThunk, setAddVideoTitle, setAddVideoContent, getVideoEditDataThunk}),
   withRouter,
 )(AddNewVideoContainer);

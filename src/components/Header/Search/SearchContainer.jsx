@@ -13,7 +13,7 @@ const SearchContainer = (props) => {
 
   const onFormSubmit = (formData) => {    
     setThisSearchPage(!props.location.pathname.includes('/search'));
-    props.getSearchRequestThunk(formData.s);   
+    props.getSearchRequestThunk(formData.s);    
   };
  
  

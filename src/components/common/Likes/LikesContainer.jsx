@@ -15,7 +15,7 @@ const LikesContainer = (props) => {
 
   useEffect(() => {
     postId && getLikesDataThunk(postId, typePost);
-  }, [postId, getLikesDataThunk]);
+  }, [postId, getLikesDataThunk, typePost]);
 
   useEffect(() => {
     userId && getLikesRenderingThunk(userId, likesData);

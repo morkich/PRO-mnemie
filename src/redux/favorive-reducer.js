@@ -1,5 +1,5 @@
 import { usersAPI } from "../api/api";
-import { addFavoriteEvent, addFavoriteExpert, addFavoriteVideo, removeFavoriteEvent, removeFavoriteExpert, removeFavoriteVideo } from '../redux/auth-reducer';
+import { addFavoriteEvent, addFavoriteExpert, addFavoritePost, addFavoriteVideo, removeFavoriteEvent, removeFavoriteExpert, removeFavoritePost, removeFavoriteVideo } from '../redux/auth-reducer';
 
 const TOGGLE_FAVOFITE_BUTTON = 'TOGGLE_FAVOFITE_BUTTON';
 const FAVORITE = 'FAVORITE';
@@ -88,7 +88,17 @@ export const favoriteThunkCreator = (itemId, arrayFav, addfavorite, type = 'expe
         dispatch(toggleFavoriteProgress(false, itemId));
       })      
     }
-
+    if(type === 'post'){
+      data = { pro_favorites_posts: JSON.stringify(favorites) }
+      usersAPI.setUserData(data).then(response => {
+        if (response) {        
+          addfavorite 
+            ? dispatch(addFavoritePost(itemId))
+            : dispatch(removeFavoritePost(itemId));
+        }
+        dispatch(toggleFavoriteProgress(false, itemId));
+      })      
+    }
     usersAPI.setUserData(data).then(response => {
       if (response) {        
         addfavorite 

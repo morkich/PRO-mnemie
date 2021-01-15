@@ -3,8 +3,8 @@ import Icon from '../../Icon/Icon';
 import style from '../Forms.module.css';
 
 const InputPass = (props) => {
-  
-  const hasError = props.meta.touched && props.meta.error;
+
+  const hasError = props.touched[props.field.name] && props.errors[props.field.name];
   let [passVision, setPassVision] = useState(false);
 
   const showPassword = () => {
@@ -14,14 +14,16 @@ const InputPass = (props) => {
   return (    
     <div className={`${style.formControl} ${hasError && style.error}`}>
       <input
-        {...props.input}
-        name={props.input.name}
+        name={props.field.name}
         placeholder={props.placeholder}
         type={passVision ? 'text' : 'password'}
         className={`${style.input} ${style.inputPass}`}
+        onChange={props.onChange}
+        onBlur={props.onBlur}                
+        value={props.values[props.field.name]}
       />
-      <Icon style={passVision? 'eye' : 'noteye'} onClick={showPassword}/>
-      {hasError && <span>{props.meta.error}</span>}
+      <Icon style={passVision ? 'eye' : 'noteye'} onClick={showPassword}/>
+      {hasError && <span>{hasError}</span>}
     </div>
   )
 }

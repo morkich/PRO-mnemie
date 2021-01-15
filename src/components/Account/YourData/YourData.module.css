@@ -1,9 +1,21 @@
-.gridfour {
+.header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 875px;
+}
+
+.gridFour {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
-  /* grid-template-rows: 205px; */
   grid-gap: 20px;  
   min-height: 500px;
+}
+
+.gridLine {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 47px;  
+  max-width: 875px;
 }
 
 .addNewContent {

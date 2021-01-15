@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import ModalContainer from '../components/common/Modal/ModalContainer';
 import { getLoggetIn } from '../redux/auth-selectors';
 

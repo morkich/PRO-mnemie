@@ -15,13 +15,7 @@ const PostImage = (props) => {
     }
   }  
 
-  let VideoModeBlock = <></>;
-
-
   let videoId = props.videoId ? props.videoId : null;
-
-  console.log(videoId);
-
   return (
     <div className={`${style.wrap} ${props.video && style.wrapVideo}`}>
       
@@ -32,14 +26,6 @@ const PostImage = (props) => {
           className={style.video}                // defaults -> null
           containerClassName={style.videoContainer}       // defaults -> ''
           opts={opts}                        // defaults -> {}
-          // onReady={func}                    // defaults -> noop
-          // onPlay={func}                     // defaults -> noop
-          // onPause={func}                    // defaults -> noop
-          // onEnd={func}                      // defaults -> noop
-          // onError={func}                    // defaults -> noop
-          // onStateChange={func}              // defaults -> noop
-          // onPlaybackRateChange={func}       // defaults -> noop
-          // onPlaybackQualityChange={func}    // defaults -> noop
         /> :
         <>
           <img src={props.imgUrl} alt={props.imgAlt} />

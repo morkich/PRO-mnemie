@@ -4,7 +4,7 @@ import AvatarChangeContainer from './AvatarChange/AvatarChangeContainer';
 import Preloader from '../common/Preloader/Preloader';
 import Raiting from '../Profile/Raiting/Raiting';
 import style from './Account.module.css';
-import AccountDataReduxForm from './AccountDataForm/AccountDataForm';
+import AccountDataForm from './AccountDataForm/AccountDataForm';
 
 const Account = (props) => {
   return (
@@ -25,8 +25,8 @@ const Account = (props) => {
       </div>
       <div className={style.form_wrap}>
         {props.loadingAcc ? <Preloader /> : null}
-        <AccountDataReduxForm 
-          initialValues={props.initialValues}
+        <AccountDataForm 
+          accountFormData={props.accountFormData}
           onSubmit={props.onFormSubmit}          
         />
       </div>

@@ -7,27 +7,33 @@ import { getYourDataThunk } from '../../../redux/yourData-reducer';
 import { getYourDataItemsState, getYourDataLoadingState } from '../../../redux/yourData-selectors';
 
 const YourDataContainer = (props) => {
+
   let dataType = props.match.params.dataType,
   userId = props.match.params.userId,
   getYourDataThunk = props.getYourDataThunk;
 
   useEffect(() => {
     dataType && getYourDataThunk(dataType, userId);
-  }, [dataType]);
+  }, [dataType, getYourDataThunk, userId]);
 
   let title = 'Ваши Сохраненные элементы';
   if(dataType === 'posts') {
-    title = 'Ваши Статьи';
+    title = 'Ваши Статьи';    
   }
   if(dataType === 'videos') {
-    title = 'Ваши Видео';
+    title = 'Ваши Видео';    
   }
- 
+  if(dataType === 'vacancies') {
+    title = 'Ваши Вакансии';    
+  }
+  if(dataType === 'events') {
+    title = 'Ваши События';    
+  }
   return (
     <YourData 
+      userId={userId}
       title={title}
       dataType={dataType}
-      userId={userId}
       dataItems={props.dataItems}
       dataLoading={props.dataLoading}
     />

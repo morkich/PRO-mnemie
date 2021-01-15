@@ -1,0 +1,27 @@
+.gridfour {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+  /* grid-template-rows: 205px; */
+  grid-gap: 20px;  
+  min-height: 500px;
+}
+
+.gridLine {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 4rem;
+  margin-right: 3rem;
+}
+
+.filter {
+  position: relative;  
+  margin-bottom: 30px;
+}
+
+.filter ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10px, auto));
+  justify-items: start;
+  justify-content: start;
+  grid-gap: 50px;
+}

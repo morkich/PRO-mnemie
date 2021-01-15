@@ -15,9 +15,7 @@ const VideoContainer = (props) => {
   let [itemValue, setItemValue] = useState('');
 
   const setVideoLink = () => {    
-    let urlObject = url.parse(itemValue, true);
-    let videoId = urlObject.query['v'];    
-    props.setAddVideoUrl(videoId)
+    props.setAddVideoUrl(itemValue)
     props.setVision(false);
   }
 

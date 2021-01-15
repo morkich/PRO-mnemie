@@ -1,5 +1,4 @@
 import React from 'react';
-import AsideLoopContainer from '../Aside/AsideLoop/AsideLoopContainer';
 import Preloader from '../common/Preloader/Preloader';
 import Title from '../common/Title/Title';
 import Watermark from '../common/Watermark/Watermark';

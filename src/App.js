@@ -20,10 +20,13 @@ import CourseLoopContainer from './components/CourseLoop/CourseLoopContainer';
 import PageContainer from './components/Page/PageContainer';
 import MainPageContainer from './components/MainPage/MainPageContainer';
 import YourDataContainer from './components/Account/YourData/YourDataContainer';
+import YourFavoritesContainer from './components/Account/YourFavorites/YourFavoritesContainer';
 import AddNewPostContainer from './components/Account/AddNewPost/AddNewPostContainer';
 import SearchRequestBlockContainer from './components/Header/Search/SearchRequestBlock/SearchRequestBlockContainer';
 import ProfileDataContainer from './components/Profile/ProfileData/ProfileDataContainer';
 import AddNewVideoContainer from './components/Account/AddNewVideo/AddNewVideoContainer';
+import AddNewVacancyContainer from './components/Account/AddNewVacancy/AddNewVacancyContainer';
+import AddNewEventContainer from './components/Account/AddNewEvent/AddNewEventContainer';
 
 class App extends React.Component {
 
@@ -52,13 +55,19 @@ class App extends React.Component {
           <Route path="/page/slug/:pageSlug?" render={() => <PageContainer />} />
           <Route path="/mydata/:dataType?/:userId?" render={() => <YourDataContainer />} />
           <Route path="/add/posts/:userId?" render={() => <AddNewPostContainer />} />
-          <Route path="/edit/posts/:itemsId?" render={() => <AddNewPostContainer />} />
           <Route path="/add/tv_video/:userId?" render={() => <AddNewVideoContainer />} />
+          <Route path="/add/vacancy/:userId?" render={() => <AddNewVacancyContainer />} />
+          <Route path="/add/event/:userId?" render={() => <AddNewEventContainer />} />
+
+          <Route path="/edit/posts/:itemsId?" render={() => <AddNewPostContainer />} />
           <Route path="/edit/tv_video/:itemsId?" render={() => <AddNewVideoContainer />} />
+          <Route path="/edit/vacancy/:itemsId?" render={() => <AddNewVacancyContainer />} />
+          <Route path="/edit/event/:itemsId?" render={() => <AddNewEventContainer />} />
           <Route path="/tv_video_cat/" render={() => <TVLoopContainer />} />
           <Route path="/tv_video/:videoId?" render={() => <TVItemContainer />} />
           <Route path="/search/:searchQuery?" render={() => <SearchRequestBlockContainer />} />
           <Route path="/profile_data/:profileId?/:dataName?" render={() => <ProfileDataContainer />} />
+          <Route path="/my_favorites/:profileId?/:typeName?" render={() => <YourFavoritesContainer />} />
         </div>
         <footer className="footer">
           <Footer />

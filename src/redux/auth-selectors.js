@@ -58,6 +58,10 @@ export const getToken = (state) => {
   return state.auth.token;
 }
 
+export const getFavoritesPost = (state) => {
+  return state.auth.favoritesPost;
+}
+
 export const getFavoritesExperts = (state) => {
   return state.auth.favoritesExperts;
 }

@@ -8,11 +8,10 @@ import TVCard from '../../../TVLoop/TVCard/TVCard';
 import style from '../Search.module.css';
 
 const SearchRequestBlock = (props) => {
-  console.log(props);
 let posts;
 let tv_video;
 let events;
-if(props.searchResult['posts'] != undefined){
+if(props.searchResult['posts'] !== undefined){
   posts = props.searchResult['posts'].map( post => {
     let categoryNames = post.category_post_items.map( item => item.cat_name);
     return(
@@ -31,7 +30,7 @@ if(props.searchResult['posts'] != undefined){
     )
   });
 }
-if(props.searchResult['tv_video'] != undefined){
+if(props.searchResult['tv_video'] !== undefined){
   tv_video = props.searchResult['tv_video'].map( post => {
     return(
       <>
@@ -50,9 +49,8 @@ if(props.searchResult['tv_video'] != undefined){
     )
   });
 }
-if(props.searchResult['events'] != undefined){
+if(props.searchResult['events'] !== undefined){
   events = props.searchResult['events'].map( post => {
-    let categoryNames = post.category_post_items.map( item => item.cat_name);
     return (
       <>
         {props.sarchLoading ? <Preloader /> : null}

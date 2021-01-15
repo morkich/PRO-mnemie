@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DateBlock from '../../common/DateBlock/DateBlock';
 import InfoBlock from '../../common/InfoBlock/InfoBlock';
-import AuthorContainer from '../../Author/AuthorContainer'
 import style from './TVCard.module.css';
 import IconString from '../../common/IconString/IconString';
 import ModalContainer from '../../common/Modal/ModalContainer';
+import FavoritesContainer from '../../common/Favorites/FavoritesContainer';
 
 const TVCard = (props) => {  
   
@@ -60,6 +60,7 @@ const TVCard = (props) => {
           <div className={style.title}>{props.cleanTitle ? props.cleanTitle: props.title.rendered}</div>
         </div>
       </Link>      
+      <FavoritesContainer expertId={props.id} darkTheme={true} type={'tv_video'}/>     
     </li>  
     )
 

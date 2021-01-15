@@ -13,7 +13,7 @@ const SearchRequestBlockContainer = (props) => {
   
   useEffect(() => {
     query && getSearchRequestThunk(query);
-  }, [query])
+  }, [query, getSearchRequestThunk])
 
   return (
     <SearchRequestBlock 

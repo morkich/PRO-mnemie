@@ -3,12 +3,14 @@ import { setUserData } from "./auth-reducer";
 
 const SET_REGISTER_DATA = 'SET_REGISTER_DATA';
 const SET_NAME = 'SET_NAME';
+const SET_REGISTER_ERROR = 'SET_REGISTER_ERROR';
 const SET_LOADING = 'SET_LOADING';
 
 let initialState = {
   registerData: {},
   registerName: '', 
-  registerLoading: true 
+  requestError: null,
+  registerLoading: true,
 }
 
 const registerReducer = (state = initialState, action) => {
@@ -22,6 +24,11 @@ const registerReducer = (state = initialState, action) => {
       return {
         ...state,
         registerName: action.name
+      }      
+    case SET_REGISTER_ERROR:
+      return {
+        ...state,
+        requestError: action.requestError
       }      
     case SET_LOADING:
       return {
@@ -46,6 +53,12 @@ export const setName = (name) => {
     name
   }
 }
+export const setRegisterError = (requestError) => {
+  return {
+    type: SET_REGISTER_ERROR,
+    requestError
+  }
+}
 
 export const setLoading = (loading) => {
   return {
@@ -57,18 +70,25 @@ export const setLoading = (loading) => {
 export const postRegisterNewUserThunk = (userData) => {
   return (dispatch) => {
     dispatch(setLoading(true));
-    usersAPI.postNewUser(userData).then(response => {
-
+    usersAPI.postNewUser(userData)
+    .then(response => {
       if(response.status === 200){
         return {
           id: response.data.id,
           userName: userData.username,
           password: userData.password,
         }
-      }else{
+      // }else if (response) {
+      }else{        
+        dispatch(setLoading(false));
         return false;
       }
-      
+    }).catch(error => {
+      console.log(error);
+      if (error.message.match(/400/gi)) {
+        dispatch(setRegisterError('!Имя или электронная почта уже зарегестрированы')); 
+      }      
+      dispatch(setLoading(false));
     })
     .then(data => {
       authAPI.getToken(data.userName, data.password).then(response => {

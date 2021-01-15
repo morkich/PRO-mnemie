@@ -4,10 +4,28 @@ import Watermark from '../common/Watermark/Watermark';
 import Title from '../common/Title/Title';
 import Preloader from '../common/Preloader/Preloader';
 import FilterContainer from '../common/Filter/FilterContainer';
-import { NavLink } from 'react-router-dom';
 import AsideLoopContainer from '../../Aside/AsideLoop/AsideLoopContainer';
+import VacancyItem from './VacancyItem/VacancyItem';
 
-const VacancyLoop = (props) => {  
+const VacancyLoop = (props) => { 
+  console.log(props);
+  
+
+  let vacancyItems = Object.keys(props.items).map(item => <VacancyItem 
+      title={props.items[item].title.rendered}
+      companyName={props.items[item].pro_vacancy_company_name}
+      city={props.items[item].pro_vacancy_city}
+      priceBefore={props.items[item].pro_vacancy_price}
+      priceAfter={props.items[item].pro_vacancy_price_after}
+      requires={props.items[item].pro_vacancy_require}
+      functions={props.items[item].pro_vacancy_function}
+      conditions={props.items[item].pro_vacancy_conditions}
+      id={props.items[item].id}
+      key={props.items[item].id}
+      
+    />
+  );
+  
   return (
     <section className="container">
       <header className={style.header}>
@@ -22,22 +40,8 @@ const VacancyLoop = (props) => {
       <div className="content_right-aside">
         <main>
           {props.loading ? <Preloader /> : null}
-          <ul className={style.vacancysBlocks}>
-            
-            {Object.keys(props.items).map(item => 
-              (                
-                <li className={style.vacancyBlock}>                  
-                  <div className={style.vacancyTitleBlock}>
-                    <h3 className={style.vacancyTitle}>{props.items[item].title.rendered}</h3>  
-                    <span className={style.vacancyDescription}>{props.items[item].pro_vacancy_company_name}, {props.items[item].pro_vacancy_city}</span>
-                  </div>
-                  <div className={style.vacancyPrice}>{props.items[item].pro_vacancy_price} ₽</div>
-                  <div className={style.vacancyContent}><div dangerouslySetInnerHTML={{ __html: props.items[item].content.rendered }}></div></div>
-                  <NavLink to={`/vacancy/${props.items[item].id}`} className="button">Подробнее</NavLink>
-                </li>
-              )
-            )}            
-            
+          <ul className={style.vacancysBlocks}>            
+            {vacancyItems}                       
           </ul>
         </main>
         <AsideLoopContainer type={'vacancies'} title={'Рекомендуемое'} />

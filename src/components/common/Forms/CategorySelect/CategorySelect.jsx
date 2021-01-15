@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import style from '../Forms.module.css';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 
 const CategorySelect = (props) => {
@@ -27,15 +26,29 @@ const CategorySelect = (props) => {
     }),
   }
 
+  const [statusValue, setStatusValue] = useState('');
+  const handleStatusChange = event => {
+      setStatusValue(event.value);
+      props.form.values.postCategory = event.value;
+  }
+
+  const getDefaultvalue = (options, defaultID) => {
+    let result = options.filter( option => option.value === defaultID)
+    return result[0];
+  }
+
+  
   return (   
     <Select 
       placeholder={"Категория"}
       options={props.options} 
       styles={styles}
       name={props.name}
-      onChange={props.onChange}
-      onKeyDown={props.keyDown}
-      defaultValue={props.options[1]}
+      onChange={handleStatusChange} 
+      value={props.options.find(option => option.value === statusValue)}
+      defaultValue={getDefaultvalue(props.options, props.field.value)}
+      errors={props.errors}
+      touched={props.touched}
     />
   )
 }

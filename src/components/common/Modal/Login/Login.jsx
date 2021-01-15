@@ -2,38 +2,74 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import style from './Login.module.css';
 import Title from '../../Title/Title';
-import { Field, reduxForm } from 'redux-form';
-import { required } from '../../../../utils/validators/validators';
 import Input from '../../Forms/Input/Input';
-import FormError from '../../Forms/FormError/FormError';
+import { Field, Formik } from 'formik';
 import InputPass from '../../Forms/InputPass/InputPass';
 
+
 const LoginForm = (props) => {
+
+  const loginFormValidate = (values => {
+    const errors = {};
+    if (!values.username) {
+      errors.username = 'Это поле обязательное!';
+    }
+    if (!values.password) {
+      errors.password = 'Это поле обязательное!';
+    }
+    return errors;
+  });  
+
+  const submitForm = (values, { setSubmitting }) => {    
+    props.onFormSubmit(values);
+    setSubmitting(false);
+  }
+
   return (
-    <form onSubmit={props.handleSubmit}>
-      <Field
-        component={Input}
-        validate={[required]}
-        name={'username'}
-        placeholder={'Почта'}
-      />
-      <Field
-        component={InputPass}
-        type={'password'}
-        validate={[required]}
-        name={'password'}
-        placeholder={'Пароль'}
-      />
-      {props.error && <FormError errorText={props.error}/>}      
-      <button className="button" type="submit">Войти</button>
-      <button onClick={props.changeForm} className={style.link}>Регистрация</button>
-    </form>
+    <Formik
+      initialValues={{ username: '', password: '' }}
+      validate={loginFormValidate}
+      onSubmit={submitForm}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }) => (
+        <form onSubmit={handleSubmit}>
+          <Field
+            component={Input}
+            type={'text'}
+            name={'username'}
+            placeholder={'Почта'}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            values={values}
+            errors={errors}
+            touched={touched}
+          />
+          <Field
+            component={InputPass}
+            type={'password'}
+            name={'password'}
+            placeholder={'Пароль'}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            values={values}
+            errors={errors}
+            touched={touched}
+          />
+          <button className="button" type="submit" disabled={isSubmitting}>Войти</button>
+          <a onClick={props.changeForm} className={style.link}>Регистрация</a>
+        </form>
+      )}
+    </Formik>
   );
 }
-
-const LoginReduxForm = reduxForm({
-  form: 'login',
-})(LoginForm);
 
 const Login = (props) => {
   if (props.loggetIn) {
@@ -42,8 +78,8 @@ const Login = (props) => {
     return (
       <div className={style.wrap}>
         <Title position="center" title="Вход" />
-        <LoginReduxForm 
-          onSubmit={props.onFormSubmit} 
+        <LoginForm 
+          onFormSubmit={props.onFormSubmit} 
           changeForm={props.changeForm}
         />
       </div>

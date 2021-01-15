@@ -4,50 +4,27 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import AddNewPost from './AddNewPost';
 import {getAddPostCategoryNameState, getAddPostCategorysState, getAddPostContentState, getAddPostImageIdState, getAddPostImageState, getAddPostLoadingState, getAddPostTagsState, getAddPostTitleState, getPostAddedState} from '../../../redux/addNewPost-selectors'
-import { postNewPostThunk, setAddPostCategorys, getPostEditDataThunk, setAddPostTitle, setAddPostContent, setAddPostImage} from '../../../redux/addNewPost-reducer';
+import { postNewPostThunk, setAddPostCategorys, getPostEditDataThunk, setAddPostContent, setAddPostImage} from '../../../redux/addNewPost-reducer';
 
 const AddNewPostContainer = (props) => {
-  console.log(props);
+
   let itemId = props.match.params.itemsId,
   getPostEditDataThunk = props.getPostEditDataThunk,
-  setAddPostTitle = props.setAddPostTitle,
   postAdded = props.postAdded;
-
-  let initialValues = {
-    postTitle: '',
-    postCategory: '',
-    postContent: '',
-  }
-  if(itemId) {
-    initialValues = {
-      postTitle: props.addPostTitle,
-      postCategory: props.addPostCategorys,
-      postContent: props.addPostContent.replace(/<\/?[^>]+(>|$)/g, ""),
-    }
-  } 
 
   useEffect(() => {
     itemId && getPostEditDataThunk(itemId);
   }, [itemId, getPostEditDataThunk])
 
   const onFormSubmit = (formData) => {     
-    props.postNewPostThunk(formData, props.addPostImageId, props.addPostTags, props.addPostCategorys, itemId)
+    props.postNewPostThunk(formData, props.addPostImageId, props.addPostTags, itemId)
   };
-
-  const onChange = (event) => {    
-    event.value && props.setAddPostCategorys(event.value);    
-  }; 
-
-  const setTitle = (event) => {
-    setAddPostTitle(event.target.value);
-  }
 
   return (
     <>
       {postAdded && <Redirect to={`/mydata/posts/${props.match.params.userId}`} />}
       <AddNewPost
         onSubmit={onFormSubmit} 
-        onChange={onChange} 
         userId={props.match.params.userId}
         itemId={itemId}
         postTitle={props.addPostTitle}
@@ -57,8 +34,6 @@ const AddNewPostContainer = (props) => {
         postContent={props.addPostContent}
         postTags={props.addPostTags}
         postLoading={props.addPostLoading}
-        setTitle={setTitle}
-        initialValues={initialValues}
       />
     </>
   )
@@ -77,6 +52,6 @@ let mapStateToProps = (state) => {
     addPostCategoryName: getAddPostCategoryNameState(state),
   }
 }
-export default compose(connect(mapStateToProps, {setAddPostTitle, postNewPostThunk, setAddPostCategorys, getPostEditDataThunk, setAddPostContent, setAddPostImage}),
+export default compose(connect(mapStateToProps, {postNewPostThunk, setAddPostCategorys, getPostEditDataThunk, setAddPostContent, setAddPostImage}),
   withRouter,
 )(AddNewPostContainer);

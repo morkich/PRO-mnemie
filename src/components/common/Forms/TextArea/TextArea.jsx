@@ -1,30 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import style from '../Forms.module.css';
 
 const TextArea = (props) => { 
 
-  let startHeight = props.startHeight ? props.startHeight : 200;
+  let startHeight = props.startHeight ? props.startHeight : 200,
+  placeholder = props.placeholder ? props.placeholder : '';
 
   const [textAreaHeight, setTextAreaHeight] = useState(startHeight);
   const updateTextArea = (event) => setTextAreaHeight(event.target.scrollHeight);
-  const hasError = props.meta.touched && props.meta.error;
+
+  debugger;
+  const hasError = props.touched[props.field.name] && props.errors[props.field.name];
 
   return (
     <div className={`${style.formControl} ${hasError && style.error}`}>
       <textarea
-        {...props.input}
+        name={props.field.name}
+        placeholder={placeholder}
+        className={style.textarea}        
         onFocus={updateTextArea}
         onChange={(event) => {
-          console.log(props.input.value);
-          props.input.onChange(event);          
+          props.onChange(event);          
           updateTextArea(event);
         }}
-        name={props.input.name}
-        placeholder={props.placeholder}
-        style={{ height: textAreaHeight }}
-        className={style.textarea}
+        data-count={props.dataCount}
+        data-name={props.dataName}
+        value={props.values[props.field.name]}        
+        style={{ height: textAreaHeight }}        
       ></textarea>
-      {hasError && <span>{props.meta.error}</span>}
+      {hasError && <span>{hasError}</span>}
     </div>
   )
 }

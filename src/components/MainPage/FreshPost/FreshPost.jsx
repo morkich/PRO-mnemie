@@ -3,7 +3,6 @@ import NewsCard from '../../common/NewsCard/NewsCard';
 import style from './FreshPost.module.css';
 
 const FreshPost = (props) => {
-  console.log(props);
   let freshPosts = props.itemsFresh.map(post => {
     return <NewsCard
         key={post.id}

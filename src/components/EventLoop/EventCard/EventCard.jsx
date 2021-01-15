@@ -9,8 +9,6 @@ const EventCard = (props) => {
   let [imageLoad, setImageLoad] = useState(false);
   let favoriteBlock = <FavoritesContainer expertId={props.id} darkTheme={true} type={'event'}/>
 
-
-
   return (
     <li className={style.wrap} key={props.id}>
       {!props.hideFavorite && favoriteBlock}
@@ -31,7 +29,11 @@ const EventCard = (props) => {
           <span className="infoString">{props.city}</span>
         </div>
         <h2 className={style.title}>{props.cleanTitle ? props.cleanTitle : props.title}</h2>
-        {props.button && <Link className="button" to={`/event/${props.id}`}>Я пойду</Link>}        
+        {props.button && 
+          props.edit 
+            ? <Link className="button" to={`/edit/event/${props.id}`}>Изменить</Link>
+            : <Link className="button" to={`/event/${props.id}`}>Я пойду</Link>
+        }        
       </div>
     </li>
   )

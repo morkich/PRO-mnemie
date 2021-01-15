@@ -9,38 +9,27 @@ import { toggleisLoading } from '../../redux/profile-reducer';
 import { setAccauntData } from '../../redux/auth-reducer';
 import { getRaiting, getUserId, getLoadingAcc, getDiscription, getExpirience, getPosition, getCity, getWorkplace, getAvatar, getFirstname, getLastname, getSecondname } from '../../redux/auth-selectors';
 
-class AccountContainer extends React.Component {
-
-  componentDidMount() {
-    this.props.toggleisLoading(false);
-  }
-  
-  getInitialValues() {
-    return {
-      discription: this.props.discription,
-      expirience: this.props.expirience,
-      position: this.props.position,
-      city: this.props.city,      
-      workplace: this.props.workplace,      
-    };
+const AccountContainer = (props) => {
+  const onFormSubmit = (formData) => {
+    props.setAccauntData(formData);
   }
 
-  onFormSubmit = (formData) => {
-    this.props.setAccauntData(formData);
-  }
-
-  render() {
-    return (
-      <>
-        {this.props.isLoading ? <Preloader /> : null}
-        <Account
-          {...this.props}
-          onFormSubmit={this.onFormSubmit}
-          initialValues={this.getInitialValues()}
-        />
-      </>
-    )
-  }
+  return (
+    <>
+      {props.isLoading ? <Preloader /> : null}
+      <Account
+        {...props}
+        onFormSubmit={onFormSubmit}
+        accountFormData={{
+          discription: props.discription,
+          expirience: props.expirience,
+          position: props.position,
+          city: props.city,      
+          workplace: props.workplace,      
+        }}        
+      />
+    </>
+  )
 }
 
 let mapStateToProps = (state) => {

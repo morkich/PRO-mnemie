@@ -43,7 +43,6 @@ export const getAsideBannersLoading = () => {
   return (dispatch) => {
     dispatch(setAsideBannersLoading(true));
     optionsAPI.getAsideBanners().then(response => {
-      console.log(response);
       dispatch(setAsideBannersItems(response));
       dispatch(setAsideBannersLoading(false));
     })

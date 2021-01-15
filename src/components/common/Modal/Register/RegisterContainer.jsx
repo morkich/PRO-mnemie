@@ -1,18 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { setType } from '../../../../redux/modal-reducer';
 import { loginThunk, setError } from '../../../../redux/auth-reducer';
 import Preloader from '../../Preloader/Preloader';
 import Register from './Register';
-import { getRegisterDataState, getRegisterLoadingState, getRegisterNameState } from '../../../../redux/rigister-selectors';
+import { getRegisterDataState, getRegisterErrorState, getRegisterLoadingState, getRegisterNameState } from '../../../../redux/rigister-selectors';
 import { postRegisterNewUserThunk } from '../../../../redux/rigister-reducer';
 
 const RegisterContainer = (props) => {
-
-  let [passwordState, setPasswordState] = useState('');
-  const onChangePass = (event) => {
-    setPasswordState(event.password);
-  };
 
   const onFormSubmit = (formData) => {        
     let newUserData = {
@@ -33,8 +28,7 @@ const RegisterContainer = (props) => {
       <Register
         onFormSubmit={onFormSubmit}
         changeForm={toAutorisation}
-        onChange={onChangePass}
-        checkPass={passwordState}
+        requestError={props.requestError}
       />
     </>
   )
@@ -44,6 +38,7 @@ let mapStateToProps = (state) => {
   return {
     registerData: getRegisterDataState(state),
     registerName: getRegisterNameState(state),
+    requestError: getRegisterErrorState(state),
     registerLoading: getRegisterLoadingState(state)
   }
 }

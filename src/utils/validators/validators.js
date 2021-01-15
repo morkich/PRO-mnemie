@@ -1,6 +1,12 @@
-export const required = value => {
-  if (value) return undefined;
-  return '!Это поле обязательно';
+export const required = (values, errors) => {
+  if (!values) {
+    errors = '!Это поле обязательно';
+  } 
+}
+
+export const onlyNumbers = value => {
+  if (value && !isNaN(Number(value))) return undefined;
+  return 'Только числа';
 }
 
 export const maxLengthCreator = (maxValue) => (value) => {
@@ -8,14 +14,13 @@ export const maxLengthCreator = (maxValue) => (value) => {
   return undefined;
 }
 
-export const dataListHardCode = (itemsArray) => (value) => {
-  let goal = itemsArray.some(itemValue => itemValue === value);
-  if (!value) return undefined;
-  if (!goal) return `Уточните город`;
+export const checkPassTwins = (item) => (value) => {
+  if(item !== value) return `Пароли не совпадают`;
   return undefined;
 }
 
-export const checkPassTwins = (item) => (value) => {
-  if(item !== value) return `Пароли не совпадают`;
+export const dataListHardCode = (itemsArray) => (value) => {
+  let goal = itemsArray.some(itemValue => itemValue === value);
+  if (!goal) return `Уточните город`;
   return undefined;
 }

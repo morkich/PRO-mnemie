@@ -9,7 +9,6 @@ import style from './MainPage.module.css';
 import UpComingEventsContainer from './UpComingEvents/UpComingEventsContainer';
 
 const MainPage = (props) => {
-  console.log(props);
   return (
     <>
       <section className="container">

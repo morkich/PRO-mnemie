@@ -3,20 +3,26 @@ import style from '../Forms.module.css';
 
 const CheckBox = (props) => {
   
-  const hasError = props.meta.touched && props.meta.error;
+  const hasError = props.touched[props.field.name] && props.errors[props.field.name];
+
+
+  
+  
   return (    
     <div className={`${style.formControl} ${hasError && style.error}`}>
       <div className={style.checkBoxWrap}>
         <input
-          {...props.input}
-          name={props.input.name}
-          id={props.input.name}
+          name={props.name}
+          id={props.name}
           type={'checkbox'}
           className={`${style.input} ${style.inputCheckBox}`}
+          onChange={props.onChange}
+          onBlur={props.onBlur}                
+          value={props.field[props.field.name]}
         />
-        <label htmlFor={props.input.name}>{props.label}</label>
+        <label htmlFor={props.name}>{props.label}</label>
       </div>      
-      {hasError && <span>{props.meta.error}</span>}
+      {hasError && <span>{hasError}</span>}
     </div>
   )
 }

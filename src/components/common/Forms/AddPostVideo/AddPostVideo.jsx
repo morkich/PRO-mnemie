@@ -6,6 +6,8 @@ import ModalContainer from '../../Modal/ModalContainer';
 
 const AddPostVideo = (props) => {
 
+  let videoId = props.field.value.postVideoId;
+
   const opts = {
     height: '100%',
     width: '100%',
@@ -18,9 +20,9 @@ const AddPostVideo = (props) => {
     <>
     <div className={style.imageBlock} onClick={props.openModalVideoUrl}>
       {props.postImageLoading ? <Preloader /> : null}
-      {props.postVideoId && <YouTube
-        videoId={props.postVideoId}                  // defaults -> null
-        id={props.postVideoId}                       // defaults -> null
+      {videoId && <YouTube
+        videoId={videoId}                  // defaults -> null
+        id={videoId}                       // defaults -> null
         className={style.video}                // defaults -> null
         containerClassName={style.videoContainer}       // defaults -> ''
         opts={opts}                        // defaults -> {}

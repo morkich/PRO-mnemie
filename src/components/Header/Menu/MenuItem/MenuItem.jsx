@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const MenuItem = (props) => {
   return (
     <li>
-      <NavLink exact={props.exact} to={props.to}  className={style.item} activeClassName={style.active}>{props.name}</NavLink>
+      <NavLink exact={props.exact} to={props.to}  className={`${style.item} ${props.styleFilter && style.filterStyle}`} activeClassName={style.active}>{props.name}</NavLink>
     </li>
   );
 }

@@ -52,7 +52,7 @@ transition: .2s;
   outline: none;
   width: 100%;
   resize: none;
-  min-height: 100px;
+  min-height: 40px;
   font-size: 13px;
   line-height: 16px;
   color: #0E2A42;
@@ -162,14 +162,11 @@ transition: .2s;
 }
 
 .form_error {
-  position: absolute;
-  top: -1.5rem;  
   color: #EB5757;
 }
 
 .inputCheckBox {
   position: absolute;
-  z-index: -1;
   opacity: 0;
   cursor: pointer;
 }
@@ -288,4 +285,33 @@ transition: .2s;
 
 .videoContainer {
   width: 100%;
+}
+
+.iconRub {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.iconRub::after {
+  content: '₽';
+  position: absolute;
+  right: 0;
+  margin: 0 15px;
+  color: #7C9BA9;
+  font-size: 15px;
+}
+
+.link {
+  display: flex;
+  font-size: 11px;
+  color: #237FC2;
+  text-decoration: underline;
+  font-weight: normal;  
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: none;
 }

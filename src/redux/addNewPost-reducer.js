@@ -155,9 +155,9 @@ export const getPostEditDataThunk = (postId) => {
   return (dispatch) => {
     dispatch(setAddPostLoading(true));
     postAPI.getPostDataById(postId).then(response => {
-      console.log(response);
       dispatch(setAddPostTitle(response.title.rendered));
       dispatch(setAddPostImage(response.img_url));
+      dispatch(setAddPostCategorys(response.categories));
       dispatch(setAddPostImageId(response.featured_media));
       dispatch(setAddPostCategoryName(response.category_name[0]));
       dispatch(setAddPostContent(response.content.rendered));
@@ -168,7 +168,7 @@ export const getPostEditDataThunk = (postId) => {
 }
 
 
-export const postNewPostThunk = (data, imageId, tagsIds = 0, postCat, postId) => {
+export const postNewPostThunk = (data, imageId, tagsIds = 0, postId) => {
   return (dispatch) => {
     dispatch(setAddPostLoading(true));
     let postData = {
@@ -177,7 +177,7 @@ export const postNewPostThunk = (data, imageId, tagsIds = 0, postCat, postId) =>
       content: data.postContent,
       featured_media: imageId,      
       comment_status: 'open',
-      categories: postCat,
+      categories: data.postCategory,
       tags: tagsIds
     }
 

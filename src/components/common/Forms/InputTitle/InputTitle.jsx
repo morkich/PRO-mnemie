@@ -3,28 +3,33 @@ import Title from '../../Title/Title';
 import style from '../Forms.module.css';
 
 const InputTitle = (props) => {
-  let [editMode, setEditMode] = useState(false);
-  const mouseLeave = (event) => {    
-    props.setTitle(event);
-    setEditMode(false);
-  }  
+  const hasError = props.errors[props.field.name];
+  const title = props.values[props.field.name] ? props.values[props.field.name] : 'Заголовок';
 
+  let [editMode, setEditMode] = useState(false);
   let input = editMode ? 
-    <input  {...props.input}
-      name={props.input.name}
+    <input
+      name={props.field.name}
+      id={props.field.name}
       placeholder={props.placeholder}
-      type={props.type}
+      type='text'
       className={style.input}      
+      onChange={props.onChange}
+      onBlur={props.onBlur}                            
+      value={props.values[props.field.name]}
     /> : 
     <Title 
-      title={props.input.value ? props.input.value : 'Заголовок'} 
+      title={title} 
       main={false} 
       uppercase={false}
     />;
 
-  const hasError = props.meta.touched && props.meta.error;
   return (    
-    <div onMouseEnter={() => setEditMode(true)} onMouseLeave={mouseLeave} className={`${style.formControl} ${hasError && style.error}`}>      
+    <div 
+      onMouseEnter={() => setEditMode(true)} 
+      onBlur={() => setEditMode(false)} 
+      className={`${style.formControl} ${hasError && style.error}`}
+    >      
       {input}
       {hasError && <span>{props.meta.error}</span>}
     </div>

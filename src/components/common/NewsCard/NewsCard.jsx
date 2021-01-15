@@ -4,6 +4,7 @@ import IconString from '../IconString/IconString';
 import InfoBlock from '../InfoBlock/InfoBlock';
 import ModalContainer from '../Modal/ModalContainer';
 import style from './NewsCard.module.css';
+import FavoritesContainer from '../Favorites/FavoritesContainer'
 
 const NewsCard = (props) => {  
 
@@ -46,7 +47,8 @@ const NewsCard = (props) => {
             comment={props.comment} 
           />
         </div>
-      </NavLink>        
+      </NavLink>  
+      <FavoritesContainer expertId={props.id} darkTheme={true} type={'post'}/>     
     </li>
   )
 
@@ -74,6 +76,7 @@ const NewsCard = (props) => {
         />
       </div>        
       {editMode && editMenu}
+      <FavoritesContainer expertId={props.id} darkTheme={true} type={'post'}/>     
     </li>
   )
 

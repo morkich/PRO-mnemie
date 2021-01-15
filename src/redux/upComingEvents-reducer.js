@@ -42,9 +42,7 @@ export const setLoadingUpEvent = (loading) => {
 export const getUpComingEventsThunk = (number, postType) => {
   return (dispatch) => {
     dispatch(setLoadingUpEvent(true));
-    console.log(number);
     postAPI.getPostNumberOrder(number, postType).then(response => {
-      console.log(response);
       dispatch(setItemsUpEvents(response));
       dispatch(setLoadingUpEvent(false));      
     }

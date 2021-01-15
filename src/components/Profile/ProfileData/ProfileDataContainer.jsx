@@ -15,7 +15,7 @@ const ProfileDataContainer = (props) => {
   
   useEffect(() => {
     userId && getProfileDataStateThunk(userId, dataName);
-  }, [userId, dataName])
+  }, [userId, dataName, getProfileDataStateThunk])
 
   return (
     <ProfileData 

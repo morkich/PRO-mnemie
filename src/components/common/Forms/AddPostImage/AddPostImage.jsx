@@ -13,7 +13,12 @@ const AddPostImage = (props) => {
           <path d="M13.333 17.7997C13.333 21.3864 16.3237 24.3044 19.9997 24.3044C23.6757 24.3044 26.6663 21.3864 26.6663 17.7997C26.6663 14.213 23.6757 11.2949 19.9997 11.2949C16.3237 11.2949 13.333 14.213 13.333 17.7997Z" fill={props.small ? '#AECAD5' : 'white'}/>
         </svg>
         <span className={style.butName}>Добавить фото</span>
-        <input name={props.name} onChange={props.changeImage} type="file" className={style.addPostImageBut}/>
+        <input 
+          name={props.name} 
+          onChange={props.changeImage} 
+          type="file" 
+          className={style.addPostImageBut}
+        />
       </div>    
     </div>
   )

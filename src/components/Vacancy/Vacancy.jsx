@@ -5,6 +5,9 @@ import Preloader from '../common/Preloader/Preloader';
 import style from './Vacancy.module.css';
 
 const Vacancy = (props) => {  
+
+  console.log(props);
+
   let date = new Date(Date.parse(props.vacancy.date));
   return (
     <section className="container container--small">      
@@ -30,7 +33,7 @@ const Vacancy = (props) => {
             </div>
             <div className={style.wordPrice}>
               <span className={style.descTitle}>Заработная плата:</span>
-              <span className={style.price}>{props.vacancy.pro_vacancy_price} ₽</span>
+              <span className={style.price}>{props.vacancy.pro_vacancy_price}{props.vacancy.pro_vacancy_price_after && ` - ${props.vacancy.pro_vacancy_price_after}`} ₽</span>
             </div>
           </div>
 
@@ -53,8 +56,8 @@ const Vacancy = (props) => {
                 </div>
                 <div className={style.contentStrings}>
                   <span className={style.descTitle}>Требования:</span>
-                  <div className={style.descText}>{props.vacancy.pro_vacancy_require}</div>
-                </div>
+                  <div className={style.descText}><ul>{props.vacancy.pro_vacancy_require && JSON.parse(props.vacancy.pro_vacancy_require).map(item => <li>{item}</li>)}</ul></div>
+                </div>                
               </div>
             </div>
 
@@ -68,12 +71,12 @@ const Vacancy = (props) => {
                 </div>
                 <div className={style.contentStrings}>
                   <span className={style.descTitle}>Обязанности:</span>
-                  <div className={style.descText}>{props.vacancy.pro_vacancy_function}</div>
+                  <div className={style.descText}><ul>{props.vacancy.pro_vacancy_function && JSON.parse(props.vacancy.pro_vacancy_function).map(item => <li>{item}</li>)}</ul></div>
                 </div>
 
                 <div className={style.contentStrings}>
                   <span className={style.descTitle}>Условия:</span>
-                  <div className={style.descText}>{props.vacancy.pro_vacancy_conditions}</div>
+                  <div className={style.descText}><ul>{props.vacancy.pro_vacancy_conditions && JSON.parse(props.vacancy.pro_vacancy_conditions).map(item => <li>{item}</li>)}</ul></div>
                 </div>
 
                 <div className={style.contentStrings}>

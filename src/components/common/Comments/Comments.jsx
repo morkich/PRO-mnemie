@@ -1,6 +1,6 @@
 import React from 'react';
 import Raiting from '../../Profile/Raiting/Raiting';
-import CommentDataReduxForm from './CommentDataForm/CommentDataForm';
+import CommentDataForm from './CommentDataForm/CommentDataForm';
 import style from './Comments.module.css';
 import ModalContainer from '../Modal/ModalContainer';
 
@@ -41,7 +41,7 @@ const Comments = (props) => {
           />
         </div>
       </div>
-      <CommentDataReduxForm
+      <CommentDataForm
         onSubmit={props.onSubmit}
         loading={props.loading}
       />

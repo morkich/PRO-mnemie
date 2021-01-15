@@ -5,6 +5,8 @@ import avatar from '../assets/img/noavatar-comment.svg'
 const LOADING_ACCAUNT = 'LOADING_ACCAUNT';
 const SET_USER_DATA = 'SET_USER_DATA';
 const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
+const ADD_FAVORITE_POST = 'ADD_FAVORITE_POST';
+const REMOVE_FAVORITE_POST = 'REMOVE_FAVORITE_POST';
 const ADD_FAVORITE_EXPERT = 'ADD_FAVORITE_EXPERT';
 const REMOVE_FAVORITE_EXPERT = 'REMOVE_FAVORITE_EXPERT';
 const ADD_FAVORITE_EVENT = 'ADD_FAVORITE_EVENT';
@@ -26,9 +28,10 @@ let initialState = {
   lastname: '',
   avatar: avatar,
   userId: '',
+  favoritesPost: [],
   favoritesExperts: [],
   favoritesVideos: [],
-  favoritesEvents: [],
+  favoritesEvents: [],  
   pro_discription: '',
   pro_expirience: '',
   pro_position: '',
@@ -62,6 +65,16 @@ const authReducer = (state = initialState, action) => {
         ...state,
         error: action.errors
       };
+    case ADD_FAVORITE_POST:
+      return {
+        ...state,
+        favoritesPost: Array.from(new Set([...state.favoritesPost, action.postId]))
+      };
+    case REMOVE_FAVORITE_POST:
+      return {
+        ...state,
+        favoritesPost: state.favoritesPost.filter(id => id !== action.postId)
+      };      
     case ADD_FAVORITE_EXPERT:
       return {
         ...state,
@@ -127,6 +140,20 @@ export const setError = (errors) => {
   }
 }
 
+export const addFavoritePost = (postId) => {
+  return {
+    type: ADD_FAVORITE_POST,
+    postId
+  }
+}
+
+export const removeFavoritePost = (postId) => {
+  return {
+    type: REMOVE_FAVORITE_POST,
+    postId
+  }
+}
+
 export const addFavoriteExpert = (expertId) => {
   return {
     type: ADD_FAVORITE_EXPERT,
@@ -182,6 +209,7 @@ export const authThunk = (token) => {
             lastname: data.pro_lastname,
             secondname: data.pro_secondname,
             avatar: data.avatar,
+            favoritesPost: (data.pro_favorites_posts.length > 0) ? JSON.parse(data.pro_favorites_posts) : [],
             favoritesExperts: (data.pro_favorites_experts.length > 0) ? JSON.parse(data.pro_favorites_experts) : [],
             favoritesVideos: (data.pro_favorites_video.length > 0) ? JSON.parse(data.pro_favorites_video) : [],
             favoritesEvents: (data.pro_favorites_events.length > 0) ? JSON.parse(data.pro_favorites_events) : [],
@@ -243,6 +271,7 @@ export const loginThunk = (username, password) => {
                 lastname: data.pro_lastname,
                 secondname: data.pro_secondname,
                 avatar: data.avatar,
+                favoritesPost: (data.pro_favorites_posts.length > 0) ? JSON.parse(data.pro_favorites_posts) : [],
                 favoritesExperts: (data.pro_favorites_experts.length > 0) ? JSON.parse(data.pro_favorites_experts) : [],
                 favoritesVideos: (data.pro_favorites_video.length > 0) ? JSON.parse(data.pro_favorites_video) : [],
                 favoritesEvents: (data.pro_favorites_events.length > 0) ? JSON.parse(data.pro_favorites_events) : [],

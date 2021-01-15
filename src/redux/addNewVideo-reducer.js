@@ -136,26 +136,20 @@ export const setAddVideoLoading = (addVideoLoading) => {
   }
 }
 
-
-
-
-
-// export const getPostEditDataThunk = (postId) => {
-//   return (dispatch) => {
-//     dispatch(setAddPostLoading(true));
-//     postAPI.getPostDataById(postId).then(response => {
-//       console.log(response);
-//       dispatch(setAddPostTitle(response.title.rendered));
-//       dispatch(setAddPostImage(response.img_url));
-//       dispatch(setAddPostImageId(response.featured_media));
-//       dispatch(setAddPostCategoryName(response.category_name[0]));
-//       dispatch(setAddPostContent(response.content.rendered));
-//       dispatch(setAddPostTags(response.tags));
-//       dispatch(setAddPostLoading(false));
-//     })
-//   }
-// }
-
+export const getVideoEditDataThunk = (postId) => {
+  return (dispatch) => {
+    dispatch(setAddVideoLoading(true));
+    postAPI.getPostDataById(postId, 'tv_video').then(response => {
+      dispatch(setAddVideoTitle(response.title.rendered));
+      dispatch(setAddVideoImage(response.img_url));
+      dispatch(setAddVideoImageId(response.featured_media));
+      dispatch(setAddVideoContent(response.content.rendered));
+      dispatch(setAddVideoTags(response.tv_video_tags));
+      dispatch(setAddVideoUrl(response.pro_tv_video_youtube_link));
+      dispatch(setAddVideoLoading(false));
+    })
+  }
+}
 
 export const postNewVideoThunk = (title, content, video, imageId, tags, postId) => {
   return (dispatch) => {

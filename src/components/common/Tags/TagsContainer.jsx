@@ -12,7 +12,7 @@ const TagsContainer = (props) => {
   
   useEffect(() => {
    tagsList && getTagsDataThunk(tagsList, tagType);
-  }, [tagsList, getTagsDataThunk])
+  }, [tagsList, getTagsDataThunk, tagType])
 
   return (
     <Tags 

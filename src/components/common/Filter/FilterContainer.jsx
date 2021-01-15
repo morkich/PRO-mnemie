@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getUniqUserCities, getFilterExpertThunk, getExpertsThunkCreator } from '../../../redux/experts-reducer';
 import { getExpertsState, getUniqCitiesState } from '../../../redux/experts-selectors';
 import { getFilteredVacanciesDataThunk } from '../../../redux/vacancyLoop-reducer';
-import FilterReduxForm from './Filter';
+import FilterForm from './Filter';
 
 const FilterContainer = (props) => {
 
@@ -27,7 +27,7 @@ const FilterContainer = (props) => {
   };  
 
   return (
-    <FilterReduxForm 
+    <FilterForm 
       onSubmit={onFormSubmit}
       uniqCities={props.uniqCities}    
     />  

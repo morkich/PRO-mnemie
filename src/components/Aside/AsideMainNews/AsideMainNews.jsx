@@ -6,7 +6,6 @@ import Title from '../../common/Title/Title';
 import style from '../Aside.module.css';
 
 const AsideMainNews = (props) => { 
-  console.log(props);
   let itemsPack = props.asideMainNewsItems.map((item, i) => {
     return (
       <Link key={item.ID} to={`/post/${item.ID}`} className={`${style.asideVacasyBlock} ${style.asideBlock} ${style.asideLine}`}>

@@ -5,7 +5,7 @@ import style from './AddTags.module.css';
 const AddTags = (props) => {
   
   let allTags = props.allTags.map( tag => <option value={tag.name} id={tag.id} key={tag.id} />)
-  let tagsReady = props.addTagsItems ? props.addTagsItems.map( tag => <span className={style.tag} id={tag.id}>{tag.name}<div id={tag.id} onClick={props.deleteTag} className={style.deleteTag}>&times;</div></span>) : null;
+  let tagsReady = props.addTagsItems ? props.addTagsItems.map( tag => <span className={style.tag} id={tag.id} key={tag.id}>{tag.name}<div id={tag.id} onClick={props.deleteTag} className={style.deleteTag}>&times;</div></span>) : null;
   
   return (    
     <div className={style.wrap}>

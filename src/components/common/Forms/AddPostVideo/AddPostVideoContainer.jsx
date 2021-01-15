@@ -1,4 +1,5 @@
-import React from 'react';
+import { Field } from 'formik';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
@@ -14,9 +15,14 @@ const AddPostVideoContainer = (props) => {
   }
 
   return (
-    <AddPostVideo 
+    <Field 
+      component={AddPostVideo}
       openModalVideoUrl={openModalVideoUrl}
-      postVideoId={props.postVideoId}
+      onChange={props.onChange}
+      onBlur={props.onBlur}
+      values={props.values}
+      errors={props.errors}
+      touched={props.touched}   
     />
   )
 }

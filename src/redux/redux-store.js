@@ -41,6 +41,8 @@ import asideMainNewsReducer from "./asideMainNews-reducer";
 import searchReducer from "./search-reducer";
 import profileDataReducer from "./profileData-reducer";
 import addVideoReducer from "./addNewVideo-reducer";
+import yourFavoritesReducer from "./yourFavorites-reducer";
+import addVacancyReducer from "./addNewVacancy-reducer";
 
 
 const { createStore, combineReducers, applyMiddleware } = require("redux");
@@ -79,6 +81,7 @@ let reducers = combineReducers({
     yourData: yourDataReducer,
     addPostImage: postImageReducer,
     addPost: addPostReducer,
+    addVacancy: addVacancyReducer,
     addTags: addTagsReducer,
     addVideo: addVideoReducer,
     categorySelect: categorySelectReducer,
@@ -87,6 +90,7 @@ let reducers = combineReducers({
     asideMainNews: asideMainNewsReducer,
     search: searchReducer,
     profileData: profileDataReducer,
+    yourFavorites: yourFavoritesReducer,
     form: formReducer
 });
  

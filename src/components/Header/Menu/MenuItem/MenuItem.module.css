@@ -28,3 +28,11 @@
 .item.active::after {
   width: 85%;
 }
+
+.filterStyle {
+  font-size: 16px;
+}
+
+.filterStyle.active:after {
+  display: none;
+}

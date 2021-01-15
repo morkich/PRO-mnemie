@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addFavoriteExpert, removeFavoriteExpert } from '../../../redux/auth-reducer';
-import { getFavoritesEvents, getFavoritesExperts, getFavoritesExpertsButtonProgress, getFavoritesVideos, getLoggetIn } from '../../../redux/auth-selectors';
+import { getFavoritesEvents, getFavoritesExperts, getFavoritesExpertsButtonProgress, getFavoritesVideos, getLoggetIn, getFavoritesPost } from '../../../redux/auth-selectors';
 import { toggleFavoriteProgress, favoriteThunkCreator } from '../../../redux/favorive-reducer';
 import Favorites from './Favorites';
 
@@ -11,6 +11,7 @@ const FavoritesContainer = (props) => {
   let favoritesIds = props.favoriteExpertsState,
       favoriteEventsState = props.favoriteEventsState,
       favoriteVideosState = props.favoriteVideosState,
+      favoritePostState = props.favoritePostState,
       expertId = props.expertId,
       toggleFavoriteProgress = props.toggleFavoriteProgress,
       addFavoriteExpert = props.addFavoriteExpert,
@@ -19,6 +20,8 @@ const FavoritesContainer = (props) => {
 
   if(props.type === 'event') favoritesIds = favoriteEventsState;
   if(props.type === 'tv_video') favoritesIds = favoriteVideosState;
+  if(props.type === 'post') favoritesIds = favoritePostState;
+
 
   useEffect(() => {
     expertId && toggleFavoriteProgress(true, expertId);
@@ -29,6 +32,9 @@ const FavoritesContainer = (props) => {
     if(type === 'tv_video') {
       favorites = favoriteVideosState.some(id => id === +expertId);
     }
+    if(type === 'post') {
+      favorites = favoritePostState.some(id => id === +expertId);
+    }    
     favorites ? addFavoriteExpert() : removeFavoriteExpert();
     toggleFavoriteProgress(false, expertId);
   }, [expertId, toggleFavoriteProgress, removeFavoriteExpert, addFavoriteExpert, favoriteEventsState, type])
@@ -58,6 +64,7 @@ let mapStateToProps = (state) => {
     favoriteExpertsState: getFavoritesExperts(state),
     favoriteEventsState: getFavoritesEvents(state),
     favoriteVideosState: getFavoritesVideos(state),
+    favoritePostState: getFavoritesPost(state),
     favoriteExpertsButtonProgress: getFavoritesExpertsButtonProgress(state),
     loggetIn: getLoggetIn(state)
   }

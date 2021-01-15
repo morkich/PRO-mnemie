@@ -2,7 +2,6 @@ import { usersAPI, filterExpertAPI } from "../api/api";
 
 const SET_EXPERTS = 'SET_EXPERTS';
 const SET_NEW_PAGE = 'SET_NEW_PAGE';
-const CURRENT_PAGE = 'CURRENT_PAGE';
 const TOTAL_PAGES = 'TOTAL_PAGES';
 const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
 const SET_CITIES = 'SET_CITIES';

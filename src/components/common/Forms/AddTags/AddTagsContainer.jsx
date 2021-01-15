@@ -13,18 +13,19 @@ const AddTagsContainer = (props) => {
   setAddVideoTags = props.setAddVideoTags,
   startTags = props.startTags ? props.startTags : [],
   allTagsItems = props.allTagsItems,
-  tagsType = props.tagsType;
+  tagsType = props.tagsType,
+  setAddTagsItems = props.setAddTagsItems;
   
   useEffect(() => {
     getAllTagsThunk(tagsType);
-  }, [getAllTagsThunk])
+  }, [getAllTagsThunk, tagsType])
 
   useEffect(() => {
     if(startTags.length >= 1 ){
-      let tagItems = props.allTagsItems.filter( v => props.startTags.some( v2 => v.id === v2 && v));
-      startTags && props.setAddTagsItems(tagItems);
+      let tagItems = allTagsItems.filter( v => startTags.some( v2 => v.id === v2 && v));
+      startTags && setAddTagsItems(tagItems);
     }
-  }, [startTags, allTagsItems])
+  }, [startTags, allTagsItems, setAddTagsItems])
 
   useEffect(() => {
     if(tagsType === 'tv_video_tags') {
@@ -32,9 +33,6 @@ const AddTagsContainer = (props) => {
     }else{
       inputTagsIdReady && setAddPostTags(inputTagsIdReady);
     }   
-    console.log(props.tagsType);
-    console.log(inputTagsIdReady);
-    
   }, [inputTagsIdReady, setAddPostTags, setAddVideoTags, tagsType])
 
   const writeTag = (event) => {

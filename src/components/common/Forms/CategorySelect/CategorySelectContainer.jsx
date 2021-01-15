@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { Field } from 'formik';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getAllCategorySelectThunk } from '../../../../redux/categorySelect-reducer';
 import { getAllCategorySelectState, getloadingCategorySelectState, getSelectCategorySelectState } from '../../../../redux/categorySelect-selectors';
@@ -6,8 +7,6 @@ import CategorySelect from './CategorySelect';
 
 
 const CategorySelectContainer = (props) => {
-
-  console.log(props);
 
   let getAllCategorySelectThunk = props.getAllCategorySelectThunk,
   allCategorySelect = props.allCategorySelect;
@@ -17,18 +16,22 @@ const CategorySelectContainer = (props) => {
   },[getAllCategorySelectThunk])
 
   const renderSelect = (catArr) => {    
-    let options = [ ... catArr.map( cat => ({value: [cat.id, cat.parent], label: cat.name}))];
+    let options = [ ...catArr.map( cat => ({value: cat.id, label: cat.name}))];
     return options;
   }
 
   return (
-    <CategorySelect 
+    <Field
+      component={CategorySelect} 
       name={props.name}
       placeholder={props.placeholder}
       options={allCategorySelect && renderSelect(allCategorySelect)} 
-      onChange={props.onChange}
       spy={props.spy}
-      defaultValue={{value: props.postCategorys[0], label: props.postCategoryName}}
+      onChange={props.onChange}
+      onBlur={props.onBlur}
+      values={props.values}
+      errors={props.errors}
+      touched={props.touched}     
     />
   )
 }
